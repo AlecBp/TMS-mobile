@@ -1,21 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import Apollo from "./src/components/Apollo";
+import Root from "./src/components/Root";
+// @ts-ignore
+import { UserProvider } from "./src/context/UserContext";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>dfgdfg</Text>
-      <StatusBar style="auto" />
-    </View>
+    <UserProvider>
+      <Apollo>
+        <Root />
+      </Apollo>
+    </UserProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
