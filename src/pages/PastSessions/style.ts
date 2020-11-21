@@ -6,11 +6,6 @@ export const styles = StyleSheet.create({
     padding: 10
   },
   title: {
-    fontSize: 30,
-  },
-  spaceAround: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center"
+    fontSize: 30
   }
 })
