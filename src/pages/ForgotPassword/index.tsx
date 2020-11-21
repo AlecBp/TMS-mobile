@@ -47,53 +47,25 @@ const InputEmail = () => {
     );
   };
 
-  const InputPassword = () => {
-    const [text, setText] = React.useState('');
-  
-    return (
-      <TextInput
-        label="Password"
-        autoCompleteType={"password"}
-        secureTextEntry={true}
-        value={text}
-        onChangeText={text => setText(text)}
-        style={styles.input}
-        
-      />
-    );
-  };
-
-  const ButtonSignIn = () => (
+  const Submit = () => (
     <Button 
         mode="contained" 
         onPress={() => console.log('Pressed')}
         style={styles.button}
         
         >
-      Log In
+      Submit
     </Button>
-  );
+  ); 
 
-  const PageTitle = () => {
-
-      return(
-          <Text />
-          )
-        
-    }
-  
-
-const LoginPage = () => {
+const ForgotPassword = () => {
 
     return (
         <>
         <SafeAreaView>
-
         <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
         <InputEmail />
-        <InputPassword />
-        <Link style={styles.forgot} to="/../ForgotPassword/index">Forgot your password?</Link>
-        <ButtonSignIn />
+        <Submit />
         
         </SafeAreaView>
         </>
@@ -102,4 +74,4 @@ const LoginPage = () => {
 
 }
 
-export {LoginPage}
+export {ForgotPassword}
