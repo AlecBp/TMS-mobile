@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         marginRight: 50,
         height: 40,
-
+        backgroundColor: 'red'
     },
 
     title:{
@@ -74,14 +74,6 @@ const InputEmail = () => {
     </Button>
   );
 
-  const PageTitle = () => {
-
-      return(
-          <Text />
-          )
-        
-    }
-  
 
 const LoginPage = () => {
 
@@ -92,7 +84,7 @@ const LoginPage = () => {
         <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
         <InputEmail />
         <InputPassword />
-        <Link style={styles.forgot} to="/../ForgotPassword/index">Forgot your password?</Link>
+        <Text style={styles.forgot} >Forgot your password?asdfasdf asdfasdf</Text>
         <ButtonSignIn />
         
         </SafeAreaView>
