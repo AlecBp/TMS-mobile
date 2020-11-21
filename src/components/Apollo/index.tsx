@@ -14,6 +14,8 @@ import { UserContext, SET_ACCESS_TOKEN, CLEAR } from "../../context/UserContext"
 // the state the value that we read right after might not be the one we just set because react "queus that update"
 // By using a regular variable we are able to write and read the variable in sequence
 
+const BASE_URL:string = "http://192.168.0.160:4000"
+
 const Apollo = (props: any) => {
   const { state, dispatch } = useContext(UserContext);
 
@@ -49,7 +51,7 @@ const Apollo = (props: any) => {
       }
     },
     fetchAccessToken: () => {
-      return fetch("http://localhost:4000/refresh_token", {
+      return fetch(`${BASE_URL}/refresh_token`, {
         method: "POST",
         credentials: "include",
       });
@@ -106,7 +108,7 @@ const Apollo = (props: any) => {
       }),
       requestLink,
       new HttpLink({
-        uri: "http://localhost:4000/graphql",
+        uri: `${BASE_URL}/graphql`,
         credentials: "include",
       }),
     ]),

@@ -344,6 +344,17 @@ export enum CacheControlScope {
 }
 
 
+export type CustomersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CustomersQuery = (
+  { __typename?: 'Query' }
+  & { customers?: Maybe<Array<Maybe<(
+    { __typename?: 'Customer' }
+    & Pick<Customer, 'id' | 'firstName'>
+  )>>> }
+);
+
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -378,6 +389,39 @@ export type MeQuery = (
 );
 
 
+export const CustomersDocument = gql`
+    query customers {
+  customers {
+    id
+    firstName
+  }
+}
+    `;
+
+/**
+ * __useCustomersQuery__
+ *
+ * To run a query within a React component, call `useCustomersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCustomersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCustomersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCustomersQuery(baseOptions?: Apollo.QueryHookOptions<CustomersQuery, CustomersQueryVariables>) {
+        return Apollo.useQuery<CustomersQuery, CustomersQueryVariables>(CustomersDocument, baseOptions);
+      }
+export function useCustomersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CustomersQuery, CustomersQueryVariables>) {
+          return Apollo.useLazyQuery<CustomersQuery, CustomersQueryVariables>(CustomersDocument, baseOptions);
+        }
+export type CustomersQueryHookResult = ReturnType<typeof useCustomersQuery>;
+export type CustomersLazyQueryHookResult = ReturnType<typeof useCustomersLazyQuery>;
+export type CustomersQueryResult = Apollo.QueryResult<CustomersQuery, CustomersQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
