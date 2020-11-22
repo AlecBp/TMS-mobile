@@ -8,11 +8,16 @@ import PastSessions from "../../pages/PastSessions";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
+import { LoginPage } from "../../pages/LoginPage";
 
 const Routes: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);
 
   const Stack = createStackNavigator();
+
+  if (!state.accessToken) {
+    return <LoginPage />;
+  }
 
   return (
     <NavigationContainer>
@@ -29,6 +34,7 @@ const Routes: React.FC = () => {
       >
         <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />
         <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Upcoming Sessions" }} />
+        {/* <Stack.Screen name="Login" component={LoginPage} options={{ title: "Login" }} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

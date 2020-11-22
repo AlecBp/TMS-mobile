@@ -1,6 +1,6 @@
-import * as React from "react";
 import { StyleSheet, Text } from 'react-native';
 import { TextInput, Button, Title } from "react-native-paper";
+import React, { useState, useContext } from "react";
 import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
@@ -33,12 +33,14 @@ const styles = StyleSheet.create({
 });
 
 const LoginPage = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState("");
 
   const [login] = useLoginMutation();
 
-  const { dispatch } = React.useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
 
   const handleLogin = async () => {
     try {
@@ -50,9 +52,9 @@ const LoginPage = () => {
           type: SET_ACCESS_TOKEN,
           payload: { accessToken: loginResponse.data.login.token },
         });
-        // Send to home page
       }
     } catch (err) {
+      setError("Error");
       console.log(err);
     }
   };
@@ -60,13 +62,14 @@ const LoginPage = () => {
   return (
     <>
       <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
+      {error ? <Text>Ops, something went wrong... Double check your credentials and try again!</Text> : <Text></Text>}
       <TextInput 
         label="Email" 
         autoCompleteType={"email"} 
         value={email} 
         onChangeText={(text) => setEmail(text)} 
         style={styles.input}/>
-
+        
       <TextInput
         label="Password"
         secureTextEntry={true}
