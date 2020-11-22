@@ -19,7 +19,7 @@ function TutorPage({ navigation }) {
 
         <View>
           <View style={styles.iconImage}>
-            <Avatar.Text size={200} label="XD" />
+            <Avatar.Text size={175} label="XD" />
           </View>
 
           <Paragraph style={styles.bodyParagraph}>
@@ -31,7 +31,7 @@ function TutorPage({ navigation }) {
             Aldus PageMaker including versions of Lorem Ipsum.
           </Paragraph>
 
-          <Title style={{ fontSize: 25, marginBottom: 10 }}>Subjects</Title>
+          <Title style={{ fontSize: 25, marginBottom: 10, textAlign: "center" }}>Subjects</Title>
           <View style={{ paddingHorizontal: 40 }}>
             {subjects.map((subject: any, i: any) => {
               return (

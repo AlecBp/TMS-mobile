@@ -10,7 +10,7 @@ const SubjectCard = (props: any) => {
       <Card.Content style={styles.spaceBetween}>
         <Avatar.Icon size={30} icon="pencil"/>
         <Title style={styles.textSize}>{subject}</Title>
-        <Title>{level}</Title>
+        <Title style={styles.textSize}>{level}</Title>
       </Card.Content>
     </Card>
   )
