@@ -29,9 +29,9 @@ const Home = ({ navigation }: any) => {
           <Title style={styles.title}>Session</Title>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
+        {/*<TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>*/}
           <Avatar.Text size={60} label="XD" />
-        </TouchableOpacity>
+        {/*</TouchableOpacity>*/}
       </View>
 
       <View style={[styles.spaceAround, { marginVertical: 20 }]}>
