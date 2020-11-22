@@ -10,34 +10,35 @@ import TutorPage from "../../pages/TutorPage";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
-import { View, Text } from "react-native";
+import { LoginPage } from "../../pages/LoginPage";
 
 const Routes: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);
 
   const Stack = createStackNavigator();
 
+  if (!state.accessToken) {
+    return <LoginPage />;
+  }
+
   return (
-    <View>
-      <Text>asdf</Text>
-    </View>
-    // <NavigationContainer>
-    //   <Stack.Navigator
-    //     screenOptions={{
-    //       headerStyle: {
-    //         backgroundColor: "#0655ab",
-    //       },
-    //       headerTintColor: "#fff",
-    //       headerTitleStyle: {
-    //         fontWeight: "bold",
-    //       },
-    //     }}
-    //   >
-    //     <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />
-    //     <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Past Sessions" }} />
-    //     <Stack.Screen name="TutorPage" component={TutorPage} options={{ title: "Tutor Page" }} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#0655ab",
+          },
+          headerTintColor: "#fff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+        }}
+      >
+        <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />
+        <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Upcoming Sessions" }} />
+        {/* <Stack.Screen name="Login" component={LoginPage} options={{ title: "Login" }} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

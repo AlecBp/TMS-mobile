@@ -1,17 +1,26 @@
-import React from "react";
-import {View, FlatList } from "react-native";
+import React, { useContext } from "react";
+import { SafeAreaView, View, FlatList } from "react-native";
 
 import { Title, Avatar, Button } from "react-native-paper";
 import { styles } from "./style";
 
-// import sessions from "./sessions.json";
 // @ts-ignore
 import { sessions } from "./sessions";
 import SessionCard from "../../components/SessionCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 // @ts-ignore
-function Home({ navigation }) {
+import { UserContext, CLEAR } from "./../../context/UserContext";
+import { setAccessToken } from "../../auth/accessToken";
+
+const Home = ({ navigation }: any) => {
+  const { dispatch } = useContext(UserContext);
+
+  const logoutProcedure = () => {
+    setAccessToken("");
+    dispatch({ type: CLEAR });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.spaceAround}>
@@ -26,8 +35,12 @@ function Home({ navigation }) {
       </View>
 
       <View style={[styles.spaceAround, { marginVertical: 20 }]}>
-        <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>See Past Sessions</Button>
-        <Button mode="contained" onPress={() => console.log("LOGOUT")}>Logout</Button>
+        <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>
+          See Past Sessions
+        </Button>
+        <Button mode="contained" onPress={() => logoutProcedure()}>
+          Logout
+        </Button>
       </View>
 
       <FlatList
@@ -39,6 +52,6 @@ function Home({ navigation }) {
       />
     </View>
   );
-}
+};
 
 export default Home;
