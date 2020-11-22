@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   spaceBetween: {
@@ -8,6 +8,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   textSize: {
-    fontSize: 30
-  }
-})
+    fontSize: 20,
+  },
+});
