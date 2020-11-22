@@ -13,11 +13,9 @@ import SessionDetails from "./src/pages/SessionDetails";
 
 export default function App() {
   return (
-    // <LoginPage />
     <UserProvider>
       <Apollo>
-        {/*<Root />*/}
-        <SessionDetails />
+        <Root />
       </Apollo>
     </UserProvider>
   );
