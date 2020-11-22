@@ -19,7 +19,6 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-
     <UserProvider>
       <Apollo>
         {/*<Root />*/}
@@ -43,6 +42,5 @@ export default function App() {
         </NavigationContainer>
       </Apollo>
     </UserProvider>
-
   );
 }

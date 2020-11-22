@@ -44,7 +44,7 @@ const Home = ({ navigation }: any) => {
           See Past Sessions
         </Button>
         <Button mode="contained" onPress={logoutProcedure}>
-           Logout
+          Logout
         </Button>
       </View>
       
