@@ -32,15 +32,9 @@ const Home = ({ navigation }: any) => {
           <Title style={styles.title}>Session</Title>
         </View>
 
-<<<<<<< HEAD
-        {/*<TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>*/}
-          <Avatar.Text size={60} label="XD" />
-        {/*</TouchableOpacity>*/}
-=======
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
           <Avatar.Text size={60} label={state?.user?.firstName[0] + state?.user?.lastName[0]} />
         </TouchableOpacity>
->>>>>>> 57e9f6dde2f6ea252ebaad9c1bc4343071dfa00d
       </View>
 
       <View style={[styles.spaceAround, { marginVertical: 20 }]}>
@@ -48,7 +42,7 @@ const Home = ({ navigation }: any) => {
           See Past Sessions
         </Button>
         <Button mode="contained" onPress={logoutProcedure}>
-          Logout
+           Logout
         </Button>
       </View>
 
