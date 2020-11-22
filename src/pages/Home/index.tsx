@@ -27,6 +27,7 @@ const Home = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={styles.spaceAround}>
         <View>
           <Title style={styles.title}>Upcoming</Title>
@@ -46,19 +47,18 @@ const Home = ({ navigation }: any) => {
            Logout
         </Button>
       </View>
-
-      <FlatList
-        keyExtractor={(item) => item.id.toString()}
-        data={sessions}
-        renderItem={({ item }) => {
+      
+      {
+        sessions.map((session: { id: string | number | null | undefined; }) => {
           return (
-            // <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
-            <TouchableOpacity style={{marginVertical: 10}} onPress={() => console.log("SessionDetails")}>
-              <SessionCard session={item} />
+            <TouchableOpacity key={session.id} style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+              <SessionCard session={session} />
             </TouchableOpacity>
-          );
-        }}
-      />
+          )
+        })
+      }
+
+      </ScrollView>
       <Footer />
     </View>
   );
