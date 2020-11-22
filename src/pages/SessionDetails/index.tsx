@@ -12,7 +12,8 @@ const students = ["Andrew Rudder", "Alec Pagliarussi", "Rafael Afonso", "Suho Ka
 import TutorCard from "../../components/TutorCard";
 import StudentCard from "../../components/StudentCard";
 
-function SessionDetails() {
+// @ts-ignore
+function SessionDetails({navigation}) {
   return (
     <ScrollView>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -20,8 +21,7 @@ function SessionDetails() {
           icon="arrow-left"
           color={Colors.blue500}
           size={30}
-          // onPress={() => navigation.goBack()}
-          onPress={() => console.log("TEST")}
+          onPress={() => navigation.goBack()}
         />
         <Title style={{ fontSize: 30 }}>Session Details</Title>
       </View>

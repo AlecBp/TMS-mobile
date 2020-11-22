@@ -1,9 +1,16 @@
 import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
-  spaceAround: {
+  spaceBetween: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center"
+  },
+  badge: {
+    overflow: 'hidden',
+    backgroundColor: '#03c6fc',
+    borderRadius: 7,
+    paddingHorizontal: 10,
+    marginHorizontal: 5,
   }
 })

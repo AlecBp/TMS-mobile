@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SafeAreaView, View, FlatList } from "react-native";
+import { ScrollView, View, FlatList } from "react-native";
 
 import { Title, Avatar, Button } from "react-native-paper";
 import { styles } from "./style";
@@ -7,7 +7,7 @@ import { styles } from "./style";
 // @ts-ignore
 import { sessions } from "./sessions";
 import SessionCard from "../../components/SessionCard";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native";
 
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
@@ -47,12 +47,17 @@ const Home = ({ navigation }: any) => {
       </View>
 
       <FlatList
-        // keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         data={sessions}
         renderItem={({ item }) => {
-          return <SessionCard session={item} />;
+          return (
+            <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+              <SessionCard session={item} />
+            </TouchableOpacity>
+          );
         }}
       />
+
     </View>
   );
 };

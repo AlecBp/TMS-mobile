@@ -8,7 +8,7 @@ import SubjectCard from "../../components/SubjectCard"
 import {subjects} from "./subjects"
 
 // @ts-ignore
-function TutorPage() {
+function TutorPage({navigation}) {
   return (
     <View>
       <ScrollView style={styles.container}>
@@ -17,8 +17,7 @@ function TutorPage() {
             icon="arrow-left"
             color={Colors.blue500}
             size={30}
-            // onPress={() => navigation.goBack()}
-            onPress={() => console.log("TEST")}
+            onPress={() => navigation.goBack()}
           />
           <Title style={{fontSize: 30}}>Tutor</Title>
         </View>
@@ -42,9 +41,9 @@ function TutorPage() {
           <Title style={{fontSize: 25, marginBottom: 10}}>Subjects</Title>
           <View style={{paddingHorizontal: 40}}>
             {
-              subjects.map((subject: any) => {
+              subjects.map((subject: any, i: any) => {
                 return (
-                  <View style={{marginVertical: 10}}>
+                  <View key={i} style={{marginVertical: 10}}>
                     <SubjectCard subject={subject} styles={{marginHorizontal: 10}}/>
                   </View>
                   )

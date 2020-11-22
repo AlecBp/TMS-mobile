@@ -20,6 +20,7 @@ function PastSessions({navigation}) {
       </View>
 
       <FlatList
+        keyExtractor={(item) => item.id.toString()}
         data={sessions}
         renderItem={({item}) => {
           return <SessionCard session={item}/>
