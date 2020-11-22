@@ -8,8 +8,7 @@ import LoginPage from "./src/pages/LoginPage";
 
 // @ts-ignore
 import { UserProvider } from "./src/context/UserContext";
-import SessionDetails from "./src/pages/SessionDetails";
-
+import Routes from "./src/components/Routes"
 
 export default function App() {
   return (
