@@ -16,6 +16,8 @@ import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
+// @ts-ignore
+import { UserProvider } from "./src/context/UserContext";
 
 export default function App() {
   return (
