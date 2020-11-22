@@ -9,7 +9,7 @@ import Apollo from "./src/components/Apollo";
 import Root from "./src/components/Root";
 
 // @ts-ignore
-import { UserContext } from "./src/context/UserContext";
+import { UserProvider } from "./src/context/UserContext";
 
 const Stack = createStackNavigator();
 
@@ -32,11 +32,11 @@ export default function App() {
     //     <Stack.Screen name="PastSessions" component={PastSessions} options={{title: 'Upcoming Sessions'}}/>
     //   </Stack.Navigator>
     // </NavigationContainer>
-    
-    <UserContext>
+
+    <UserProvider>
       <Apollo>
         <Root />
       </Apollo>
-    </UserContext>
+    </UserProvider>
   );
 }
