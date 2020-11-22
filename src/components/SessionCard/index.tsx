@@ -16,7 +16,7 @@ const SessionCard = (props: any) => {
         <View style={styles.spaceAround}>
           <Title>Subjects: </Title>
           <View style={{flexDirection: "row"}}>
-            {subjects.map((subject: any, i: number) => <Badge key={i} style={{marginHorizontal: 5, paddingHorizontal: 5}}>{subject}</Badge>)}
+            {subjects.map((subject: any, i) => <Badge key={i} style={{marginHorizontal: 5, paddingHorizontal: 5}}>{subject}</Badge>)}
           </View>
         </View>
 

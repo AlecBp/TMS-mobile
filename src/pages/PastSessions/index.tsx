@@ -1,5 +1,5 @@
 import React from "react";
-import {FlatList, SafeAreaView, View} from "react-native";
+import {FlatList, View} from "react-native";
 import {styles} from "../Home/style";
 import {IconButton, Title, Colors} from "react-native-paper";
 import {sessions} from "../Home/sessions.js";
@@ -8,9 +8,8 @@ import SessionCard from "../../components/SessionCard";
 // @ts-ignore
 function PastSessions({navigation}) {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={{flexDirection: "row", alignItems: "center"}}>
-        {/*<IconButton />*/}
         <IconButton
           icon="arrow-left"
           color={Colors.blue500}
@@ -26,9 +25,8 @@ function PastSessions({navigation}) {
           return <SessionCard session={item}/>
         }}
       />
-    </SafeAreaView>
+    </View>
   );
 }
-
 
 export default PastSessions;

@@ -25,14 +25,14 @@ const Home = ({ navigation }: any) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.spaceAround}>
         <View>
           <Title style={styles.title}>Upcoming</Title>
           <Title style={styles.title}>Session</Title>
         </View>
 
-        <TouchableOpacity onPress={() => console.log("Take user to profile page")}>
+        <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
           <Avatar.Text size={60} label={state?.user?.firstName[0] + state?.user?.lastName[0]} />
         </TouchableOpacity>
       </View>
@@ -53,7 +53,7 @@ const Home = ({ navigation }: any) => {
           return <SessionCard session={item} />;
         }}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

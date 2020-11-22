@@ -1,3 +1,4 @@
+import "react-native-gesture-handler"
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -5,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Pages
 import Home from "../../pages/Home";
 import PastSessions from "../../pages/PastSessions";
+import TutorPage from "../../pages/TutorPage";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
