@@ -34,7 +34,6 @@ const Routes: React.FC = () => {
       >
         <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />
         <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Upcoming Sessions" }} />
-        {/* <Stack.Screen name="Login" component={LoginPage} options={{ title: "Login" }} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,16 +8,19 @@ import { getAccessToken, setAccessToken } from "../../auth/accessToken";
 
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN, CLEAR } from "../../context/UserContext";
+import getEnvVars from "../../../env";
 
 // Inside of this file, we make use of a getter and setter to manipulate and read a token that is stored in memory as variable,
 // we also keep the same token in state inside of the UserContext. The need of the first variable is due to the fact that after setting
 // the state the value that we read right after might not be the one we just set because react "queus that update"
 // By using a regular variable we are able to write and read the variable in sequence
 
-const BASE_URL:string = "http://192.168.0.160:4000"
-
 const Apollo = (props: any) => {
   const { state, dispatch } = useContext(UserContext);
+
+  const { graphqlUrl, refreshTokenUrl }: any = getEnvVars();
+
+  console.log({ graphqlUrl, refreshTokenUrl });
 
   const defaultOptions = {
     watchQuery: {
@@ -51,7 +54,7 @@ const Apollo = (props: any) => {
       }
     },
     fetchAccessToken: () => {
-      return fetch(`${BASE_URL}/refresh_token`, {
+      return fetch(refreshTokenUrl, {
         method: "POST",
         credentials: "include",
       });
@@ -108,7 +111,7 @@ const Apollo = (props: any) => {
       }),
       requestLink,
       new HttpLink({
-        uri: `${BASE_URL}/graphql`,
+        uri: graphqlUrl,
         credentials: "include",
       }),
     ]),

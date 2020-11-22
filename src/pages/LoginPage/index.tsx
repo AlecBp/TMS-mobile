@@ -5,9 +5,9 @@ import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
-const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState("john@gmail.com");
+  const [password, setPassword] = useState("password");
 
   const [error, setError] = useState("");
 
@@ -18,7 +18,6 @@ const LoginPage = () => {
   const handleLogin = async () => {
     try {
       const loginResponse = await login({ variables: { email, password } });
-      console.log(loginResponse);
 
       if (loginResponse && loginResponse?.data?.login?.token) {
         dispatch({
@@ -27,14 +26,18 @@ const LoginPage = () => {
         });
       }
     } catch (err) {
-      setError("Error");
-      console.log(err);
+      setError(err.message);
     }
   };
 
+  let body: string = "";
+
+  if (error === "Wrong password") body = "Your email and/or password are wrong, please try again.";
+  else if (error) body = "Ops, something went wrong... Double check your credentials and try again!";
+
   return (
     <>
-      {error ? <Text>Ops, something went wrong... Double check your credentials and try again!</Text> : <Text></Text>}
+      <Text>{body}</Text>
       <TextInput label="Email" autoCompleteType={"email"} value={email} onChangeText={(text) => setEmail(text)} />
       <TextInput
         label="Password"

@@ -12,12 +12,15 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 import { setAccessToken } from "../../auth/accessToken";
+import { useLogoutMutation } from "../../graphql/generated/graphql";
 
 const Home = ({ navigation }: any) => {
   const { dispatch } = useContext(UserContext);
+  const [logout] = useLogoutMutation();
 
-  const logoutProcedure = () => {
+  const logoutProcedure = async () => {
     setAccessToken("");
+    await logout();
     dispatch({ type: CLEAR });
   };
 
