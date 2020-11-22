@@ -45,13 +45,7 @@ const LoginPage: React.FC = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button
-        mode="contained"
-        onPress={() => {
-          console.log("Pressed");
-          handleLogin();
-        }}
-      >
+      <Button mode="contained" onPress={handleLogin}>
         Log In
       </Button>
     </>

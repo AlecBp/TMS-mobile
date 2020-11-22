@@ -20,8 +20,6 @@ const Apollo = (props: any) => {
 
   const { graphqlUrl, refreshTokenUrl }: any = getEnvVars();
 
-  console.log({ graphqlUrl, refreshTokenUrl });
-
   const defaultOptions = {
     watchQuery: {
       fetchPolicy: "no-cache",
@@ -60,7 +58,7 @@ const Apollo = (props: any) => {
       });
     },
     handleFetch: (accessToken) => {
-      console.log(accessToken);
+      // console.log(accessToken);
       dispatch({ type: SET_ACCESS_TOKEN, payload: { accessToken: accessToken } });
       setAccessToken(accessToken);
     },
