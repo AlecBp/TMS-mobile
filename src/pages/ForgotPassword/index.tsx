@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         marginRight: 50,
         height: 40,
-
+        backgroundColor: 'black'
     },
 
     title:{
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     forgot:{
         marginLeft: 50,
+        marginRight: 50,
     }
 
   
@@ -54,7 +55,7 @@ const InputEmail = () => {
         style={styles.button}
         
         >
-      Submit
+      Recover my password
     </Button>
   ); 
 
@@ -64,6 +65,7 @@ const ForgotPassword = () => {
         <>
         <SafeAreaView>
         <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
+        <Text style={styles.forgot}>A new temporary password will be sent to your email address</Text>
         <InputEmail />
         <Submit />
         

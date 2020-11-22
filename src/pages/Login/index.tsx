@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
         marginLeft: 50,
         marginRight: 50,
         height: 40,
-        backgroundColor: 'red'
+        backgroundColor: 'black'
     },
 
     title:{
@@ -84,7 +84,7 @@ const LoginPage = () => {
         <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
         <InputEmail />
         <InputPassword />
-        <Text style={styles.forgot} >Forgot your password?asdfasdf asdfasdf</Text>
+        <Text style={styles.forgot} >Forgot your password?</Text>
         <ButtonSignIn />
         
         </SafeAreaView>

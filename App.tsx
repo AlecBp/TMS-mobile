@@ -12,22 +12,22 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <LoginPage />
+    // <LoginPage />
     // <PastSessions />
 
-  // <NavigationContainer>
-  //   <Stack.Navigator screenOptions={{
-  //     headerStyle: {
-  //       backgroundColor: "#0655ab",
-  //     },
-  //     headerTintColor: "#fff",
-  //     headerTitleStyle: {
-  //       fontWeight: 'bold'
-  //     }
-  //   }}>
-  //     <Stack.Screen name="Home" component={Home} options={{title: 'Upcoming Sessions'}}/>
-  //     <Stack.Screen name="PastSessions" component={PastSessions} options={{title: 'Upcoming Sessions'}}/>
-  //   </Stack.Navigator>
-  // </NavigationContainer>
+  <NavigationContainer>
+    <Stack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: "#0655ab",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
+    }}>
+      <Stack.Screen name="Home" component={Home} options={{title: 'Upcoming Sessions'}}/>
+      <Stack.Screen name="PastSessions" component={PastSessions} options={{title: 'Upcoming Sessions'}}/>
+    </Stack.Navigator>
+  </NavigationContainer>
   );
 }
