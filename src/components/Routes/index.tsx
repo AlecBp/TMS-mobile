@@ -1,4 +1,4 @@
-import "react-native-gesture-handler"
+import "react-native-gesture-handler";
 import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -10,7 +10,7 @@ import TutorPage from "../../pages/TutorPage";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
-import { LoginPage } from "../../pages/LoginPage";
+import LoginPage from "../../pages/LoginPage";
 
 const Routes: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);

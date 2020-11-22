@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
@@ -54,19 +55,15 @@ const LoginPage = () => {
         });
       }
     } catch (err) {
-      setError(err.message);
+      if (err.message === "Wrong password") setError("Your email and/or password are wrong, please try again.");
+      else setError("Ops, something went wrong... Double check your credentials and try again!");
     }
   };
-
-  let body: string = "";
-
-  if (error === "Wrong password") body = "Your email and/or password are wrong, please try again.";
-  else if (error) body = "Ops, something went wrong... Double check your credentials and try again!";
 
   return (
     <>
       <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
-      <Text>{body}</Text>
+      <Text>{error}</Text>
       <TextInput
         label="Email"
         autoCompleteType={"email"}
