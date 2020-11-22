@@ -5,6 +5,7 @@ import {Title, Avatar, Button} from 'react-native-paper';
 import {styles} from "./style";
 
 // import sessions from "./sessions.json";
+// @ts-ignore
 import {sessions} from "./sessions"
 import SessionCard from "../../components/SessionCard"
 
@@ -18,12 +19,15 @@ function Home({navigation}) {
           <Title style={styles.title}>Session</Title>
         </View>
 
-        <Avatar.Text size={60} label="XD"/>
+        {/*<View onPress={() => console.log("TEST")}>*/}
+        {/*  <Avatar.Text size={60} label="XD" />*/}
+        {/*</View>*/}
+        <Button mode="outlined" onPress={() => navigation.navigate("TutorPage")}>Tutor Page</Button>
       </View>
 
       <View style={[styles.spaceAround, {marginVertical: 20}]}>
         <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>See Past Sessions</Button>
-        <Button mode="contained">Logout</Button>
+        <Button mode="contained" onPress={() => console.log("LOGOUT")}>Logout</Button>
       </View>
 
       <FlatList

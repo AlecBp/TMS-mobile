@@ -10,7 +10,6 @@ function PastSessions({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{flexDirection: "row", alignItems: "center"}}>
-        {/*<IconButton />*/}
         <IconButton
           icon="arrow-left"
           color={Colors.blue500}
@@ -29,6 +28,5 @@ function PastSessions({navigation}) {
     </SafeAreaView>
   );
 }
-
 
 export default PastSessions;
