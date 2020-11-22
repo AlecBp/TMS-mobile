@@ -21,12 +21,10 @@ import { UserProvider } from "./src/context/UserContext";
 
 export default function App() {
   return (
-
     <UserProvider>
       <Apollo>
         <Root />
       </Apollo>
     </UserProvider>
-
   );
 }

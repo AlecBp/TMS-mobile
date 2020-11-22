@@ -21,13 +21,7 @@ function SessionDetails({navigation}) {
 
       <ScrollView style={styles.container}>
         <View style={{flexDirection: "row", alignItems: "center"}}>
-          <IconButton
-            icon="arrow-left"
-            color={Colors.blue500}
-            size={30}
-            onPress={() => navigation.goBack()}
-          />
-          <Title style={{fontSize: 30}}>Session Details</Title>
+          <Title style={{fontSize: 25}}>Session Details</Title>
         </View>
 
         <View>

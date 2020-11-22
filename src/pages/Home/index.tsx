@@ -43,7 +43,7 @@ const Home = ({ navigation }: any) => {
           See Past Sessions
         </Button>
         <Button mode="contained" onPress={logoutProcedure}>
-           Logout
+          Logout
         </Button>
       </View>
 
@@ -52,8 +52,7 @@ const Home = ({ navigation }: any) => {
         data={sessions}
         renderItem={({ item }) => {
           return (
-            // <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
-            <TouchableOpacity style={{marginVertical: 10}} onPress={() => console.log("SessionDetails")}>
+            <TouchableOpacity style={{ marginVertical: 10 }} onPress={() => navigation.navigate("SessionDetails")}>
               <SessionCard session={item} />
             </TouchableOpacity>
           );
