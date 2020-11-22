@@ -17,8 +17,6 @@ import Footer from "../../components/Footer";
 function SessionDetails({navigation}) {
   return (
     <View>
-
-
       <ScrollView style={styles.container}>
         <View style={{flexDirection: "row", alignItems: "center"}}>
           <Title style={{fontSize: 25}}>Session Details</Title>
