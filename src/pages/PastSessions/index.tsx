@@ -1,6 +1,6 @@
 import React from "react";
-import {FlatList, View} from "react-native";
-import {styles} from "../Home/style";
+import {FlatList, TouchableOpacity, View} from "react-native";
+import {styles} from "./style";
 import {IconButton, Title, Colors} from "react-native-paper";
 import {sessions} from "../Home/sessions.js";
 import SessionCard from "../../components/SessionCard";
@@ -9,7 +9,7 @@ import SessionCard from "../../components/SessionCard";
 function PastSessions({navigation}) {
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: "row", alignItems: "center"}}>
+      <View style={styles.title}>
         <IconButton
           icon="arrow-left"
           color={Colors.blue500}
@@ -22,9 +22,11 @@ function PastSessions({navigation}) {
       <FlatList
         keyExtractor={(item) => item.id.toString()}
         data={sessions}
-        renderItem={({item}) => {
-          return <SessionCard session={item}/>
-        }}
+        renderItem={({item}) => (
+          <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+            <SessionCard session={item} />
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
