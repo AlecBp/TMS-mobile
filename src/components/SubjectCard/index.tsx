@@ -3,7 +3,7 @@ import React from "react";
 import {styles} from "./style"
 import {Avatar, Title} from "react-native-paper";
 
-const SubjectCard = (props) => {
+const SubjectCard = (props: any) => {
   const {subject: {subject, level}} = props;
   return (
     <View style={styles.spaceAround}>

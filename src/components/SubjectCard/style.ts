@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     paddingVertical: 5,
-    marginVertical: 5,
     // box shadow
     shadowColor: "#000",
     shadowOffset: {
