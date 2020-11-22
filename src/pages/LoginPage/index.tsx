@@ -5,6 +5,8 @@ import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
+import Footer from "../../components/Footer"
+
 const styles = StyleSheet.create({
   input: {
       marginTop: 10,
@@ -96,4 +98,4 @@ const LoginPage = () => {
   );
 };
 
-export { LoginPage };
+export default LoginPage;
