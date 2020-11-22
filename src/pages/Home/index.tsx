@@ -13,6 +13,7 @@ import { TouchableOpacity } from "react-native";
 import { UserContext, CLEAR } from "./../../context/UserContext";
 import { setAccessToken } from "../../auth/accessToken";
 import { useLogoutMutation } from "../../graphql/generated/graphql";
+import Footer from "../../components/Footer";
 
 const Home = ({ navigation }: any) => {
   const { state, dispatch } = useContext(UserContext);
@@ -57,7 +58,7 @@ const Home = ({ navigation }: any) => {
           );
         }}
       />
-
+      <Footer />
     </View>
   );
 };

@@ -4,11 +4,13 @@ import {styles} from "./style";
 import {IconButton, Title, Colors} from "react-native-paper";
 import {sessions} from "../Home/sessions.js";
 import SessionCard from "../../components/SessionCard";
+import Footer from "../../components/Footer";
 
 // @ts-ignore
 function PastSessions({navigation}) {
   return (
     <View style={styles.container}>
+
       <View style={styles.title}>
         <IconButton
           icon="arrow-left"
@@ -28,6 +30,7 @@ function PastSessions({navigation}) {
           </TouchableOpacity>
         )}
       />
+
     </View>
   );
 }

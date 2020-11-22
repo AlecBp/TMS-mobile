@@ -4,7 +4,7 @@ import React from "react";
 import {styles} from "./style";
 import {ScrollView} from "react-native"
 import SubjectCard from "../../components/SubjectCard"
-
+import Footer from "../../components/Footer";
 import {subjects} from "./subjects"
 
 // @ts-ignore
@@ -52,6 +52,8 @@ function TutorPage({navigation}) {
           </View>
         </View>
       </ScrollView>
+
+      <Footer />
     </View>
   );
 }

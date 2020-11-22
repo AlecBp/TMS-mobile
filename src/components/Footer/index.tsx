@@ -1,30 +1,22 @@
 import React from "react";
-import { StyleSheet, } from 'react-native';
-import { Text } from "react-native-paper";
+import {StyleSheet, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
-    bottom: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: 'black',
-        color: 'white',
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        height: 35,
-        paddingVertical: 7
-        
-      }
+  bottom: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    backgroundColor: 'black',
+    height: 35,
+  }
 })
 
-const Footer = () => {
-
-    return (
-        <>
-        <Text style={styles.bottom}>Tutoring Management System © 2020 - V 0.1.0</Text>
-        </>
-    )
-}
-
+const Footer = () => (
+  <View style={styles.bottom}>
+    <Text style={{color: "white"}}>Tutoring Management System © 2020 - V 0.1.0</Text>
+  </View>
+)
 export default Footer;
