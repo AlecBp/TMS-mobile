@@ -15,7 +15,7 @@ import StudentCard from "../../components/StudentCard";
 // @ts-ignore
 function SessionDetails({navigation}) {
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <IconButton
           icon="arrow-left"
@@ -26,7 +26,7 @@ function SessionDetails({navigation}) {
         <Title style={{ fontSize: 30 }}>Session Details</Title>
       </View>
 
-      <View style={{ marginHorizontal: 30 }}>
+      <View>
         <Card>
           <Card.Content>
             <View style={styles.spaceAround}>
@@ -34,19 +34,12 @@ function SessionDetails({navigation}) {
               <Title>4:00PM - 6:00PM</Title>
             </View>
 
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
               <Title>Subjects: </Title>
               {subjects.map((subject: any, i) => (
-                <Badge
-                  visible={true}
-                  key={i}
-                  style={{
-                    marginHorizontal: 5,
-                    paddingHorizontal: 5,
-                  }}
-                >
-                  {subject}
-                </Badge>
+                <View>
+                  <Text style={styles.badge}>{subject}</Text>
+                </View>
               ))}
             </View>
 
@@ -62,9 +55,9 @@ function SessionDetails({navigation}) {
         <TutorCard />
 
         <Title style={styles.title}>Students</Title>
-        {students.map((student) => {
+        {students.map((student, i) => {
           return (
-            <View style={{ marginVertical: 10 }}>
+            <View key={i} style={{ marginVertical: 10 }}>
               <StudentCard student={student} />
             </View>
           );
