@@ -34,7 +34,7 @@ const Home = ({ navigation }: any) => {
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          <Avatar.Text size={60} label={state?.user?.firstName[0] + state?.user?.lastName[0]} />
+          <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
         </TouchableOpacity>
       </View>
 
