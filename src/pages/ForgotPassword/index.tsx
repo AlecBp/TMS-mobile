@@ -1,7 +1,9 @@
-import * as React from 'react';
-import { TextInput, Button, Title } from 'react-native-paper';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Link } from '@react-navigation/native';
+import * as React from "react";
+import { StyleSheet, Text } from 'react-native';
+import { TextInput, Button, Title } from "react-native-paper";
+import { useLoginMutation } from "../../graphql/generated/graphql";
+// @ts-ignore
+import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
 const styles = StyleSheet.create({
     input: {
@@ -34,46 +36,43 @@ const styles = StyleSheet.create({
     
   });
 
-const InputEmail = () => {
-    const [text, setText] = React.useState('');
-  
-    return (
-      <TextInput
-        label="Email"
-        autoCompleteType={"email"}
-        value={text}
-        onChangeText={text => setText(text)}
-        style={styles.input}
-      />
-    );
-  };
-
-  const Submit = () => (
-    <Button 
-        mode="contained" 
-        onPress={() => console.log('Pressed')}
-        style={styles.button}
-        
-        >
-      Recover my password
-    </Button>
-  ); 
-
 const ForgotPassword = () => {
+  const [email, setEmail] = React.useState("");
+
+  const { dispatch } = React.useContext(UserContext);
+
+  const handleForgotPassword = async () => {
+    //To be implemented
+    return;
+  };
 
     return (
         <>
-        <SafeAreaView>
+        
         <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
         <Text style={styles.forgot}>A new temporary password will be sent to your email address</Text>
-        <InputEmail />
-        <Submit />
+        <TextInput 
+          label="Email" 
+          autoCompleteType={"email"} 
+          value={email} 
+          onChangeText={(text) => setEmail(text)} 
+          style={styles.input}/>
         
-        </SafeAreaView>
+        <Button
+        mode="contained"
+        onPress={() => {
+          console.log("Pressed");
+          handleForgotPassword();
+        }}
+        style={styles.button}
+        >
+          Recover my password
+        </Button>
+          
         </>
     )
 
 
 }
 
-export {ForgotPassword}
+export default ForgotPassword 
