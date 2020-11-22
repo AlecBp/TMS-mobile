@@ -13,7 +13,7 @@ function TutorCard(props: any) {
         {/*  <Avatar.Text size={60} label="XD" />*/}
         {/*</TouchableOpacity>*/}
 
-        <Avatar.Text size={60} label="XD" />
+        <Avatar.Text size={50} label="XD" />
         <Title>{"John Doe"}</Title>
         <Title>(Tutor)</Title>
       </Card.Content>
