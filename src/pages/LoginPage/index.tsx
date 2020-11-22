@@ -4,26 +4,6 @@ import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
-const InputEmail = () => {
-  const [text, setText] = React.useState("");
-
-  return <TextInput label="Email" autoCompleteType={"email"} value={text} onChangeText={(text) => setText(text)} />;
-};
-
-const InputPassword = () => {
-  const [text, setText] = React.useState("");
-
-  return (
-    <TextInput label="Password" autoCompleteType={"password"} value={text} onChangeText={(text) => setText(text)} />
-  );
-};
-
-const ButtonSignIn = () => (
-  <Button mode="contained" onPress={() => console.log("Pressed")}>
-    Log In
-  </Button>
-);
-
 const LoginPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
