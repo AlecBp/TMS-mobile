@@ -1,4 +1,4 @@
-import {SafeAreaView, View} from "react-native";
+import {View} from "react-native";
 import {Colors, IconButton, Title, Avatar, Paragraph} from "react-native-paper";
 import React from "react";
 import {styles} from "./style";
@@ -10,7 +10,7 @@ import {subjects} from "./subjects"
 // @ts-ignore
 function TutorPage({navigation}) {
   return (
-    <SafeAreaView>
+    <View>
       <ScrollView style={styles.container}>
         <View style={{flexDirection: "row", alignItems: "center"}}>
           <IconButton
@@ -46,7 +46,7 @@ function TutorPage({navigation}) {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
