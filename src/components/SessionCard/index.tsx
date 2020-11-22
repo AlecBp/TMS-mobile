@@ -17,7 +17,7 @@ const SessionCard = (props: any) => {
           <Title>Subjects: </Title>
           <View style={{flexDirection: "row", alignItems: "center", }}>
             {subjects.map((subject: any, i: any) => (
-              <View>
+              <View key={i}>
                 <Text style={styles.badge}>{subject}</Text>
               </View>
             ))}

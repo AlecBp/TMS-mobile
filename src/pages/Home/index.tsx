@@ -34,7 +34,7 @@ const Home = ({ navigation }: any) => {
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          <Avatar.Text size={60} label={state?.user?.firstName[0] + state?.user?.lastName[0]} />
+          <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
         </TouchableOpacity>
       </View>
 
@@ -52,7 +52,8 @@ const Home = ({ navigation }: any) => {
         data={sessions}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+            // <TouchableOpacity style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+            <TouchableOpacity style={{marginVertical: 10}} onPress={() => console.log("SessionDetails")}>
               <SessionCard session={item} />
             </TouchableOpacity>
           );
