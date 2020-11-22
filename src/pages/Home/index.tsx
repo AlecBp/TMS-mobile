@@ -12,12 +12,15 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 import { setAccessToken } from "../../auth/accessToken";
+import { useLogoutMutation } from "../../graphql/generated/graphql";
 
 const Home = ({ navigation }: any) => {
-  const { dispatch } = useContext(UserContext);
+  const { state, dispatch } = useContext(UserContext);
+  const [logout] = useLogoutMutation();
 
-  const logoutProcedure = () => {
+  const logoutProcedure = async () => {
     setAccessToken("");
+    await logout();
     dispatch({ type: CLEAR });
   };
 
@@ -29,16 +32,22 @@ const Home = ({ navigation }: any) => {
           <Title style={styles.title}>Session</Title>
         </View>
 
+<<<<<<< HEAD
         {/*<TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>*/}
           <Avatar.Text size={60} label="XD" />
         {/*</TouchableOpacity>*/}
+=======
+        <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
+          <Avatar.Text size={60} label={state?.user?.firstName[0] + state?.user?.lastName[0]} />
+        </TouchableOpacity>
+>>>>>>> 57e9f6dde2f6ea252ebaad9c1bc4343071dfa00d
       </View>
 
       <View style={[styles.spaceAround, { marginVertical: 20 }]}>
         <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>
           See Past Sessions
         </Button>
-        <Button mode="contained" onPress={() => logoutProcedure()}>
+        <Button mode="contained" onPress={logoutProcedure}>
           Logout
         </Button>
       </View>

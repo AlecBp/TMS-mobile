@@ -15,6 +15,7 @@
     "@react-navigation/stack": "^5.12.8",
     "apollo-link-token-refresh": "^0.3.2",
     "expo": "~39.0.2",
+    "expo-constants": "^9.2.0",
     "expo-status-bar": "~1.0.2",
     "graphql": "^15.4.0",
     "jwt-decode": "^3.1.2",

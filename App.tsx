@@ -12,10 +12,9 @@ import Routes from "./src/components/Routes"
 
 export default function App() {
   return (
-    // <LoginPage />
     <UserProvider>
       <Apollo>
-        {/*<Root />*/}
+        <Root />
       </Apollo>
     </UserProvider>
   );
