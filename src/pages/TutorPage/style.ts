@@ -3,6 +3,7 @@ import {StyleSheet} from "react-native";
 export const styles = StyleSheet.create({
   container: {
     padding: 15,
+    marginBottom: 50
   },
   iconImage: {
     flexDirection: "row",

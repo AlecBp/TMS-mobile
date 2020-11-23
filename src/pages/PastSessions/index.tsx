@@ -15,27 +15,29 @@ const PastSessions = ({ navigation }) => {
   const { loading, error, data } = useSessionsQuery();
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.title}>
-          <PageTitle firstLetter1="P" restOfWord1="ast" firstLetter2="S" restOfWord2="essions" />
-        </View>
+    <View>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.title}>
+            <PageTitle firstLetter1="P" restOfWord1="ast" firstLetter2="S" restOfWord2="essions" />
+          </View>
 
-        {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
-        {!loading &&
-          data!.sessions!.map((s) => {
-            const { id, date, time, subjects, location }: any = s;
-            return (
-              <TouchableOpacity
-                key={id}
-                style={{ marginVertical: 10 }}
-                onPress={() => navigation.navigate("SessionDetails")}
-              >
-                <SessionCard date={date} location={location} time={time} subjects={subjects} />
-              </TouchableOpacity>
-            );
-          })}
-      </ScrollView>
+          {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
+          {!loading &&
+            data!.sessions!.map((s) => {
+              const { id, date, time, subjects, location }: any = s;
+              return (
+                <TouchableOpacity
+                  key={id}
+                  style={{ marginVertical: 10 }}
+                  onPress={() => navigation.navigate("SessionDetails")}
+                >
+                  <SessionCard date={date} location={location} time={time} subjects={subjects} />
+                </TouchableOpacity>
+              );
+            })}
+        </ScrollView>
+      </View>
       <Footer />
     </View>
   );

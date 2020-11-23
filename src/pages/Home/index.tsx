@@ -30,40 +30,42 @@ const Home = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.spaceAround}>
-          <PageTitle firstLetter1="U" restOfWord1="pcoming" firstLetter2="S" restOfWord2="ession" />
+    <View>
+      <View style={styles.container}>
+        <ScrollView>
+          <View style={styles.spaceAround}>
+            <PageTitle firstLetter1="U" restOfWord1="pcoming" firstLetter2="S" restOfWord2="ession" />
 
-          <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-            <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
+              <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
+            </TouchableOpacity>
+          </View>
 
-        <View style={[styles.spaceAround, { marginVertical: 20 }]}>
-          <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>
-            See Past Sessions
-          </Button>
-          <Button mode="contained" onPress={logoutProcedure}>
-            Logout
-          </Button>
-        </View>
+          <View style={[styles.spaceAround, { marginVertical: 20 }]}>
+            <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>
+              See Past Sessions
+            </Button>
+            <Button mode="contained" onPress={logoutProcedure}>
+              Logout
+            </Button>
+          </View>
 
-        {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
-        {!loading &&
-          data!.sessions!.map((s) => {
-            const { id, date, time, subjects, location }: any = s;
-            return (
-              <TouchableOpacity
-                key={id}
-                style={{ marginVertical: 10 }}
-                onPress={() => navigation.navigate("SessionDetails")}
-              >
-                <SessionCard date={date} location={location} time={time} subjects={subjects} />
-              </TouchableOpacity>
-            );
-          })}
-      </ScrollView>
+          {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
+          {!loading &&
+            data!.sessions!.map((s) => {
+              const { id, date, time, subjects, location }: any = s;
+              return (
+                <TouchableOpacity
+                  key={id}
+                  style={{ marginVertical: 10 }}
+                  onPress={() => navigation.navigate("SessionDetails")}
+                >
+                  <SessionCard date={date} location={location} time={time} subjects={subjects} />
+                </TouchableOpacity>
+              );
+            })}
+        </ScrollView>
+      </View>
       <Footer />
     </View>
   );
