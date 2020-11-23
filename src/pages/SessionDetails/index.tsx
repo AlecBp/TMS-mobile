@@ -1,8 +1,7 @@
 import React from "react";
 
 import { ScrollView, View, Text, KeyboardAvoidingView  } from "react-native";
-import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput } from "react-native-paper";
-
+import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
 import { styles } from "./style";
 
 // dummy data
@@ -70,10 +69,13 @@ function SessionDetails({ navigation }) {
 
           <Title style={styles.title}>Notes</Title>
           <TextInput mode="outlined" multiline={true} label="Notes about the session" numberOfLines={5} />
-          <View style={{ height: 100 }} />
+        </View>
+        <View style={{ marginVertical: 10 }}>
+          <Button mode="contained" onPress={() => console.log("Update session")}>
+            Update
+          </Button>
         </View>
       </ScrollView>
-
       <Footer />
     </KeyboardAvoidingView>
   );
