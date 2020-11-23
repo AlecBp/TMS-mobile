@@ -1,9 +1,9 @@
 import * as React from "react";
-import { StyleSheet, Text } from "react-native";
-import { TextInput, Button, Title } from "react-native-paper";
-import { useLoginMutation } from "../../graphql/generated/graphql";
+import { StyleSheet, Text, View } from "react-native";
+import { TextInput, Button } from "react-native-paper";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
+import PageTitle from "../../components/PageTitle";
 
 const styles = StyleSheet.create({
   input: {
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginBottom: 30,
     marginLeft: 50,
-    fontSize: 30,
   },
   forgot: {
     marginLeft: 50,
@@ -44,7 +43,13 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
+      <View style={styles.title}> 
+      <PageTitle 
+        firstLetter1="T" restOfWord1="utoring" 
+        firstLetter2="M" restOfWord2="anagement"
+        firstLetter3="S" restOfWord3="ystem"
+        />
+    </View>
       <Text style={styles.forgot}>A new temporary password will be sent to your email address</Text>
       <TextInput
         label="Email"

@@ -4,9 +4,9 @@ import {StyleSheet, Text, View} from 'react-native';
 const styles = StyleSheet.create({
   parent: {
     
-    marginTop: 60,
-    marginBottom: 30,
-    marginLeft: 50,
+    // marginTop: 60,
+    // marginBottom: 30,
+    // marginLeft: 50,
     
   },
   restOfWord:{

@@ -1,5 +1,5 @@
-import { StyleSheet, Text } from "react-native";
-import { TextInput, Button, Title } from "react-native-paper";
+import { StyleSheet, Text, View } from "react-native";
+import { TextInput, Button,  } from "react-native-paper";
 import React, { useState, useContext } from "react";
 import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
@@ -22,14 +22,12 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: "black",
   },
-
+  forgot: {
+    marginLeft: 50,
+  },
   title: {
     marginTop: 60,
     marginBottom: 30,
-    marginLeft: 50,
-    fontSize: 30,
-  },
-  forgot: {
     marginLeft: 50,
   },
 });
@@ -63,11 +61,14 @@ const LoginPage = () => {
 
   return (
     <>
+    <View style={styles.title}> 
       <PageTitle 
         firstLetter1="T" restOfWord1="utoring" 
         firstLetter2="M" restOfWord2="anagement"
         firstLetter3="S" restOfWord3="ystem"
         />
+    </View>
+
       <Text>{error}</Text>
       <TextInput
         label="Email"

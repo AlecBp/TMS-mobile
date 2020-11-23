@@ -12,6 +12,7 @@ import Routes from "./src/components/Routes"
 import Home from "./src/pages/Home";
 import PastSessions from "./src/pages/PastSessions";
 import TutorPage from "./src/pages/TutorPage";
+import ForgotPassword from "./src/pages/ForgotPassword";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 

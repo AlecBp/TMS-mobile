@@ -14,6 +14,7 @@ import { UserContext, CLEAR } from "./../../context/UserContext";
 import { setAccessToken } from "../../auth/accessToken";
 import { useLogoutMutation } from "../../graphql/generated/graphql";
 import Footer from "../../components/Footer";
+import PageTitle from "../../components/PageTitle";
 
 const Home = ({ navigation }: any) => {
   const { state, dispatch } = useContext(UserContext);
@@ -27,11 +28,14 @@ const Home = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
+      
       <View style={styles.spaceAround}>
-        <View>
-          <Title style={styles.title}>Upcoming</Title>
-          <Title style={styles.title}>Session</Title>
-        </View>
+      <PageTitle 
+        firstLetter1="U" restOfWord1="pcoming" 
+        firstLetter2="S" restOfWord2="ession"
+        />
+        
+        
 
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
           <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />

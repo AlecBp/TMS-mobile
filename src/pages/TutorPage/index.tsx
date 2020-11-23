@@ -5,6 +5,7 @@ import { styles } from "./style";
 import { ScrollView } from "react-native";
 import SubjectCard from "../../components/SubjectCard";
 import Footer from "../../components/Footer";
+import PageTitle from "../../components/PageTitle";
 // @ts-ignore
 import { subjects } from "./subjects";
 
@@ -13,8 +14,11 @@ function TutorPage({ navigation }) {
   return (
     <View>
       <ScrollView style={styles.container}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Title style={{ fontSize: 25 }}>Tutor</Title>
+        </View> */}
+        <View style={{marginLeft:30}}>
+          <PageTitle firstLetter1="T" restOfWord1="utor" />
         </View>
 
         <View>
