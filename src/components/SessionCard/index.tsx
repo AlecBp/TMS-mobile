@@ -3,8 +3,12 @@ import { View, Text, ScrollView } from "react-native";
 import { styles } from "./style";
 import React from "react";
 
-const SessionCard = (props: any) => {
-  const { date, time, subjects, location } = props.session;
+const SessionCard: React.FC<{ date: string; time: string; subjects: any; location: string }> = ({
+  date,
+  time,
+  subjects,
+  location,
+}) => {
   return (
     <Card>
       <Card.Content>
@@ -18,7 +22,9 @@ const SessionCard = (props: any) => {
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             {subjects.map((subject: any, i: number) => (
               <View key={i}>
-                <Text style={styles.badge}>{subject}</Text>
+                <Text style={styles.badge}>
+                  {subject.name} {subject.level}
+                </Text>
               </View>
             ))}
           </View>

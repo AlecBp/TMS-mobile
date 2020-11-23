@@ -1,38 +1,44 @@
 import React from "react";
-import {FlatList, TouchableOpacity, View, ScrollView} from "react-native";
-import {styles} from "./style";
-import {IconButton, Title, Colors} from "react-native-paper";
+import { FlatList, TouchableOpacity, View, ScrollView } from "react-native";
+import { styles } from "./style";
+import { IconButton, Title, Colors } from "react-native-paper";
 // @ts-ignore
-import {sessions} from "../Home/sessions.js";
+import { sessions } from "../Home/sessions.js";
 import SessionCard from "../../components/SessionCard";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
+import { useSessionsQuery } from "../../graphql/generated/graphql";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 // @ts-ignore
-const PastSessions = ({navigation}) => {
+const PastSessions = ({ navigation }) => {
+  const { loading, error, data } = useSessionsQuery();
+
   return (
     <View style={styles.container}>
       <ScrollView>
-      <View style={styles.title}> 
-      <PageTitle 
-        firstLetter1="P" restOfWord1="ast" 
-        firstLetter2="S" restOfWord2="essions"
-        
-        />
-      </View>
+        <View style={styles.title}>
+          <PageTitle firstLetter1="P" restOfWord1="ast" firstLetter2="S" restOfWord2="essions" />
+        </View>
 
-        {
-          sessions.map((session: { id: string | number | null | undefined; }) => (
-            <TouchableOpacity key={session.id} style={{marginVertical: 10}}
-                              onPress={() => navigation.navigate("SessionDetails")}>
-              <SessionCard session={session}/>
-            </TouchableOpacity>
-          ))
-        }
+        {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
+        {!loading &&
+          data!.sessions!.map((s) => {
+            const { id, date, time, subjects, location }: any = s;
+            return (
+              <TouchableOpacity
+                key={id}
+                style={{ marginVertical: 10 }}
+                onPress={() => navigation.navigate("SessionDetails")}
+              >
+                <SessionCard date={date} location={location} time={time} subjects={subjects} />
+              </TouchableOpacity>
+            );
+          })}
       </ScrollView>
       <Footer />
     </View>
   );
-}
+};
 
 export default PastSessions;
