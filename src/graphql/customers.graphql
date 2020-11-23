@@ -1,6 +1,0 @@
-query customers {
-  customers {
-    id
-    firstName
-  }
-}

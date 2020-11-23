@@ -10,7 +10,7 @@ import PageTitle from "../../components/PageTitle";
 import { subjects } from "./subjects";
 
 // @ts-ignore
-function TutorPage({ navigation }) {
+const TutorPage = ({ navigation }) => {
   return (
     <View>
       <ScrollView style={styles.container}>

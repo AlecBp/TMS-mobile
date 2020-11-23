@@ -1,0 +1,12 @@
+query sessions {
+  sessions {
+    id
+    date
+    time
+    location
+    subjects {
+      name
+      level
+    }
+  }
+}

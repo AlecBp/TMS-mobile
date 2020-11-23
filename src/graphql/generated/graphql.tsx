@@ -18,13 +18,8 @@ export type Query = {
   _empty?: Maybe<Scalars['String']>;
   users?: Maybe<Array<Maybe<User>>>;
   user?: Maybe<User>;
-  customers?: Maybe<Array<Maybe<Customer>>>;
-  customer?: Maybe<Customer>;
-  orders?: Maybe<Array<Maybe<Order>>>;
-  order?: Maybe<Order>;
-  ordersFromCustomer?: Maybe<Array<Maybe<Order>>>;
-  products?: Maybe<Array<Maybe<Product>>>;
-  product?: Maybe<Product>;
+  sessions?: Maybe<Array<Maybe<Session>>>;
+  session?: Maybe<User>;
   me?: Maybe<User>;
 };
 
@@ -34,22 +29,7 @@ export type QueryUserArgs = {
 };
 
 
-export type QueryCustomerArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryOrderArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryOrdersFromCustomerArgs = {
-  customerId: Scalars['ID'];
-};
-
-
-export type QueryProductArgs = {
+export type QuerySessionArgs = {
   id: Scalars['ID'];
 };
 
@@ -58,11 +38,6 @@ export type Mutation = {
   _empty?: Maybe<Scalars['String']>;
   addUser?: Maybe<User>;
   editUser?: Maybe<User>;
-  addCustomer?: Maybe<Customer>;
-  updateCustomer?: Maybe<Customer>;
-  addOrder?: Maybe<Order>;
-  editOrder?: Maybe<Order>;
-  addProduct?: Maybe<Product>;
   login?: Maybe<LoginResponse>;
   revokeRefreshTokenForUser?: Maybe<Scalars['Boolean']>;
   logout?: Maybe<Scalars['Boolean']>;
@@ -92,91 +67,6 @@ export type MutationEditUserArgs = {
 };
 
 
-export type MutationAddCustomerArgs = {
-  companyName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  cpfOrCnpj: Scalars['String'];
-  cpf?: Maybe<Scalars['String']>;
-  cnpj?: Maybe<Scalars['String']>;
-  phones?: Maybe<Array<Maybe<Scalars['String']>>>;
-  addressBook?: Maybe<Array<Maybe<InputAddress>>>;
-};
-
-
-export type MutationUpdateCustomerArgs = {
-  id: Scalars['ID'];
-  companyName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  cpfOrCnpj?: Maybe<Scalars['String']>;
-  cpf?: Maybe<Scalars['String']>;
-  cnpj?: Maybe<Scalars['String']>;
-  phones?: Maybe<Array<Maybe<Scalars['String']>>>;
-  addressBook?: Maybe<Array<Maybe<InputAddress>>>;
-};
-
-
-export type MutationAddOrderArgs = {
-  customer?: Maybe<Scalars['ID']>;
-  employee?: Maybe<Scalars['ID']>;
-  nf?: Maybe<Scalars['String']>;
-  siteNumber?: Maybe<Scalars['String']>;
-  orderDate?: Maybe<Scalars['String']>;
-  eventDate?: Maybe<Scalars['String']>;
-  deliveryPeriod?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
-  totalPrice?: Maybe<Scalars['Float']>;
-  balance?: Maybe<Scalars['Float']>;
-  pendingPayment?: Maybe<Scalars['Float']>;
-  quantityGlasses?: Maybe<Scalars['Int']>;
-  deliveryFee?: Maybe<Scalars['Float']>;
-  includeDraftMachine?: Maybe<Scalars['Boolean']>;
-  obs?: Maybe<Scalars['String']>;
-  useNewAddress?: Maybe<Scalars['Boolean']>;
-  address?: Maybe<InputAddress>;
-  purchaseItems?: Maybe<Array<Maybe<InputPurchaseItem>>>;
-  payments?: Maybe<Array<Maybe<InputPaymentItem>>>;
-  draftMachines?: Maybe<Array<Maybe<InputDraftMachineEmbeded>>>;
-};
-
-
-export type MutationEditOrderArgs = {
-  id: Scalars['ID'];
-  nf?: Maybe<Scalars['String']>;
-  siteNumber?: Maybe<Scalars['String']>;
-  orderDate?: Maybe<Scalars['String']>;
-  eventDate?: Maybe<Scalars['String']>;
-  deliveryPeriod?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
-  totalPrice?: Maybe<Scalars['Float']>;
-  balance?: Maybe<Scalars['Float']>;
-  pendingPayment?: Maybe<Scalars['Float']>;
-  quantityGlasses?: Maybe<Scalars['Int']>;
-  deliveryFee?: Maybe<Scalars['Float']>;
-  includeDraftMachine?: Maybe<Scalars['Boolean']>;
-  obs?: Maybe<Scalars['String']>;
-  useNewAddress?: Maybe<Scalars['Boolean']>;
-  address?: Maybe<InputAddress>;
-  purchaseItems?: Maybe<Array<Maybe<InputPurchaseItem>>>;
-  payments?: Maybe<Array<Maybe<InputPaymentItem>>>;
-  draftMachines?: Maybe<Array<Maybe<InputDraftMachineEmbeded>>>;
-};
-
-
-export type MutationAddProductArgs = {
-  name: Scalars['String'];
-  displayName: Scalars['String'];
-  defaultPrice: Scalars['Float'];
-  quantityPerUnit?: Maybe<Scalars['Int']>;
-  unitName?: Maybe<Scalars['String']>;
-};
-
-
 export type MutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
@@ -199,137 +89,20 @@ export type User = {
   role?: Maybe<Scalars['String']>;
 };
 
-export type InputAddress = {
-  address: Scalars['String'];
-  number: Scalars['Int'];
-  unit?: Maybe<Scalars['String']>;
-  cep?: Maybe<Scalars['String']>;
-  neighbourhood?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  reference?: Maybe<Scalars['String']>;
-};
-
-export type Address = {
-  __typename?: 'Address';
-  address: Scalars['String'];
-  number: Scalars['Int'];
-  unit?: Maybe<Scalars['String']>;
-  cep?: Maybe<Scalars['String']>;
-  neighbourhood?: Maybe<Scalars['String']>;
-  city?: Maybe<Scalars['String']>;
-  reference?: Maybe<Scalars['String']>;
-};
-
-export type Customer = {
-  __typename?: 'Customer';
-  id: Scalars['ID'];
-  companyName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  cpfOrCnpj: Scalars['String'];
-  cpf?: Maybe<Scalars['String']>;
-  cnpj?: Maybe<Scalars['String']>;
-  phones?: Maybe<Array<Maybe<Scalars['String']>>>;
-  addressBook?: Maybe<Array<Maybe<Address>>>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type PurchaseItem = {
-  __typename?: 'PurchaseItem';
-  product?: Maybe<Scalars['ID']>;
-  pricePerUnit?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Int']>;
-  subtotal?: Maybe<Scalars['Float']>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-  consignado?: Maybe<Scalars['Boolean']>;
-};
-
-export type InputPurchaseItem = {
-  product?: Maybe<Scalars['ID']>;
-  pricePerUnit?: Maybe<Scalars['Float']>;
-  quantity?: Maybe<Scalars['Int']>;
-  subtotal?: Maybe<Scalars['Float']>;
-  consignado?: Maybe<Scalars['Boolean']>;
-};
-
-export type PaymentItem = {
-  __typename?: 'PaymentItem';
-  id?: Maybe<Scalars['ID']>;
-  amount?: Maybe<Scalars['Float']>;
-  status?: Maybe<Scalars['String']>;
-  paymentMethod?: Maybe<Scalars['String']>;
-  employee?: Maybe<User>;
-  obs?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type InputPaymentItem = {
-  amount?: Maybe<Scalars['Float']>;
-  status?: Maybe<Scalars['String']>;
-  paymentMethod?: Maybe<Scalars['String']>;
-  employee?: Maybe<Scalars['ID']>;
-  obs?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type DraftMachineEmbeded = {
-  __typename?: 'DraftMachineEmbeded';
-  id?: Maybe<Scalars['ID']>;
-  model?: Maybe<Scalars['String']>;
-  voltage?: Maybe<Scalars['String']>;
-  gasType?: Maybe<Scalars['String']>;
-};
-
-export type InputDraftMachineEmbeded = {
-  model?: Maybe<Scalars['String']>;
-  voltage?: Maybe<Scalars['String']>;
-  gasType?: Maybe<Scalars['String']>;
-};
-
-export type Order = {
-  __typename?: 'Order';
-  id: Scalars['ID'];
-  customer?: Maybe<Customer>;
-  employee?: Maybe<User>;
-  nf?: Maybe<Scalars['String']>;
-  siteNumber?: Maybe<Scalars['String']>;
-  orderNumber?: Maybe<Scalars['Int']>;
-  orderDate?: Maybe<Scalars['String']>;
-  eventDate?: Maybe<Scalars['String']>;
-  deliveryPeriod?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
-  obs?: Maybe<Scalars['String']>;
-  includeDraftMachine?: Maybe<Scalars['Boolean']>;
-  quantityGlasses?: Maybe<Scalars['Int']>;
-  deliveryFee?: Maybe<Scalars['Float']>;
-  totalPrice?: Maybe<Scalars['Float']>;
-  balance?: Maybe<Scalars['Float']>;
-  pendingPayment?: Maybe<Scalars['Float']>;
-  useNewAddress?: Maybe<Scalars['Boolean']>;
-  address?: Maybe<Address>;
-  draftMachines?: Maybe<Array<Maybe<DraftMachineEmbeded>>>;
-  purchaseItems?: Maybe<Array<Maybe<PurchaseItem>>>;
-  payments?: Maybe<Array<Maybe<PaymentItem>>>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
-};
-
-export type Product = {
-  __typename?: 'Product';
-  id?: Maybe<Scalars['ID']>;
-  displayName: Scalars['String'];
+export type Subject = {
+  __typename?: 'Subject';
   name: Scalars['String'];
-  defaultPrice: Scalars['Float'];
-  quantityPerUnit?: Maybe<Scalars['Int']>;
-  unitName?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['String']>;
+  level: Scalars['String'];
+};
+
+export type Session = {
+  __typename?: 'Session';
+  id: Scalars['ID'];
+  tutor: User;
+  date: Scalars['String'];
+  time: Scalars['String'];
+  location: Scalars['String'];
+  subjects?: Maybe<Array<Maybe<Subject>>>;
 };
 
 export type LoginResponse = {
@@ -343,17 +116,6 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
-
-export type CustomersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CustomersQuery = (
-  { __typename?: 'Query' }
-  & { customers?: Maybe<Array<Maybe<(
-    { __typename?: 'Customer' }
-    & Pick<Customer, 'id' | 'firstName'>
-  )>>> }
-);
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -388,40 +150,22 @@ export type MeQuery = (
   )> }
 );
 
+export type SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const CustomersDocument = gql`
-    query customers {
-  customers {
-    id
-    firstName
-  }
-}
-    `;
 
-/**
- * __useCustomersQuery__
- *
- * To run a query within a React component, call `useCustomersQuery` and pass it any options that fit your needs.
- * When your component renders, `useCustomersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCustomersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCustomersQuery(baseOptions?: Apollo.QueryHookOptions<CustomersQuery, CustomersQueryVariables>) {
-        return Apollo.useQuery<CustomersQuery, CustomersQueryVariables>(CustomersDocument, baseOptions);
-      }
-export function useCustomersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CustomersQuery, CustomersQueryVariables>) {
-          return Apollo.useLazyQuery<CustomersQuery, CustomersQueryVariables>(CustomersDocument, baseOptions);
-        }
-export type CustomersQueryHookResult = ReturnType<typeof useCustomersQuery>;
-export type CustomersLazyQueryHookResult = ReturnType<typeof useCustomersLazyQuery>;
-export type CustomersQueryResult = Apollo.QueryResult<CustomersQuery, CustomersQueryVariables>;
+export type SessionsQuery = (
+  { __typename?: 'Query' }
+  & { sessions?: Maybe<Array<Maybe<(
+    { __typename?: 'Session' }
+    & Pick<Session, 'id' | 'date' | 'time' | 'location'>
+    & { subjects?: Maybe<Array<Maybe<(
+      { __typename?: 'Subject' }
+      & Pick<Subject, 'name' | 'level'>
+    )>>> }
+  )>>> }
+);
+
+
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -523,3 +267,42 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const SessionsDocument = gql`
+    query sessions {
+  sessions {
+    id
+    date
+    time
+    location
+    subjects {
+      name
+      level
+    }
+  }
+}
+    `;
+
+/**
+ * __useSessionsQuery__
+ *
+ * To run a query within a React component, call `useSessionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSessionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSessionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSessionsQuery(baseOptions?: Apollo.QueryHookOptions<SessionsQuery, SessionsQueryVariables>) {
+        return Apollo.useQuery<SessionsQuery, SessionsQueryVariables>(SessionsDocument, baseOptions);
+      }
+export function useSessionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SessionsQuery, SessionsQueryVariables>) {
+          return Apollo.useLazyQuery<SessionsQuery, SessionsQueryVariables>(SessionsDocument, baseOptions);
+        }
+export type SessionsQueryHookResult = ReturnType<typeof useSessionsQuery>;
+export type SessionsLazyQueryHookResult = ReturnType<typeof useSessionsLazyQuery>;
+export type SessionsQueryResult = Apollo.QueryResult<SessionsQuery, SessionsQueryVariables>;

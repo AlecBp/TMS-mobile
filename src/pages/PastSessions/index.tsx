@@ -9,7 +9,7 @@ import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 
 // @ts-ignore
-function PastSessions({navigation}) {
+const PastSessions = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>
