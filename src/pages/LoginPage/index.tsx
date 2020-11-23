@@ -5,6 +5,7 @@ import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
+import PageTitle from "../../components/PageTitle";
 import Footer from "../../components/Footer";
 
 const styles = StyleSheet.create({
@@ -62,7 +63,11 @@ const LoginPage = () => {
 
   return (
     <>
-      <Title style={styles.title}>{`Tutoring \nManagement \nSystem`}</Title>
+      <PageTitle 
+        firstLetter1="T" restOfWord1="utoring" 
+        firstLetter2="M" restOfWord2="anagement"
+        firstLetter3="S" restOfWord3="ystem"
+        />
       <Text>{error}</Text>
       <TextInput
         label="Email"
