@@ -1,8 +1,7 @@
 import React from "react";
 
-import { ScrollView, View, Text } from "react-native";
+import { ScrollView, View, Text, KeyboardAvoidingView  } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
-
 import { styles } from "./style";
 
 // dummy data
@@ -17,7 +16,9 @@ import Footer from "../../components/Footer";
 function SessionDetails({ navigation }) {
   const fontSize = 17;
   return (
-    <View>
+    <KeyboardAvoidingView
+      behavior="padding"
+    >
       <ScrollView style={styles.container}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Title style={{ fontSize: 25 }}>Session Details</Title>
@@ -74,11 +75,10 @@ function SessionDetails({ navigation }) {
             Update
           </Button>
         </View>
-
-        <View style={{ height: 200 }}></View>
+        <View style={{height: 100}} />
       </ScrollView>
       <Footer />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

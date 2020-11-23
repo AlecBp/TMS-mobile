@@ -29,6 +29,7 @@ const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       
+      <ScrollView>
       <View style={styles.spaceAround}>
       <PageTitle 
         firstLetter1="U" restOfWord1="pcoming" 
@@ -50,18 +51,18 @@ const Home = ({ navigation }: any) => {
           Logout
         </Button>
       </View>
-
-      <FlatList
-        keyExtractor={(item) => item.id.toString()}
-        data={sessions}
-        renderItem={({ item }) => {
+      
+      {
+        sessions.map((session: { id: string | number | null | undefined; }) => {
           return (
-            <TouchableOpacity style={{ marginVertical: 10 }} onPress={() => navigation.navigate("SessionDetails")}>
-              <SessionCard session={item} />
+            <TouchableOpacity key={session.id} style={{marginVertical: 10}} onPress={() => navigation.navigate("SessionDetails")}>
+              <SessionCard session={session} />
             </TouchableOpacity>
-          );
-        }}
-      />
+          )
+        })
+      }
+
+      </ScrollView>
       <Footer />
     </View>
   );
