@@ -75,6 +75,7 @@ function SessionDetails({ navigation }) {
             Update
           </Button>
         </View>
+        <View style={{height: 100}} />
       </ScrollView>
       <Footer />
     </KeyboardAvoidingView>
