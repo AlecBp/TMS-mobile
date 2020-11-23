@@ -27,7 +27,7 @@ function SessionDetails({ navigation }) {
           <Card>
             <Card.Content>
               <View style={styles.spaceAround}>
-                <Title style={{ fontSize }}>Tue.Nov 10</Title>
+                <Title style={{ fontSize }}>Tue. Nov 10</Title>
                 <Title style={{ fontSize }}>4:00PM - 6:00PM</Title>
               </View>
 
