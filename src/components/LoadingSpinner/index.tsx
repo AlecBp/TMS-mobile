@@ -10,4 +10,5 @@ const LoadingSpinner: React.FC<{ text: string; size: any; color: any }> = ({ tex
   );
 };
 
+// @ts-ignore
 export default LoadingSpinner;
