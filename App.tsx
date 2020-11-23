@@ -19,28 +19,12 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
+
     <UserProvider>
       <Apollo>
         <Root />
-        {/*<NavigationContainer>*/}
-        {/*  <Stack.Navigator*/}
-        {/*    screenOptions={{*/}
-        {/*      headerStyle: {*/}
-        {/*        backgroundColor: "#0655ab",*/}
-        {/*      },*/}
-        {/*      headerTintColor: "#fff",*/}
-        {/*      headerTitleStyle: {*/}
-        {/*        fontWeight: "bold",*/}
-        {/*      },*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />*/}
-        {/*    <Stack.Screen name="SessionDetails" component={SessionDetails} options={{ title: "Session Details" }} />*/}
-        {/*    <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Past Sessions" }} />*/}
-        {/*    <Stack.Screen name="TutorPage" component={TutorPage} options={{ title: "Tutor Page" }} />*/}
-        {/*  </Stack.Navigator>*/}
-        {/*</NavigationContainer>*/}
       </Apollo>
     </UserProvider>
+
   );
 }

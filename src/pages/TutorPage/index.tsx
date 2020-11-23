@@ -43,7 +43,6 @@ function TutorPage({ navigation }) {
           </View>
         </View>
       </ScrollView>
-
       <Footer />
     </View>
   );
