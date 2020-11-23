@@ -4,11 +4,11 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import React from "react";
 import {styles} from "./style";
 
-function TutorCard(props: any) {
+const TutorCard = (props: any) => {
   return (
     <Card>
       <Card.Content style={styles.spaceBetween}>
-        
+
         {/*<TouchableOpacity onPress={() => console.log("GO TO TUTOR PAGE")}>*/}
         {/*  <Avatar.Text size={60} label="XD" />*/}
         {/*</TouchableOpacity>*/}

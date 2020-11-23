@@ -8,7 +8,7 @@ import SessionCard from "../../components/SessionCard";
 import Footer from "../../components/Footer";
 
 // @ts-ignore
-function PastSessions({navigation}) {
+const PastSessions = ({navigation}) => {
   return (
     <View style={styles.container}>
       <ScrollView>

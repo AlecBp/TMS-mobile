@@ -4,7 +4,7 @@ import {TouchableOpacity} from "react-native-gesture-handler";
 import React, {useState} from "react";
 import {styles} from "./style";
 
-function StudentCard(props: any) {
+const StudentCard = (props: any) => {
   const {student} = props;
   const [attendance, setAttendance] = useState(true);
 

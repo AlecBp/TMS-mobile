@@ -13,7 +13,7 @@ import StudentCard from "../../components/StudentCard";
 import Footer from "../../components/Footer";
 
 // @ts-ignore
-function SessionDetails({ navigation }) {
+const SessionDetails = ({ navigation }) => {
   const fontSize = 17;
   return (
     <KeyboardAvoidingView
