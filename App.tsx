@@ -23,8 +23,7 @@ export default function App() {
 
     <UserProvider>
       <Apollo>
-        <Root />
-        
+        {/*<Root />*/}
       </Apollo>
     </UserProvider>
 
