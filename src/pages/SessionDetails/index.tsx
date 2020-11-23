@@ -11,6 +11,7 @@ const students = ["Andrew Rudder", "Alec Pagliarussi", "Rafael Afonso", "Suho Ka
 import TutorCard from "../../components/TutorCard";
 import StudentCard from "../../components/StudentCard";
 import Footer from "../../components/Footer";
+import PageTitle from "../../components/PageTitle";
 
 // @ts-ignore
 const SessionDetails = ({ navigation }) => {
@@ -21,7 +22,10 @@ const SessionDetails = ({ navigation }) => {
     >
       <ScrollView style={styles.container}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Title style={{ fontSize: 25 }}>Session Details</Title>
+        <PageTitle 
+        firstLetter1="S" restOfWord1="ession" 
+        firstLetter2="D" restOfWord2="etails"
+        />
         </View>
 
         <View>

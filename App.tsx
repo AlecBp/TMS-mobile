@@ -24,7 +24,6 @@ export default function App() {
     <UserProvider>
       <Apollo>
         <Root />
-        
       </Apollo>
     </UserProvider>
 

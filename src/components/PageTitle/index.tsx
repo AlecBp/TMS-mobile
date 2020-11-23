@@ -2,13 +2,6 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const styles = StyleSheet.create({
-  parent: {
-    
-    // marginTop: 60,
-    // marginBottom: 30,
-    // marginLeft: 50,
-    
-  },
   restOfWord: {
     color: "#737373",
     fontSize: 30,
