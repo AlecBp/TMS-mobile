@@ -35,8 +35,6 @@ const Home = ({ navigation }: any) => {
       <View style={styles.container}>
         <ScrollView>
           <View style={styles.spaceAround}>
-            <PageTitle firstLetter1="U" restOfWord1="pcoming" firstLetter2="S" restOfWord2="ession" />
-
             <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
               <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
             </TouchableOpacity>

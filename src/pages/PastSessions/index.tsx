@@ -19,10 +19,6 @@ const PastSessions = ({ navigation }) => {
     <View>
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.title}>
-            <PageTitle firstLetter1="P" restOfWord1="ast" firstLetter2="S" restOfWord2="essions" />
-          </View>
-
           {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
           {!loading &&
             data!.sessions!.map((s) => {

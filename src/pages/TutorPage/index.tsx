@@ -18,13 +18,6 @@ const TutorPage = ({ navigation }) => {
   return (
     <View>
       <ScrollView style={styles.container}>
-        {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Title style={{ fontSize: 25 }}>Tutor</Title>
-        </View> */}
-        <View style={{marginLeft:30}}>
-          <PageTitle firstLetter1="T" restOfWord1="utor" />
-        </View>
-
         <View>
           <View style={styles.iconImage}>
             {/* <Avatar.Text size={175} label="XD" /> */}
