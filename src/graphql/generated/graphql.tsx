@@ -227,7 +227,7 @@ export type SessionQuery = (
       & Pick<Attendance, 'isPresent'>
       & { student?: Maybe<(
         { __typename?: 'User' }
-        & Pick<User, 'firstName' | 'lastName'>
+        & Pick<User, 'id' | 'firstName' | 'lastName'>
       )> }
     )>>> }
   )> }
@@ -437,6 +437,7 @@ export const SessionDocument = gql`
     notes
     attendance {
       student {
+        id
         firstName
         lastName
       }

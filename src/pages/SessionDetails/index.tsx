@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { ScrollView, View, Text, KeyboardAvoidingView  } from "react-native";
+import { ScrollView, View, Text, KeyboardAvoidingView } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
 import { styles } from "./style";
 
@@ -16,34 +16,45 @@ import PageContainer from "../../components/HOC/PageContainer";
 import { useSessionQuery, useEditNotesMutation, useEditAttendanceMutation } from "../../graphql/generated/graphql";
 import LoadingSpinner from "../../components/LoadingSpinner";
 // @ts-ignore
-import {UserContext, CLEAR} from "./../../context/UserContext";
+import { UserContext, CLEAR } from "./../../context/UserContext";
 
 // @ts-ignore
 const SessionDetails = ({ navigation, route }) => {
   const fontSize = 17;
-  const {sessionId} = route.params;
-  const {loading, error, data} = useSessionQuery(sessionId);
-  const {state, dispatch} = useContext(UserContext);
+  const { sessionId } = route.params;
+
+  const { loading, error, data } = useSessionQuery({
+    variables: {
+      id: sessionId,
+    },
+  });
+
+  const { state, dispatch } = useContext(UserContext);
+
   const [editNotes] = useEditNotesMutation();
   const [editAttendance] = useEditAttendanceMutation();
   const [note, setNote] = useState("");
-  
+
+  const markAttendance = (studentId: string, isPresent: boolean) => {
+    handleCheckAttendance(studentId, isPresent);
+  };
+
   const handleSubmit = () => {
-    editNotes(sessionId, note);
+    editNotes({ variables: { sessionId, notes: note } });
+  };
+
+  const handleCheckAttendance = (studentId: any, attendance: any) => {
+    editAttendance({ variables: { sessionId, studentId, status: attendance } });
+  };
+
+  if (loading) {
+    return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
   }
 
-  const handleCheckAttendance = (sessionId, studentId, attendance) => {
-    editAttendance(sessionId, studentId, attendance);
-  }
-
-  if(loading == false) {
-    return <LoadingSpinner text="Loading" size="large" color="#0000ff"/>;
-  }
   console.log(data);
+
   return (
-    <KeyboardAvoidingView
-      behavior="padding"
-    >
+    <KeyboardAvoidingView behavior="padding">
       <ScrollView>
         <View>
           <Card>
@@ -59,7 +70,9 @@ const SessionDetails = ({ navigation, route }) => {
                 <Title style={{ fontSize }}>Subjects: </Title>
                 {data?.session?.subjects?.map((subject: any, i) => (
                   <View key={i}>
-                    <Text style={styles.badge}>{subject}</Text>
+                    <Text style={styles.badge}>
+                      {subject.name} {subject.level}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -82,26 +95,34 @@ const SessionDetails = ({ navigation, route }) => {
           <TutorCard />
 
           <Title style={styles.title}>Students</Title>
-          {data?.session?.attendance?.map((student, i) => {
+          {data?.session?.attendance?.map((obj) => {
+            console.log(obj);
+
             return (
-              <View key={i} style={{ marginVertical: 10 }}>
-                <StudentCard student={student} />
+              <View key={obj!.student!.id} style={{ marginVertical: 10 }}>
+                <StudentCard student={obj?.student} isPresent={obj?.isPresent} />
               </View>
             );
           })}
 
           <Title style={styles.title}>Notes</Title>
-          <TextInput mode="outlined" multiline={true} label="Notes about the session" numberOfLines={5} onChangeText={note => setNote(note)}/>
+          <TextInput
+            mode="outlined"
+            multiline={true}
+            label="Notes about the session"
+            numberOfLines={5}
+            onChangeText={(note) => setNote(note)}
+          />
         </View>
         <View style={{ marginVertical: 10 }}>
           <Button mode="contained" onPress={handleSubmit}>
             Update
           </Button>
         </View>
-        <View style={{height: 100}} />
+        <View style={{ height: 100 }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 export default PageContainer(SessionDetails);

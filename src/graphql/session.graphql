@@ -11,6 +11,7 @@ query session($id: ID!) {
     notes
     attendance {
       student {
+        id
         firstName
         lastName
       }

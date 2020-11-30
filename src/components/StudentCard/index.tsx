@@ -1,21 +1,23 @@
-import {View} from "react-native";
-import {Avatar, Card, Title, Checkbox} from "react-native-paper";
-import {TouchableOpacity} from "react-native-gesture-handler";
-import React, {useState} from "react";
-import {styles} from "./style";
+import { View } from "react-native";
+import { Avatar, Card, Title, Checkbox } from "react-native-paper";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import { styles } from "./style";
 
-const StudentCard = (props: any) => {
-  const {student} = props;
-  const [attendance, setAttendance] = useState(true);
-
+const StudentCard = ({ student, isPresent, markAttendance }: any) => {
   return (
     <Card>
       <Card.Content style={styles.spaceBetween}>
-        <Checkbox status={attendance ? 'checked' : 'unchecked'} onPress={() => setAttendance(!attendance)} />
-        <Title style={{marginLeft: 20}}>{student}</Title>
+        <Checkbox
+          status={isPresent ? "checked" : "unchecked"}
+          onPress={() => markAttendance(student.id, !isPresent)}
+        />
+        <Title style={{ marginLeft: 20 }}>
+          {student.firstName} {student.lastName}
+        </Title>
       </Card.Content>
     </Card>
-  )
-}
+  );
+};
 
 export default StudentCard;
