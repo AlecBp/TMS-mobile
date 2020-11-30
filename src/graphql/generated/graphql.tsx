@@ -19,7 +19,7 @@ export type Query = {
   users?: Maybe<Array<Maybe<User>>>;
   user?: Maybe<User>;
   sessions?: Maybe<Array<Maybe<Session>>>;
-  session?: Maybe<User>;
+  session?: Maybe<Session>;
   me?: Maybe<User>;
 };
 
@@ -38,6 +38,8 @@ export type Mutation = {
   _empty?: Maybe<Scalars['String']>;
   addUser?: Maybe<User>;
   editUser?: Maybe<User>;
+  editNotes?: Maybe<Session>;
+  editAttendance?: Maybe<Session>;
   login?: Maybe<LoginResponse>;
   revokeRefreshTokenForUser?: Maybe<Scalars['Boolean']>;
   logout?: Maybe<Scalars['Boolean']>;
@@ -64,6 +66,19 @@ export type MutationEditUserArgs = {
   password?: Maybe<Scalars['String']>;
   dateOfBirth?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationEditNotesArgs = {
+  sessionId: Scalars['ID'];
+  notes: Scalars['String'];
+};
+
+
+export type MutationEditAttendanceArgs = {
+  sessionId: Scalars['ID'];
+  studentId: Scalars['ID'];
+  status: Scalars['Boolean'];
 };
 
 
@@ -95,6 +110,12 @@ export type Subject = {
   level: Scalars['String'];
 };
 
+export type Attendance = {
+  __typename?: 'Attendance';
+  isPresent?: Maybe<Scalars['Boolean']>;
+  student?: Maybe<User>;
+};
+
 export type Session = {
   __typename?: 'Session';
   id: Scalars['ID'];
@@ -102,7 +123,9 @@ export type Session = {
   date: Scalars['String'];
   time: Scalars['String'];
   location: Scalars['String'];
+  notes: Scalars['String'];
   subjects?: Maybe<Array<Maybe<Subject>>>;
+  attendance?: Maybe<Array<Maybe<Attendance>>>;
 };
 
 export type LoginResponse = {
@@ -116,6 +139,42 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type EditAttendanceMutationVariables = Exact<{
+  sessionId: Scalars['ID'];
+  studentId: Scalars['ID'];
+  status: Scalars['Boolean'];
+}>;
+
+
+export type EditAttendanceMutation = (
+  { __typename?: 'Mutation' }
+  & { editAttendance?: Maybe<(
+    { __typename?: 'Session' }
+    & { attendance?: Maybe<Array<Maybe<(
+      { __typename?: 'Attendance' }
+      & Pick<Attendance, 'isPresent'>
+      & { student?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'id'>
+      )> }
+    )>>> }
+  )> }
+);
+
+export type EditNotesMutationVariables = Exact<{
+  sessionId: Scalars['ID'];
+  notes: Scalars['String'];
+}>;
+
+
+export type EditNotesMutation = (
+  { __typename?: 'Mutation' }
+  & { editNotes?: Maybe<(
+    { __typename?: 'Session' }
+    & Pick<Session, 'id' | 'notes'>
+  )> }
+);
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -150,6 +209,30 @@ export type MeQuery = (
   )> }
 );
 
+export type SessionQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type SessionQuery = (
+  { __typename?: 'Query' }
+  & { session?: Maybe<(
+    { __typename?: 'Session' }
+    & Pick<Session, 'id' | 'date' | 'time' | 'location' | 'notes'>
+    & { subjects?: Maybe<Array<Maybe<(
+      { __typename?: 'Subject' }
+      & Pick<Subject, 'name' | 'level'>
+    )>>>, attendance?: Maybe<Array<Maybe<(
+      { __typename?: 'Attendance' }
+      & Pick<Attendance, 'isPresent'>
+      & { student?: Maybe<(
+        { __typename?: 'User' }
+        & Pick<User, 'firstName' | 'lastName'>
+      )> }
+    )>>> }
+  )> }
+);
+
 export type SessionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -166,6 +249,79 @@ export type SessionsQuery = (
 );
 
 
+export const EditAttendanceDocument = gql`
+    mutation editAttendance($sessionId: ID!, $studentId: ID!, $status: Boolean!) {
+  editAttendance(sessionId: $sessionId, studentId: $studentId, status: $status) {
+    attendance {
+      student {
+        id
+      }
+      isPresent
+    }
+  }
+}
+    `;
+export type EditAttendanceMutationFn = Apollo.MutationFunction<EditAttendanceMutation, EditAttendanceMutationVariables>;
+
+/**
+ * __useEditAttendanceMutation__
+ *
+ * To run a mutation, you first call `useEditAttendanceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditAttendanceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editAttendanceMutation, { data, loading, error }] = useEditAttendanceMutation({
+ *   variables: {
+ *      sessionId: // value for 'sessionId'
+ *      studentId: // value for 'studentId'
+ *      status: // value for 'status'
+ *   },
+ * });
+ */
+export function useEditAttendanceMutation(baseOptions?: Apollo.MutationHookOptions<EditAttendanceMutation, EditAttendanceMutationVariables>) {
+        return Apollo.useMutation<EditAttendanceMutation, EditAttendanceMutationVariables>(EditAttendanceDocument, baseOptions);
+      }
+export type EditAttendanceMutationHookResult = ReturnType<typeof useEditAttendanceMutation>;
+export type EditAttendanceMutationResult = Apollo.MutationResult<EditAttendanceMutation>;
+export type EditAttendanceMutationOptions = Apollo.BaseMutationOptions<EditAttendanceMutation, EditAttendanceMutationVariables>;
+export const EditNotesDocument = gql`
+    mutation editNotes($sessionId: ID!, $notes: String!) {
+  editNotes(sessionId: $sessionId, notes: $notes) {
+    id
+    notes
+  }
+}
+    `;
+export type EditNotesMutationFn = Apollo.MutationFunction<EditNotesMutation, EditNotesMutationVariables>;
+
+/**
+ * __useEditNotesMutation__
+ *
+ * To run a mutation, you first call `useEditNotesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditNotesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editNotesMutation, { data, loading, error }] = useEditNotesMutation({
+ *   variables: {
+ *      sessionId: // value for 'sessionId'
+ *      notes: // value for 'notes'
+ *   },
+ * });
+ */
+export function useEditNotesMutation(baseOptions?: Apollo.MutationHookOptions<EditNotesMutation, EditNotesMutationVariables>) {
+        return Apollo.useMutation<EditNotesMutation, EditNotesMutationVariables>(EditNotesDocument, baseOptions);
+      }
+export type EditNotesMutationHookResult = ReturnType<typeof useEditNotesMutation>;
+export type EditNotesMutationResult = Apollo.MutationResult<EditNotesMutation>;
+export type EditNotesMutationOptions = Apollo.BaseMutationOptions<EditNotesMutation, EditNotesMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -267,6 +423,54 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const SessionDocument = gql`
+    query session($id: ID!) {
+  session(id: $id) {
+    id
+    date
+    time
+    location
+    subjects {
+      name
+      level
+    }
+    notes
+    attendance {
+      student {
+        firstName
+        lastName
+      }
+      isPresent
+    }
+  }
+}
+    `;
+
+/**
+ * __useSessionQuery__
+ *
+ * To run a query within a React component, call `useSessionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSessionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSessionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSessionQuery(baseOptions: Apollo.QueryHookOptions<SessionQuery, SessionQueryVariables>) {
+        return Apollo.useQuery<SessionQuery, SessionQueryVariables>(SessionDocument, baseOptions);
+      }
+export function useSessionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SessionQuery, SessionQueryVariables>) {
+          return Apollo.useLazyQuery<SessionQuery, SessionQueryVariables>(SessionDocument, baseOptions);
+        }
+export type SessionQueryHookResult = ReturnType<typeof useSessionQuery>;
+export type SessionLazyQueryHookResult = ReturnType<typeof useSessionLazyQuery>;
+export type SessionQueryResult = Apollo.QueryResult<SessionQuery, SessionQueryVariables>;
 export const SessionsDocument = gql`
     query sessions {
   sessions {

@@ -21,14 +21,7 @@ const SessionDetails = ({ navigation }) => {
     <KeyboardAvoidingView
       behavior="padding"
     >
-      <ScrollView style={styles.container}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <PageTitle 
-        firstLetter1="S" restOfWord1="ession" 
-        firstLetter2="D" restOfWord2="etails"
-        />
-        </View>
-
+      <ScrollView>
         <View>
           <Card>
             <Card.Content>
