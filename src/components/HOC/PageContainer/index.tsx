@@ -7,7 +7,7 @@ export default (Contents: any) => {
     return (
       <View>
 
-        <Contents />
+        <Contents navigation={args.navigation} />
 
         <Footer />
       </View>

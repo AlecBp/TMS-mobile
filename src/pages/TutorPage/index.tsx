@@ -4,16 +4,17 @@ import React from "react";
 import { styles } from "./style";
 import { ScrollView } from "react-native";
 import SubjectCard from "../../components/SubjectCard";
-import PageContainer from "../../components/HOC/PageContainer";
+import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
+import PageContainer from "../../components/HOC/PageContainer";
+
 // @ts-ignore
 import { subjects } from "./subjects";
 
 // @ts-ignore
 const TutorPage = ({ navigation }) => {
-
   return (
-    <>
+    <View>
       <ScrollView style={styles.container}>
         {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Title style={{ fontSize: 25 }}>Tutor</Title>
@@ -48,8 +49,7 @@ const TutorPage = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-
-    </>
+    </View>
   );
 }
 

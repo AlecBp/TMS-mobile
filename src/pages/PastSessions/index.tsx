@@ -9,6 +9,7 @@ import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 import { useSessionsQuery } from "../../graphql/generated/graphql";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
 const PastSessions = ({ navigation }) => {
@@ -38,9 +39,8 @@ const PastSessions = ({ navigation }) => {
             })}
         </ScrollView>
       </View>
-      <Footer />
     </View>
   );
 };
 
-export default PastSessions;
+export default PageContainer(PastSessions);
