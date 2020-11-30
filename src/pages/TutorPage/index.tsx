@@ -9,20 +9,20 @@ import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
-import { subjects } from "./subjects";
-import { UserContext, } from "../../context/UserContext";
+import {subjects} from "./subjects";
+import {UserContext,} from "../../context/UserContext";
 
 // @ts-ignore
-const TutorPage = ({ navigation }) => {
-  const { state, dispatch } = useContext(UserContext);
+const TutorPage = ({navigation}) => {
+  // const {state, dispatch} = useContext(UserContext);
   return (
-    <View>
-      <ScrollView>
-        <View>
-          <View style={styles.iconImage}>
-            {/* <Avatar.Text size={175} label="XD" /> */}
-            <Avatar.Text size={100} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
-          </View>
+    <ScrollView>
+      <View>
+        <View style={styles.iconImage}>
+          {/* <Avatar.Text size={175} label="XD" /> */}
+          <Avatar.Text size={100} label={`J`}/>
+          {/*<Avatar.Text size={100} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}/>*/}
+        </View>
 
         <Paragraph style={styles.bodyParagraph}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -34,11 +34,12 @@ const TutorPage = ({ navigation }) => {
         </Paragraph>
 
         <Title style={{fontSize: 25, marginBottom: 10, textAlign: "center"}}>Subjects</Title>
-        <View style={{paddingHorizontal: 40}}>
+
+        <View style={{paddingHorizontal: 0}}>
           {subjects.map((subject: any, i: any) => {
             return (
-              <View key={i} style={{marginVertical: 10}}>
-                <SubjectCard subject={subject} styles={{marginHorizontal: 10}}/>
+              <View key={i} style={{marginVertical: 5}}>
+                <SubjectCard subject={subject} />
               </View>
             );
           })}
