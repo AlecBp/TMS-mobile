@@ -23,9 +23,9 @@ export default function App() {
 
     <UserProvider>
       <Apollo>
-        {/*<Root />*/}
+        <Root />
 
-        <NavigationContainer>
+        {/* <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
@@ -42,7 +42,7 @@ export default function App() {
             <Stack.Screen name="TutorPage" component={TutorPage} options={{ title: "Tutor Page" }} />
             <Stack.Screen name="SessionDetails" component={SessionDetails} options={{ title: "Session Details" }} />
           </Stack.Navigator>
-        </NavigationContainer>
+        </NavigationContainer> */}
       </Apollo>
     </UserProvider>
 

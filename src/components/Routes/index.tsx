@@ -12,6 +12,7 @@ import SessionDetails from "../../pages/SessionDetails";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
+import ForgotPassword from "../../pages/ForgotPassword";
 
 
 const Routes: React.FC = () => {
@@ -33,8 +34,8 @@ const Routes: React.FC = () => {
             },
           }}
         >
-          <Stack.Screen name="LoginPage" component={Home} options={{ title: "Login" }} />
-          <Stack.Screen name="ForgotPassword" component={Home} options={{ title: "Forgot Password" }} />
+          <Stack.Screen name="LoginPage" component={LoginPage} options={{ title: "Login" }} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ title: "Forgot Password" }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
