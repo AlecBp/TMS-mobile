@@ -40,8 +40,6 @@ const Routes: React.FC = () => {
     );
   }
 
-
-
   return (
     <NavigationContainer>
       <Stack.Navigator
