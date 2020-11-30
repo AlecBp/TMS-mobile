@@ -34,6 +34,7 @@ const SessionDetails = ({ navigation, route }) => {
   const [editNotes] = useEditNotesMutation();
   const [editAttendance] = useEditAttendanceMutation();
   const [note, setNote] = useState("");
+  const [sessionData, setSessionData] = useState();
 
   const markAttendance = (studentId: string, isPresent: boolean) => {
     handleCheckAttendance(studentId, isPresent);
@@ -96,11 +97,9 @@ const SessionDetails = ({ navigation, route }) => {
 
           <Title style={styles.title}>Students</Title>
           {data?.session?.attendance?.map((obj) => {
-            console.log(obj);
-
             return (
               <View key={obj!.student!.id} style={{ marginVertical: 10 }}>
-                <StudentCard student={obj?.student} isPresent={obj?.isPresent} />
+                <StudentCard markAttendance={markAttendance} student={obj?.student} isPresent={obj?.isPresent} />
               </View>
             );
           })}
