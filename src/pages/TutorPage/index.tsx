@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Colors, IconButton, Title, Avatar, Paragraph } from "react-native-paper";
-import React from "react";
+import React, { useContext } from "react";
 import { styles } from "./style";
 import { ScrollView } from "react-native";
 import SubjectCard from "../../components/SubjectCard";
@@ -8,9 +8,11 @@ import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 // @ts-ignore
 import { subjects } from "./subjects";
+import { UserContext, } from "../../context/UserContext";
 
 // @ts-ignore
 const TutorPage = ({ navigation }) => {
+  const { state, dispatch } = useContext(UserContext);
   return (
     <View>
       <ScrollView style={styles.container}>
@@ -23,7 +25,8 @@ const TutorPage = ({ navigation }) => {
 
         <View>
           <View style={styles.iconImage}>
-            <Avatar.Text size={175} label="XD" />
+            {/* <Avatar.Text size={175} label="XD" /> */}
+            <Avatar.Text size={100} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
           </View>
 
           <Paragraph style={styles.bodyParagraph}>

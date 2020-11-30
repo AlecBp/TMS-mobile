@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    padding: 0,
     marginBottom: 50
   },
   iconImage: {
