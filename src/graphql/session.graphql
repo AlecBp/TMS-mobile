@@ -1,0 +1,20 @@
+query session($id: ID!) {
+  session(id: $id) {
+    id
+    date
+    time
+    location
+    subjects {
+      name
+      level
+    }
+    notes
+    attendance {
+      student {
+        firstName
+        lastName
+      }
+      isPresent
+    }
+  }
+}
