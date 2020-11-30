@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// @ts-ignore
 const LoginPage = ({navigation}) => {
   const [email, setEmail] = useState("");
 
@@ -55,6 +56,7 @@ const LoginPage = ({navigation}) => {
       <Text>{error}</Text>
       <TextInput
         label="Email"
+        mode="outlined"
         autoCompleteType={"email"}
         value={email}
         onChangeText={(text) => setEmail(text)}
@@ -63,6 +65,7 @@ const LoginPage = ({navigation}) => {
 
       <TextInput
         label="Password"
+        mode="outlined"
         secureTextEntry={true}
         autoCompleteType={"password"}
         value={password}
@@ -79,7 +82,7 @@ const LoginPage = ({navigation}) => {
       </Button>
 
       {/* until the footer is positioned at the bottom*/}
-      <View style={{height: 400}}/>
+      <View style={{height: 700}}/>
     </>
   );
 };
