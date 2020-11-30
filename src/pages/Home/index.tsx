@@ -55,7 +55,7 @@ const Home = ({ navigation }: any) => {
             <TouchableOpacity
               key={id}
               style={{ marginVertical: 10 }}
-              onPress={() => navigation.navigate("SessionDetails")}
+              onPress={() => navigation.navigate("SessionDetails", {sessionId:s.id})}
             >
               <SessionCard date={date} location={location} time={time} subjects={subjects} />
             </TouchableOpacity>

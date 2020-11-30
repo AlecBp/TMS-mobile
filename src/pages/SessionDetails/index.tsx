@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import { ScrollView, View, Text, KeyboardAvoidingView  } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
@@ -13,11 +13,33 @@ import StudentCard from "../../components/StudentCard";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
+import { useSessionQuery, useEditNotesMutation, useEditAttendanceMutation } from "../../graphql/generated/graphql";
+import LoadingSpinner from "../../components/LoadingSpinner";
+// @ts-ignore
+import {UserContext, CLEAR} from "./../../context/UserContext";
 
 // @ts-ignore
-const SessionDetails = ({ navigation }) => {
+const SessionDetails = ({ navigation, route }) => {
   const fontSize = 17;
+  const {sessionId} = route.params;
+  const {loading, error, data} = useSessionQuery(sessionId);
+  const {state, dispatch} = useContext(UserContext);
+  const [editNotes] = useEditNotesMutation();
+  const [editAttendance] = useEditAttendanceMutation();
+  const [note, setNote] = useState("");
   
+  const handleSubmit = () => {
+    editNotes(sessionId, note);
+  }
+
+  const handleCheckAttendance = (sessionId, studentId, attendance) => {
+    editAttendance(sessionId, studentId, attendance);
+  }
+
+  if(loading == false) {
+    return <LoadingSpinner text="Loading" size="large" color="#0000ff"/>;
+  }
+  console.log(data);
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -27,13 +49,15 @@ const SessionDetails = ({ navigation }) => {
           <Card>
             <Card.Content>
               <View style={styles.spaceAround}>
-                <Title style={{ fontSize }}>Tue. Nov 10</Title>
-                <Title style={{ fontSize }}>4:00PM - 6:00PM</Title>
+                {/* <Title style={{ fontSize }}>Tue. Nov 10</Title>
+                <Title style={{ fontSize }}>4:00PM - 6:00PM</Title> */}
+                <Title style={{ fontSize }}>{data?.session?.date}</Title>
+                <Title style={{ fontSize }}>{data?.session?.time}</Title>
               </View>
 
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Title style={{ fontSize }}>Subjects: </Title>
-                {subjects.map((subject: any, i) => (
+                {data?.session?.subjects?.map((subject: any, i) => (
                   <View key={i}>
                     <Text style={styles.badge}>{subject}</Text>
                   </View>
@@ -42,15 +66,15 @@ const SessionDetails = ({ navigation }) => {
 
               <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <Title style={{ fontSize }}>Location: </Title>
-                <Text style={{ fontSize }}>{"Bloor Collegiate Institute"}</Text>
+                <Text style={{ fontSize }}>{data?.session?.location}</Text>
               </View>
 
               <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <Title style={{ fontSize }}>Tutor: </Title>
-                <Text style={{ fontSize }}>{"John Doe"}</Text>
+                <Text style={{ fontSize }}>{state?.user?.firstName}</Text>
               </View>
 
-              <Title style={{ fontSize }}>There are {students.length} students in the session</Title>
+              <Title style={{ fontSize }}>There are {data?.session?.attendance?.length} students in the session</Title>
             </Card.Content>
           </Card>
 
@@ -58,7 +82,7 @@ const SessionDetails = ({ navigation }) => {
           <TutorCard />
 
           <Title style={styles.title}>Students</Title>
-          {students.map((student, i) => {
+          {data?.session?.attendance?.map((student, i) => {
             return (
               <View key={i} style={{ marginVertical: 10 }}>
                 <StudentCard student={student} />
@@ -67,10 +91,10 @@ const SessionDetails = ({ navigation }) => {
           })}
 
           <Title style={styles.title}>Notes</Title>
-          <TextInput mode="outlined" multiline={true} label="Notes about the session" numberOfLines={5} />
+          <TextInput mode="outlined" multiline={true} label="Notes about the session" numberOfLines={5} onChangeText={note => setNote(note)}/>
         </View>
         <View style={{ marginVertical: 10 }}>
-          <Button mode="contained" onPress={() => console.log("Update session")}>
+          <Button mode="contained" onPress={handleSubmit}>
             Update
           </Button>
         </View>
