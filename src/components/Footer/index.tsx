@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     backgroundColor: 'black',
-    height: 35,
+    height: 35
   }
 })
 

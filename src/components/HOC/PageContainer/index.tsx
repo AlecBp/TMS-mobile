@@ -10,8 +10,8 @@ export default (Contents: any) => {
         <View style={styles.container}>
           <Contents navigation={args.navigation} />
 
-          <Footer />
         </View>
+        <Footer />
       </View>
     )
   }

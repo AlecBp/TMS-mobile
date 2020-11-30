@@ -1,8 +1,8 @@
 import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TextInput, Button } from "react-native-paper";
+import {StyleSheet, Text, View} from "react-native";
+import {TextInput, Button} from "react-native-paper";
 // @ts-ignore
-import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
+import {UserContext, SET_ACCESS_TOKEN} from "./../../context/UserContext";
 import PageTitle from "../../components/PageTitle";
 
 const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 const ForgotPassword = () => {
   const [email, setEmail] = React.useState("");
 
-  const { dispatch } = React.useContext(UserContext);
+  const {dispatch} = React.useContext(UserContext);
 
   const handleForgotPassword = async () => {
     //To be implemented
@@ -43,13 +43,6 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <View style={styles.title}> 
-      <PageTitle 
-        firstLetter1="T" restOfWord1="utoring" 
-        firstLetter2="M" restOfWord2="anagement"
-        firstLetter3="S" restOfWord3="ystem"
-        />
-    </View>
       <Text style={styles.forgot}>A new temporary password will be sent to your email address</Text>
       <TextInput
         label="Email"
