@@ -1,0 +1,6 @@
+mutation editNotes($sessionId: ID!, $notes: String!) {
+  editNotes(sessionId: $sessionId, notes: $notes) {
+    id
+    notes
+  }
+}
