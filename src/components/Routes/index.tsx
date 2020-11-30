@@ -7,11 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../../pages/Home";
 import PastSessions from "../../pages/PastSessions";
 import TutorPage from "../../pages/TutorPage";
+import LoginPage from "../../pages/LoginPage";
+import SessionDetails from "../../pages/SessionDetails";
 
 // @ts-ignore
 import { UserContext } from "./../../context/UserContext";
-import LoginPage from "../../pages/LoginPage";
-import SessionDetails from "../../pages/SessionDetails";
+
 
 const Routes: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -19,8 +20,27 @@ const Routes: React.FC = () => {
   const Stack = createStackNavigator();
 
   if (!state.accessToken) {
-    return <LoginPage />;
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#0655ab",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        >
+          <Stack.Screen name="LoginPage" component={Home} options={{ title: "Login" }} />
+          <Stack.Screen name="ForgotPassword" component={Home} options={{ title: "Forgot Password" }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
   }
+
+
 
   return (
     <NavigationContainer>
