@@ -17,6 +17,7 @@ import PageContainer from "../../components/HOC/PageContainer";
 // @ts-ignore
 const SessionDetails = ({ navigation }) => {
   const fontSize = 17;
+  
   return (
     <KeyboardAvoidingView
       behavior="padding"
