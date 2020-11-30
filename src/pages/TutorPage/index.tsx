@@ -9,20 +9,20 @@ import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
-import {subjects} from "./subjects";
+import { subjects } from "./subjects";
+import { UserContext, } from "../../context/UserContext";
 
 // @ts-ignore
-const TutorPage = ({navigation}) => {
+const TutorPage = ({ navigation }) => {
+  const { state, dispatch } = useContext(UserContext);
   return (
-    <ScrollView>
-      {/* <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Title style={{ fontSize: 25 }}>Tutor</Title>
-        </View> */}
-
-      <View>
-        <View style={styles.iconImage}>
-          <Avatar.Text size={175} label="XD"/>
-        </View>
+    <View>
+      <ScrollView>
+        <View>
+          <View style={styles.iconImage}>
+            {/* <Avatar.Text size={175} label="XD" /> */}
+            <Avatar.Text size={100} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
+          </View>
 
         <Paragraph style={styles.bodyParagraph}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the

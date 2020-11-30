@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 const PageTitle: React.FC = (props: any) => (
-  <View style={styles.parent}>
+  <View>
     <Text style={styles.firstLetter}>
       {props.firstLetter1}
       <Text style={styles.restOfWord}>{props.restOfWord1}</Text>
