@@ -58,9 +58,8 @@ const Apollo = (props: any) => {
       });
     },
     handleFetch: (accessToken) => {
-      // console.log(accessToken);
-      dispatch({ type: SET_ACCESS_TOKEN, payload: { accessToken: accessToken } });
       setAccessToken(accessToken);
+      dispatch({ type: SET_ACCESS_TOKEN, payload: { accessToken: accessToken } });
     },
     handleError: (err) => {
       console.warn("Refresh token is invalid, try to sign in again.");
