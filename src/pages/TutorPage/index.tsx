@@ -1,6 +1,6 @@
 import {View} from "react-native";
 import {Colors, IconButton, Title, Avatar, Paragraph} from "react-native-paper";
-import React from "react";
+import React, {useContext} from "react";
 import {styles} from "./style";
 import {ScrollView} from "react-native";
 import SubjectCard from "../../components/SubjectCard";
@@ -16,7 +16,7 @@ import { UserContext, } from "../../context/UserContext";
 const TutorPage = ({ navigation }) => {
   const { state, dispatch } = useContext(UserContext);
   return (
-    <View>
+    
       <ScrollView>
         <View>
           <View style={styles.iconImage}>
