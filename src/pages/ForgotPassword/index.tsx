@@ -1,33 +1,22 @@
 import * as React from "react";
 import {StyleSheet, Text, View} from "react-native";
 import {TextInput, Button} from "react-native-paper";
+import PageContainer from "../../components/HOC/PageContainer";
+
 // @ts-ignore
 import {UserContext, SET_ACCESS_TOKEN} from "./../../context/UserContext";
 import PageTitle from "../../components/PageTitle";
 
 const styles = StyleSheet.create({
-  input: {
-    marginTop: 10,
-    marginLeft: 50,
-    marginRight: 50,
-    height: 50,
-  },
-  button: {
-    marginTop: 20,
-    marginLeft: 50,
-    marginRight: 50,
-    height: 40,
-    backgroundColor: "black",
-  },
-
   title: {
     marginTop: 60,
     marginBottom: 30,
     marginLeft: 50,
   },
-  forgot: {
-    marginLeft: 50,
-    marginRight: 50,
+
+  formGroup: {
+    height: 50,
+    marginVertical: 5
   },
 });
 
@@ -43,13 +32,14 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <Text style={styles.forgot}>A new temporary password will be sent to your email address</Text>
+      <Text style={{fontSize: 16, marginTop: 60}}>A new temporary password will be sent to your email address</Text>
       <TextInput
         label="Email"
+        mode="outlined"
         autoCompleteType={"email"}
         value={email}
         onChangeText={(text) => setEmail(text)}
-        style={styles.input}
+        style={styles.formGroup}
       />
 
       <Button
@@ -58,12 +48,15 @@ const ForgotPassword = () => {
           console.log("Pressed");
           handleForgotPassword();
         }}
-        style={styles.button}
+        style={[styles.formGroup, {backgroundColor: "black", justifyContent: "center"}]}
       >
         Recover my password
       </Button>
+
+      {/* until the footer is positioned at the bottom*/}
+      <View style={{height: 700}} />
     </>
   );
 };
 
-export default ForgotPassword;
+export default PageContainer(ForgotPassword);

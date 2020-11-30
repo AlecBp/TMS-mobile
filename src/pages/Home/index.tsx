@@ -31,8 +31,7 @@ const Home = ({navigation}: any) => {
   };
 
   return (
-
-    <ScrollView>
+    <>
       <View style={{justifyContent: "center", alignItems: "center", marginBottom: 10}}>
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
           <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}/>
@@ -62,7 +61,7 @@ const Home = ({navigation}: any) => {
           </TouchableOpacity>
         );
       })}
-    </ScrollView>
+    </>
   );
 };
 
