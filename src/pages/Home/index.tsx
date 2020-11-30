@@ -16,6 +16,7 @@ import { useLogoutMutation, useSessionsQuery } from "../../graphql/generated/gra
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import PageContainer from "../../components/HOC/PageContainer";
 
 const Home = ({ navigation }: any) => {
   const { state, dispatch } = useContext(UserContext);
@@ -66,9 +67,8 @@ const Home = ({ navigation }: any) => {
             })}
         </ScrollView>
       </View>
-      <Footer />
     </View>
   );
 };
 
-export default Home;
+export default PageContainer(Home);

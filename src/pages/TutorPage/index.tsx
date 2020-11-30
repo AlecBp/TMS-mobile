@@ -6,6 +6,8 @@ import { ScrollView } from "react-native";
 import SubjectCard from "../../components/SubjectCard";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
+import PageContainer from "../../components/HOC/PageContainer";
+
 // @ts-ignore
 import { subjects } from "./subjects";
 import { UserContext, } from "../../context/UserContext";
@@ -50,9 +52,8 @@ const TutorPage = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <Footer />
     </View>
   );
 }
 
-export default TutorPage;
+export default PageContainer(TutorPage);

@@ -12,6 +12,7 @@ import TutorCard from "../../components/TutorCard";
 import StudentCard from "../../components/StudentCard";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
+import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
 const SessionDetails = ({ navigation }) => {
@@ -81,9 +82,8 @@ const SessionDetails = ({ navigation }) => {
         </View>
         <View style={{height: 100}} />
       </ScrollView>
-      <Footer />
     </KeyboardAvoidingView>
   );
 }
 
-export default SessionDetails;
+export default PageContainer(SessionDetails);
