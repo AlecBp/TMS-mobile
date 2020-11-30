@@ -1,40 +1,40 @@
-import React, {useContext} from "react";
-import {ScrollView, View, FlatList} from "react-native";
+import React, { useContext } from "react";
+import { ScrollView, View, FlatList } from "react-native";
 
-import {Title, Avatar, Button} from "react-native-paper";
-import {styles} from "./style";
+import { Title, Avatar, Button } from "react-native-paper";
+import { styles } from "./style";
 
 // @ts-ignore
-import {sessions} from "./sessions";
+import { sessions } from "./sessions";
 import SessionCard from "../../components/SessionCard";
-import {TouchableOpacity} from "react-native";
+import { TouchableOpacity } from "react-native";
 
 // @ts-ignore
-import {UserContext, CLEAR} from "./../../context/UserContext";
-import {setAccessToken} from "../../auth/accessToken";
-import {useLogoutMutation, useSessionsQuery} from "../../graphql/generated/graphql";
+import { UserContext, CLEAR } from "./../../context/UserContext";
+import { setAccessToken } from "../../auth/accessToken";
+import { useLogoutMutation, useSessionsQuery } from "../../graphql/generated/graphql";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
-const Home = ({navigation}: any) => {
-  const {state, dispatch} = useContext(UserContext);
+const Home = ({ navigation }: any) => {
+  const { state, dispatch } = useContext(UserContext);
   const [logout] = useLogoutMutation();
 
-  const {loading, error, data} = useSessionsQuery();
+  const { loading, error, data } = useSessionsQuery();
 
   const logoutProcedure = async () => {
     setAccessToken("");
     await logout();
-    dispatch({type: CLEAR});
+    dispatch({ type: CLEAR });
   };
 
   return (
     <>
-      <View style={{justifyContent: "center", alignItems: "center", marginBottom: 10}}>
+      <View style={{ justifyContent: "center", alignItems: "center", marginBottom: 10 }}>
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}/>
+          <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
         </TouchableOpacity>
       </View>
 
@@ -47,20 +47,20 @@ const Home = ({navigation}: any) => {
         </Button>
       </View>
 
-      {/*{loading && <LoadingSpinner text="Loading" size="large" color="#0000ff"/>}*/}
-      {/*{!loading &&*/}
-      {sessions.map((s: any) => {
-        const {id, date, time, subjects, location}: any = s;
-        return (
-          <TouchableOpacity
-            key={id}
-            style={{marginVertical: 10}}
-            onPress={() => navigation.navigate("SessionDetails")}
-          >
-            <SessionCard date={date} location={location} time={time} subjects={subjects}/>
-          </TouchableOpacity>
-        );
-      })}
+      {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
+      {!loading &&
+        data?.sessions?.map((s: any) => {
+          const { id, date, time, subjects, location }: any = s;
+          return (
+            <TouchableOpacity
+              key={id}
+              style={{ marginVertical: 10 }}
+              onPress={() => navigation.navigate("SessionDetails")}
+            >
+              <SessionCard date={date} location={location} time={time} subjects={subjects} />
+            </TouchableOpacity>
+          );
+        })}
     </>
   );
 };

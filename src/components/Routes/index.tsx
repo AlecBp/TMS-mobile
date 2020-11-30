@@ -14,11 +14,13 @@ import SessionDetails from "../../pages/SessionDetails";
 import { UserContext } from "./../../context/UserContext";
 import ForgotPassword from "../../pages/ForgotPassword";
 
-
 const Routes: React.FC = () => {
   const { state, dispatch } = useContext(UserContext);
+  console.log(state);
 
   const Stack = createStackNavigator();
+
+  // if (!state.accessToken) return <LoginPage />;
 
   if (!state.accessToken) {
     return (
