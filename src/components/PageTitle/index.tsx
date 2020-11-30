@@ -12,21 +12,18 @@ const styles = StyleSheet.create({
   },
 });
 
-const PageTitle: React.FC = (props: any) => (
-  <View>
-    <Text style={styles.firstLetter}>
-      {props.firstLetter1}
-      <Text style={styles.restOfWord}>{props.restOfWord1}</Text>
-    </Text>
-    <Text style={styles.firstLetter}>
-      {props.firstLetter2}
-      <Text style={styles.restOfWord}>{props.restOfWord2}</Text>
-    </Text>
-    <Text style={styles.firstLetter}>
-      {props.firstLetter3}
-      <Text style={styles.restOfWord}>{props.restOfWord3}</Text>
-    </Text>
-  </View>
-);
+const PageTitle: React.FC<{ words: string }> = ({words}) => {
+
+  return (
+    <View>
+      {words.split(' ').map((word: string, i: number) => (
+        <Text style={styles.firstLetter} key={i}>
+          {word[0].toUpperCase()}
+          <Text style={styles.restOfWord}>{word.substr(1, word.length)}</Text>
+        </Text>
+      ))}
+    </View>
+  )
+};
 
 export default PageTitle;

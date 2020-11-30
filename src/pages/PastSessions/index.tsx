@@ -16,7 +16,7 @@ const PastSessions = ({navigation}) => {
   const {loading, error, data} = useSessionsQuery();
 
   return (
-    <ScrollView>
+    <>
 
       {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff"/>}
       {!loading &&
@@ -32,7 +32,7 @@ const PastSessions = ({navigation}) => {
           </TouchableOpacity>
         );
       })}
-    </ScrollView>
+    </>
   );
 };
 
