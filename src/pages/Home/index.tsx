@@ -20,13 +20,14 @@ import PageContainer from "../../components/HOC/PageContainer";
 
 const Home = ({ navigation }: any) => {
   const { state, dispatch } = useContext(UserContext);
-  const [logout] = useLogoutMutation();
+  const [logout, { client }] = useLogoutMutation();
 
   const { loading, error, data } = useSessionsQuery();
 
   const logoutProcedure = async () => {
     setAccessToken("");
     await logout();
+    await client.clearStore();
     dispatch({ type: CLEAR });
   };
 

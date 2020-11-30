@@ -1,17 +1,18 @@
-import {StyleSheet, Text, View} from "react-native";
-import {TextInput, Button,} from "react-native-paper";
-import React, {useState, useContext} from "react";
-import {useLoginMutation} from "../../graphql/generated/graphql";
+import { StyleSheet, Text, View } from "react-native";
+import { TextInput, Button } from "react-native-paper";
+import React, { useState, useContext } from "react";
+import { useLoginMutation } from "../../graphql/generated/graphql";
 // @ts-ignore
-import {UserContext, SET_ACCESS_TOKEN} from "./../../context/UserContext";
+import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 
 import PageTitle from "../../components/PageTitle";
-import PageContainer from "../../components/HOC/PageContainer"
+import PageContainer from "../../components/HOC/PageContainer";
+import { setAccessToken } from "../../auth/accessToken";
 
 const styles = StyleSheet.create({
   formGroup: {
     height: 50,
-    marginVertical: 5
+    marginVertical: 5,
   },
   title: {
     marginTop: 60,
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 });
 
 // @ts-ignore
-const LoginPage = ({navigation}) => {
+const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -29,16 +30,17 @@ const LoginPage = ({navigation}) => {
 
   const [login] = useLoginMutation();
 
-  const {dispatch} = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
 
   const handleLogin = async () => {
     try {
-      const loginResponse = await login({variables: {email, password}});
+      const loginResponse = await login({ variables: { email, password } });
 
       if (loginResponse && loginResponse?.data?.login?.token) {
+        setAccessToken(loginResponse.data.login.token);
         dispatch({
           type: SET_ACCESS_TOKEN,
-          payload: {accessToken: loginResponse.data.login.token},
+          payload: { accessToken: loginResponse.data.login.token },
         });
       }
     } catch (err) {
@@ -73,16 +75,24 @@ const LoginPage = ({navigation}) => {
         style={styles.formGroup}
       />
 
-      <Button mode="contained" onPress={() => navigation.navigate("ForgotPassword")} style={[styles.formGroup, {backgroundColor: "black", justifyContent: "center"}]}>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate("ForgotPassword")}
+        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
+      >
         Forgot Password ?
       </Button>
 
-      <Button mode="contained" onPress={handleLogin} style={[styles.formGroup, {backgroundColor: "black", justifyContent: "center"}]}>
+      <Button
+        mode="contained"
+        onPress={handleLogin}
+        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
+      >
         Log In
       </Button>
 
       {/* until the footer is positioned at the bottom*/}
-      <View style={{height: 700}}/>
+      <View style={{ height: 700 }} />
     </>
   );
 };
