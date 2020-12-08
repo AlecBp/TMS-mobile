@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { ScrollView, View, Text, KeyboardAvoidingView } from "react-native";
+import { ScrollView, View, Text, KeyboardAvoidingView, Platform } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
 import { styles } from "./style";
 
@@ -55,7 +55,9 @@ const SessionDetails = ({ navigation, route }) => {
   console.log(data);
 
   return (
-    <KeyboardAvoidingView behavior="padding">
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : null}
+    >
       <ScrollView>
         <View>
           <Card>
@@ -118,7 +120,6 @@ const SessionDetails = ({ navigation, route }) => {
             Update
           </Button>
         </View>
-        <View style={{ height: 100 }} />
       </ScrollView>
     </KeyboardAvoidingView>
   );
