@@ -6,7 +6,8 @@ import { styles } from "./style";
 export default (Contents: any) => {
   return function (args: any) {
     return (
-      <View>
+      // this flex: 1 would make a footer at the bottom throughout the application
+      <View style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
           <Contents {...args} navigation={args.navigation} />
         </ScrollView>
