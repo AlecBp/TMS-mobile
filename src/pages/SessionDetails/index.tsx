@@ -26,7 +26,7 @@ const SessionDetails = () => {
   const route = useRoute();
   
   const fontSize = 17;
-  const { sessionId } = route.params;
+  const { sessionId }:number = route.params;
 
   const { loading, error, data } = useSessionQuery({
     variables: {

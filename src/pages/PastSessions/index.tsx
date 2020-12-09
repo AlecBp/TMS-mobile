@@ -23,6 +23,7 @@ const PastSessions = () => {
     <>
 
       {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff"/>}
+
       {!loading &&
       data!.sessions!.map((s) => {
         const {id, date, time, subjects, location}: any = s;

@@ -30,8 +30,6 @@ const LoginPage = () => {
 
   const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
-
   const [login] = useLoginMutation();
 
   const { dispatch } = useContext(UserContext);
@@ -103,9 +101,6 @@ const LoginPage = () => {
       >
         Forgot Password ?
       </Button>
-
-      {/* until the footer is positioned at the bottom*/}
-      <View style={{ height: 700 }} />
     </>
   );
 };
