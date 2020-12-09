@@ -9,6 +9,9 @@ import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 import { setAccessToken } from "../../auth/accessToken";
 
+import {useNavigation} from "@react-navigation/native"; 
+
+
 const styles = StyleSheet.create({
   formGroup: {
     height: 50,
@@ -21,7 +24,8 @@ const styles = StyleSheet.create({
 });
 
 // @ts-ignore
-const LoginPage = ({ navigation }) => {
+const LoginPage = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -44,20 +48,17 @@ const LoginPage = ({ navigation }) => {
         });
       }
     } catch (err) {
-      if (err.message === "Wrong password") setError("Your email and/or password are wrong, please try again.");
-      else {
-        setError("Ops, something went wrong... Double check your credentials and try again!");
-        errorMsgBox();
-      }
+      if (err.message === "Wrong password") errorMsgBox("Your email and/or password are wrong", "");
+      else errorMsgBox("Ops, something went wrong..", "Double check your credentials");
     }
   };
 
-  const errorMsgBox = () =>
+  const errorMsgBox = (text: string, msg: string | undefined) =>
     Alert.alert(
-      "Ops, something went wrong...",
-      "Double check your credentials and try again!",
+      text,
+      msg,
       [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
+        { text: "Try again", onPress: () => console.log("OK Pressed") }
       ],
       { cancelable: false }
     );
@@ -68,7 +69,6 @@ const LoginPage = ({ navigation }) => {
         <PageTitle words="Tutoring Management System" />
       </View>
 
-      <Text>{error}</Text>
       <TextInput
         label="Email"
         mode="outlined"
