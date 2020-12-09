@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import React, { useState, useContext } from "react";
 import { useLoginMutation } from "../../graphql/generated/graphql";
@@ -45,9 +45,22 @@ const LoginPage = ({ navigation }) => {
       }
     } catch (err) {
       if (err.message === "Wrong password") setError("Your email and/or password are wrong, please try again.");
-      else setError("Ops, something went wrong... Double check your credentials and try again!");
+      else {
+        setError("Ops, something went wrong... Double check your credentials and try again!");
+        errorMsgBox();
+      }
     }
   };
+
+  const errorMsgBox = () =>
+    Alert.alert(
+      "Ops, something went wrong...",
+      "Double check your credentials and try again!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
 
   return (
     <>
@@ -77,18 +90,18 @@ const LoginPage = ({ navigation }) => {
 
       <Button
         mode="contained"
-        onPress={() => navigation.navigate("ForgotPassword")}
-        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
-      >
-        Forgot Password ?
-      </Button>
-
-      <Button
-        mode="contained"
         onPress={handleLogin}
         style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
       >
         Log In
+      </Button>
+
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate("ForgotPassword")}
+        style={[styles.formGroup, { justifyContent: "center" }]}
+      >
+        Forgot Password ?
       </Button>
 
       {/* until the footer is positioned at the bottom*/}

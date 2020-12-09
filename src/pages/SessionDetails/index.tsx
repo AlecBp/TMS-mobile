@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 
-import { ScrollView, View, Text, KeyboardAvoidingView, Platform } from "react-native";
+import { ScrollView, View, Text, Platform } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
 import { styles } from "./style";
+
+import {useNavigation, useRoute} from "@react-navigation/native"; 
 
 // dummy data
 const subjects = ["Science Lv.1", "Math Lv.1"];
@@ -19,7 +21,10 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import { UserContext, CLEAR } from "./../../context/UserContext";
 
 // @ts-ignore
-const SessionDetails = ({ navigation, route }) => {
+const SessionDetails = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  
   const fontSize = 17;
   const { sessionId } = route.params;
 
@@ -55,16 +60,11 @@ const SessionDetails = ({ navigation, route }) => {
   console.log(data);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : null}
-    >
-      <ScrollView>
+
         <View>
           <Card>
             <Card.Content>
               <View style={styles.spaceAround}>
-                {/* <Title style={{ fontSize }}>Tue. Nov 10</Title>
-                <Title style={{ fontSize }}>4:00PM - 6:00PM</Title> */}
                 <Title style={{ fontSize }}>{data?.session?.date}</Title>
                 <Title style={{ fontSize }}>{data?.session?.time}</Title>
               </View>
@@ -106,23 +106,26 @@ const SessionDetails = ({ navigation, route }) => {
             );
           })}
 
-          <Title style={styles.title}>Notes</Title>
-          <TextInput
-            mode="outlined"
-            multiline={true}
-            label="Notes about the session"
-            numberOfLines={5}
-            onChangeText={(note) => setNote(note)}
-          />
+
+            <Title style={styles.title}>Notes</Title>
+            <TextInput
+              mode="outlined"
+              multiline={true}
+              label="Notes about the session"
+              numberOfLines={5}
+              onChangeText={(note) => setNote(note)}
+            />
+            <View style={{ marginVertical: 10 }}>
+              <Button mode="contained" onPress={handleSubmit}>
+                Update
+              </Button>
+            </View>
+
         </View>
-        <View style={{ marginVertical: 10 }}>
-          <Button mode="contained" onPress={handleSubmit}>
-            Update
-          </Button>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
   );
 };
 
 export default PageContainer(SessionDetails);
+
+
+{/* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} ></KeyboardAvoidingView> */}

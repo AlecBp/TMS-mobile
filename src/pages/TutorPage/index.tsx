@@ -10,10 +10,12 @@ import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
 import {subjects} from "./subjects";
+import { useNavigation } from "@react-navigation/native";
 // import {UserContext,} from "../../context/UserContext";
 
 // @ts-ignore
-const TutorPage = ({navigation}) => {
+const TutorPage = () => {
+  const navigation = useNavigation
   // const {state, dispatch} = useContext(UserContext);
   return (
     <>

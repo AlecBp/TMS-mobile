@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ScrollView, View, FlatList } from "react-native";
 
+import {useNavigation} from "@react-navigation/native"; 
+
 import { Title, Avatar, Button } from "react-native-paper";
 import { styles } from "./style";
 
@@ -18,7 +20,8 @@ import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
-const Home = ({ navigation }: any) => {
+const Home = () => {
+  const navigation = useNavigation();
   const { state, dispatch } = useContext(UserContext);
   const [logout, { client }] = useLogoutMutation();
 

@@ -2,6 +2,9 @@ import React from "react";
 import {FlatList, TouchableOpacity, View, ScrollView} from "react-native";
 import {styles} from "./style";
 import {IconButton, Title, Colors} from "react-native-paper";
+
+import {useNavigation} from "@react-navigation/native"; 
+
 // @ts-ignore
 import {sessions} from "../Home/sessions.js";
 import SessionCard from "../../components/SessionCard";
@@ -12,7 +15,8 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
 // @ts-ignore
-const PastSessions = ({navigation}) => {
+const PastSessions = () => {
+  const navigation = useNavigation();
   const {loading, error, data} = useSessionsQuery();
 
   return (
@@ -26,7 +30,7 @@ const PastSessions = ({navigation}) => {
           <TouchableOpacity
             key={id}
             style={{marginVertical: 10}}
-            onPress={() => navigation.navigate("SessionDetails")}
+            onPress={() => navigation.navigate("SessionDetails", {sessionId: id})}
           >
             <SessionCard date={date} location={location} time={time} subjects={subjects}/>
           </TouchableOpacity>
