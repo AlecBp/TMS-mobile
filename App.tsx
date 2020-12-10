@@ -21,9 +21,9 @@ export default function App() {
   return (
     <UserProvider>
       <ThemeProvider>
-      <Apollo>
-        <Root />
-      </Apollo>
+        <Apollo>
+          <Root />
+        </Apollo>
       </ThemeProvider>
     </UserProvider>
   );

@@ -52,7 +52,7 @@ const SessionDetails = () => {
   const headerHeight = useHeaderHeight();
 
   const fontSize = 17;
-  const { sessionId }: number = route.params;
+  const { sessionId }: any = route.params;
 
   const { loading, error, data } = useSessionQuery({
     variables: {
