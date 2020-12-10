@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { ScrollView, View, Text, KeyboardAvoidingView } from "react-native";
 import { Avatar, Badge, Card, Colors, IconButton, Title, TextInput, Button } from "react-native-paper";
@@ -34,7 +34,7 @@ const SessionDetails = ({ navigation, route }) => {
   const [editNotes] = useEditNotesMutation();
   const [editAttendance] = useEditAttendanceMutation();
   const [note, setNote] = useState("");
-  const [sessionData, setSessionData] = useState();
+  const [attendance, setAttendance] = useState([]);
 
   const markAttendance = (studentId: string, isPresent: boolean) => {
     handleCheckAttendance(studentId, isPresent);
@@ -52,8 +52,6 @@ const SessionDetails = ({ navigation, route }) => {
     return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
   }
 
-  console.log(data);
-
   return (
     <KeyboardAvoidingView behavior="padding">
       <ScrollView>
@@ -69,7 +67,7 @@ const SessionDetails = ({ navigation, route }) => {
 
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Title style={{ fontSize }}>Subjects: </Title>
-                {data?.session?.subjects?.map((subject: any, i) => (
+                {data?.session?.subjects?.map((subject: any, i: number) => (
                   <View key={i}>
                     <Text style={styles.badge}>
                       {subject.name} {subject.level}
@@ -96,7 +94,7 @@ const SessionDetails = ({ navigation, route }) => {
           <TutorCard />
 
           <Title style={styles.title}>Students</Title>
-          {data?.session?.attendance?.map((obj) => {
+          {data?.session?.attendance?.map((obj: any) => {
             return (
               <View key={obj!.student!.id} style={{ marginVertical: 10 }}>
                 <StudentCard markAttendance={markAttendance} student={obj?.student} isPresent={obj?.isPresent} />
@@ -110,7 +108,7 @@ const SessionDetails = ({ navigation, route }) => {
             multiline={true}
             label="Notes about the session"
             numberOfLines={5}
-            onChangeText={(note) => setNote(note)}
+            onChangeText={(note: string) => setNote(note)}
           />
         </View>
         <View style={{ marginVertical: 10 }}>
