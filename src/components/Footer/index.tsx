@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {useTheme} from "react-native-paper";
-const Footer:React.FC<{}> = () => {
-  const {font1}:object = useTheme();
+import { useTheme } from "react-native-paper";
+
+const Footer: React.FC<{}> = () => {
+  const { font1 }: object = useTheme();
   const materialTheme = useTheme();
 
   const styles = StyleSheet.create({
@@ -17,12 +18,11 @@ const Footer:React.FC<{}> = () => {
       height: 35,
     },
   });
-  
+
   return (
-  <View style={styles.bottom}>
-    <Text style={font1}>
-      Tutoring Management System © 2020 - V 0.1.0
-    </Text>
-  </View>
-)};
+    <View style={styles.bottom}>
+      <Text style={font1}>Tutoring Management System © 2020 - V 0.1.0</Text>
+    </View>
+  );
+};
 export default Footer;

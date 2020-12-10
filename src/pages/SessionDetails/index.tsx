@@ -50,7 +50,6 @@ const SessionDetails = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const headerHeight = useHeaderHeight();
-  
 
   const fontSize = 17;
   const { sessionId }: number = route.params;
@@ -151,10 +150,10 @@ const SessionDetails = () => {
         );
       })}
 
-      <KeyboardAvoidingView 
-        behavior = "padding"
-        keyboardVerticalOffset = {400}
-        style = {{ flex: 1 }}
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={400}
+        style={{ flex: 1 }}
         enabled
       >
         <Title style={styles.title}>Notes</Title>

@@ -17,11 +17,17 @@ import { ThemeContext } from "./../../context/ThemeContext";
 import ForgotPassword from "../../pages/ForgotPassword";
 
 // Theme
-import { DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from "@react-navigation/native";
-import { useTheme, Provider as PaperProvider, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from "react-native-paper";
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
+import {
+  Provider as PaperProvider,
+  DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperDefaultTheme,
+} from "react-native-paper";
 
 const Routes: React.FC = () => {
-  
   const { state, dispatch } = useContext(UserContext);
   const { isDarkTheme, toggleDarkTheme } = useContext(ThemeContext);
 
@@ -35,15 +41,15 @@ const Routes: React.FC = () => {
       ...PaperDefaultTheme.colors,
     },
     btn: {
-      backgroundColor: "black", 
+      backgroundColor: "black",
       justifyContent: "center",
       height: 50,
       marginVertical: 5,
     },
     font1: {
-      color: "#fff"
-    }
-  }
+      color: "#fff",
+    },
+  };
 
   const CustomDarkTheme = {
     ...NavigationDarkTheme,
@@ -53,16 +59,16 @@ const Routes: React.FC = () => {
       ...PaperDarkTheme.colors,
     },
     btn: {
-      backgroundColor: "white", 
+      backgroundColor: "white",
       justifyContent: "center",
       height: 50,
       marginVertical: 5,
-      color: "black"
+      color: "black",
     },
     font1: {
-      color: "#000"
-    }
-  }
+      color: "#000",
+    },
+  };
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
@@ -73,31 +79,31 @@ const Routes: React.FC = () => {
   if (!state.accessToken) {
     return (
       <PaperProvider theme={theme}>
-      <NavigationContainer theme={theme} >
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: `${isDarkTheme ? "#fff" : "#000"}`,
-            },
-            headerTintColor: `${isDarkTheme ? "#000" : "#fff"}`,
-            headerTitleStyle: {
-              fontWeight: "bold",
-            },
-          }}
-        >
-          <Stack.Screen
-            name="LoginPage"
-            component={LoginPage}
-            options={{ title: "Login" }}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPassword}
-            options={{ title: "Forgot Password" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      </PaperProvider> 
+        <NavigationContainer theme={theme}>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: `${isDarkTheme ? "#fff" : "#000"}`,
+              },
+              headerTintColor: `${isDarkTheme ? "#000" : "#fff"}`,
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+            }}
+          >
+            <Stack.Screen
+              name="LoginPage"
+              component={LoginPage}
+              options={{ title: "Login" }}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{ title: "Forgot Password" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     );
   }
 

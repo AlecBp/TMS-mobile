@@ -7,10 +7,9 @@ import { styles } from "./style";
 import { ThemeContext } from "../../../context/ThemeContext";
 
 export default (Contents: any) => {
-  
   return (args: any) => {
-    const { isDarkTheme, toggleDarkTheme } = useContext(ThemeContext); 
-    const materialTheme = useTheme(); 
+    const { isDarkTheme, toggleDarkTheme } = useContext(ThemeContext);
+    const materialTheme = useTheme();
     return (
       // this flex: 1 would make a footer at the bottom throughout the application
       <View style={{ flex: 1 }}>

@@ -11,7 +11,7 @@ import { setAccessToken } from "../../auth/accessToken";
 
 import { useNavigation } from "@react-navigation/native";
 
-import {useTheme} from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   title: {
@@ -19,8 +19,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
-
-
 
 // @ts-ignore
 const LoginPage = () => {
@@ -90,11 +88,7 @@ const LoginPage = () => {
         style={styles.formGroup}
       />
 
-      <Button
-        mode="contained"
-        onPress={handleLogin}
-        style={btn}
-      >
+      <Button mode="contained" onPress={handleLogin} style={btn}>
         Log In
       </Button>
 
