@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ScrollView, View, FlatList } from "react-native";
 
-import {useNavigation} from "@react-navigation/native"; 
+import { useNavigation } from "@react-navigation/native";
 
 import { Title, Avatar, Button } from "react-native-paper";
 import { styles } from "./style";
@@ -14,7 +14,10 @@ import { TouchableOpacity } from "react-native";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 import { setAccessToken } from "../../auth/accessToken";
-import { useLogoutMutation, useSessionsQuery } from "../../graphql/generated/graphql";
+import {
+  useLogoutMutation,
+  useSessionsQuery,
+} from "../../graphql/generated/graphql";
 import Footer from "../../components/Footer";
 import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -36,14 +39,26 @@ const Home = () => {
 
   return (
     <>
-      <View style={{ justifyContent: "center", alignItems: "center", marginBottom: 10 }}>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: 10,
+        }}
+      >
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          <Avatar.Text size={60} label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`} />
+          <Avatar.Text
+            size={60}
+            label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}
+          />
         </TouchableOpacity>
       </View>
 
       <View style={styles.spaceBetween}>
-        <Button mode="outlined" onPress={() => navigation.navigate("PastSessions")}>
+        <Button
+          mode="outlined"
+          onPress={() => navigation.navigate("PastSessions")}
+        >
           See Past Sessions
         </Button>
         <Button mode="contained" onPress={logoutProcedure}>
@@ -51,7 +66,9 @@ const Home = () => {
         </Button>
       </View>
 
-      {loading && <LoadingSpinner text="Loading" size="large" color="#0000ff" />}
+      {loading && (
+        <LoadingSpinner text="Loading" size="large" color="#0000ff" />
+      )}
       {!loading &&
         data?.sessions?.map((s: any) => {
           const { id, date, time, subjects, location }: any = s;
@@ -59,9 +76,16 @@ const Home = () => {
             <TouchableOpacity
               key={id}
               style={{ marginVertical: 10 }}
-              onPress={() => navigation.navigate("SessionDetails", { sessionId: s.id })}
+              onPress={() =>
+                navigation.navigate("SessionDetails", { sessionId: s.id })
+              }
             >
-              <SessionCard date={date} location={location} time={time} subjects={subjects} />
+              <SessionCard
+                date={date}
+                location={location}
+                time={time}
+                subjects={subjects}
+              />
             </TouchableOpacity>
           );
         })}

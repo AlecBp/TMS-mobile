@@ -3,7 +3,11 @@ import { View, Text, ActivityIndicator } from "react-native";
 import { setAccessToken } from "../../auth/accessToken";
 import Routes from "../Routes";
 // @ts-ignore
-import { UserContext, SET_ACCESS_TOKEN, CLEAR } from "./../../context/UserContext";
+import {
+  UserContext,
+  SET_ACCESS_TOKEN,
+  CLEAR,
+} from "./../../context/UserContext";
 import LoadingSpinner from "../LoadingSpinner";
 import getEnvVars from "../../../env";
 

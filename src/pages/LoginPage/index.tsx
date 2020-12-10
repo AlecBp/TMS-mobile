@@ -9,23 +9,24 @@ import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 import { setAccessToken } from "../../auth/accessToken";
 
-import {useNavigation} from "@react-navigation/native"; 
+import { useNavigation } from "@react-navigation/native";
 
+import {useTheme} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
-  formGroup: {
-    height: 50,
-    marginVertical: 5,
-  },
   title: {
     marginTop: 60,
     marginBottom: 30,
   },
 });
 
+
+
 // @ts-ignore
 const LoginPage = () => {
   const navigation = useNavigation();
+  const { btn }: object = useTheme();
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
@@ -46,8 +47,13 @@ const LoginPage = () => {
         });
       }
     } catch (err) {
-      if (err.message === "Wrong password") errorMsgBox("Your email and/or password are wrong", "");
-      else errorMsgBox("Ops, something went wrong..", "Double check your credentials");
+      if (err.message === "Wrong password")
+        errorMsgBox("Your email and/or password are wrong", "");
+      else
+        errorMsgBox(
+          "Ops, something went wrong..",
+          "Double check your credentials"
+        );
     }
   };
 
@@ -55,9 +61,7 @@ const LoginPage = () => {
     Alert.alert(
       text,
       msg,
-      [
-        { text: "Try again", onPress: () => console.log("OK Pressed") }
-      ],
+      [{ text: "Try again", onPress: () => console.log("OK Pressed") }],
       { cancelable: false }
     );
 
@@ -89,7 +93,7 @@ const LoginPage = () => {
       <Button
         mode="contained"
         onPress={handleLogin}
-        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
+        style={btn}
       >
         Log In
       </Button>

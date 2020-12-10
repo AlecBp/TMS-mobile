@@ -1,5 +1,9 @@
 mutation editAttendance($sessionId: ID!, $studentId: ID!, $status: Boolean!) {
-  editAttendance(sessionId: $sessionId, studentId: $studentId, status: $status) {
+  editAttendance(
+    sessionId: $sessionId
+    studentId: $studentId
+    status: $status
+  ) {
     attendance {
       student {
         id

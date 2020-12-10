@@ -31,7 +31,11 @@ const UserContext = createContext(initialState);
 const UserProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <UserContext.Provider value={{ state, dispatch }}>{props.children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ state, dispatch }}>
+      {props.children}
+    </UserContext.Provider>
+  );
 };
 
 export { UserContext, UserProvider, CLEAR, SET_ACCESS_TOKEN };

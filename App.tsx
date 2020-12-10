@@ -11,6 +11,8 @@ import { NavigationContainer } from "@react-navigation/native";
 
 // @ts-ignore
 import { UserProvider } from "./src/context/UserContext";
+// @ts-ignore
+import { ThemeProvider } from "./src/context/ThemeContext";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -18,27 +20,11 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <UserProvider>
+      <ThemeProvider>
       <Apollo>
         <Root />
-        {/* <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#0655ab",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      >
-        <Stack.Screen name="Home" component={Home} options={{ title: "Upcoming Sessions" }} />
-        <Stack.Screen name="PastSessions" component={PastSessions} options={{ title: "Past Sessions" }} />
-        <Stack.Screen name="TutorPage" component={TutorPage} options={{ title: "Tutor Page" }} />
-        <Stack.Screen name="SessionDetails" component={SessionDetails} options={{ title: "Session Details" }} />
-      </Stack.Navigator>
-    </NavigationContainer> */}
       </Apollo>
+      </ThemeProvider>
     </UserProvider>
   );
 }
