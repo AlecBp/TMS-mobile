@@ -24,4 +24,4 @@ export const subjects = [
     subject: "French",
     level: "Level 1",
   },
-]
+];

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { TextInput, Button } from "react-native-paper";
 import React, { useState, useContext } from "react";
 import { useLoginMutation } from "../../graphql/generated/graphql";
@@ -9,24 +9,27 @@ import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 import { setAccessToken } from "../../auth/accessToken";
 
+import { useNavigation } from "@react-navigation/native";
+
+import {useTheme} from "@react-navigation/native";
+
 const styles = StyleSheet.create({
-  formGroup: {
-    height: 50,
-    marginVertical: 5,
-  },
   title: {
     marginTop: 60,
     marginBottom: 30,
   },
 });
 
+
+
 // @ts-ignore
-const LoginPage = ({ navigation }) => {
+const LoginPage = () => {
+  const navigation = useNavigation();
+  const { btn }: object = useTheme();
+
   const [email, setEmail] = useState("");
 
   const [password, setPassword] = useState("");
-
-  const [error, setError] = useState("");
 
   const [login] = useLoginMutation();
 
@@ -44,10 +47,23 @@ const LoginPage = ({ navigation }) => {
         });
       }
     } catch (err) {
-      if (err.message === "Wrong password") setError("Your email and/or password are wrong, please try again.");
-      else setError("Ops, something went wrong... Double check your credentials and try again!");
+      if (err.message === "Wrong password")
+        errorMsgBox("Your email and/or password are wrong", "");
+      else
+        errorMsgBox(
+          "Ops, something went wrong..",
+          "Double check your credentials"
+        );
     }
   };
+
+  const errorMsgBox = (text: string, msg: string | undefined) =>
+    Alert.alert(
+      text,
+      msg,
+      [{ text: "Try again", onPress: () => console.log("OK Pressed") }],
+      { cancelable: false }
+    );
 
   return (
     <>
@@ -55,7 +71,6 @@ const LoginPage = ({ navigation }) => {
         <PageTitle words="Tutoring Management System" />
       </View>
 
-      <Text>{error}</Text>
       <TextInput
         label="Email"
         mode="outlined"
@@ -77,22 +92,19 @@ const LoginPage = ({ navigation }) => {
 
       <Button
         mode="contained"
-        onPress={() => navigation.navigate("ForgotPassword")}
-        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
-      >
-        Forgot Password ?
-      </Button>
-
-      <Button
-        mode="contained"
         onPress={handleLogin}
-        style={[styles.formGroup, { backgroundColor: "black", justifyContent: "center" }]}
+        style={btn}
       >
         Log In
       </Button>
 
-      {/* until the footer is positioned at the bottom*/}
-      <View style={{ height: 700 }} />
+      <Button
+        mode="outlined"
+        onPress={() => navigation.navigate("ForgotPassword")}
+        style={[styles.formGroup, { justifyContent: "center" }]}
+      >
+        Forgot Password ?
+      </Button>
     </>
   );
 };

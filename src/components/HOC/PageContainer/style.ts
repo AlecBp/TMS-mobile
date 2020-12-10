@@ -1,7 +1,8 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    padding: 10
+    padding: 10,
+    marginBottom: 40,
   },
 });

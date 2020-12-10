@@ -3,12 +3,12 @@ import { View, Text, ScrollView } from "react-native";
 import { styles } from "./style";
 import React from "react";
 
-const SessionCard: React.FC<{ date: string; time: string; subjects: any; location: string }> = ({
-  date,
-  time,
-  subjects,
-  location,
-}) => {
+const SessionCard: React.FC<{
+  date: string;
+  time: string;
+  subjects: any;
+  location: string;
+}> = ({ date, time, subjects, location }) => {
   return (
     <Card>
       <Card.Content>

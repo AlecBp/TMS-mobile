@@ -1,13 +1,24 @@
 import React, { useContext } from "react";
 
 import { TokenRefreshLink } from "apollo-link-token-refresh";
-import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink, Observable } from "@apollo/client";
+import {
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  ApolloLink,
+  Observable,
+} from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import jwtDecode from "jwt-decode";
 import { getAccessToken, setAccessToken } from "../../auth/accessToken";
 
 // @ts-ignore
-import { UserContext, SET_ACCESS_TOKEN, CLEAR } from "../../context/UserContext";
+import {
+  UserContext,
+  SET_ACCESS_TOKEN,
+  CLEAR,
+} from "../../context/UserContext";
 import getEnvVars from "../../../env";
 
 // Inside of this file, we make use of a getter and setter to manipulate and read a token that is stored in memory as variable,
@@ -59,7 +70,10 @@ const Apollo = (props: any) => {
     },
     handleFetch: (accessToken) => {
       setAccessToken(accessToken);
-      dispatch({ type: SET_ACCESS_TOKEN, payload: { accessToken: accessToken } });
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: { accessToken: accessToken },
+      });
     },
     handleError: (err) => {
       console.warn("Refresh token is invalid, try to sign in again.");
