@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, Text, ActivityIndicator, AsyncStorage } from "react-native";
 import { setAccessToken } from "../../auth/accessToken";
 import Routes from "../Routes";
+import {ThemeContext} from "../../context/ThemeContext";
+
+
 // @ts-ignore
 import {
   UserContext,
@@ -18,7 +21,17 @@ const Root: React.FC = () => {
 
   const { dispatch } = useContext(UserContext);
 
+  const {setIsDarkTheme} = useContext(ThemeContext);
+
   useEffect(() => {
+    (AsyncStorage.getItem("isDarkTheme"))
+    .then((result) => {if(result) {
+      setIsDarkTheme(result === "true" ? true : false);
+    } else {
+      AsyncStorage.setItem("isDarkTheme", "false")
+    }
+  })
+
     fetch(getEnvVars().refreshTokenUrl, {
       method: "POST",
       credentials: "include",

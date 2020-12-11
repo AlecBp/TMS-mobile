@@ -5,6 +5,8 @@ import {
   Title,
   Avatar,
   Paragraph,
+  Switch,
+  useTheme
 } from "react-native-paper";
 import React, { useContext, useState } from "react";
 import { styles } from "./style";
@@ -22,16 +24,22 @@ import { useNavigation } from "@react-navigation/native";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 // @ts-ignore
+import { ThemeContext } from "./../../context/ThemeContext";
+// @ts-ignore
 import { useUserQuery } from "../../graphql/generated/graphql";
 
 // @ts-ignore
 const TutorPage = () => {
   const navigation = useNavigation;
   const { state, dispatch } = useContext(UserContext);
+  const { isDarkTheme, toggleDarkTheme } = useContext(ThemeContext);
+  const materialTheme = useTheme();
+
   const { data, loading, error } = useUserQuery({
     variables: {
-      id: state.user.id,
+      id: state?.user?.id,
     },
+    skip: !state.user
   });
 
   if (loading) {
@@ -41,6 +49,9 @@ const TutorPage = () => {
   // alert(JSON.stringify(data));
   return (
     <>
+        <View>
+          <Switch value={materialTheme.dark} onValueChange={toggleDarkTheme} />
+        </View>
       <View style={styles.iconImage}>
         <Avatar.Text
           size={100}

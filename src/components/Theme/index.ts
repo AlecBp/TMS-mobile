@@ -8,7 +8,7 @@ import {
   DefaultTheme as PaperDefaultTheme,
 } from "react-native-paper";
 
-const CustomDefaultTheme = {
+export const CustomDefaultTheme = {
   ...NavigationDefaultTheme,
   ...PaperDefaultTheme,
   colors: {
@@ -37,7 +37,7 @@ const CustomDefaultTheme = {
   },
 };
 
-const CustomDarkTheme = {
+export const CustomDarkTheme = {
   ...NavigationDarkTheme,
   ...PaperDarkTheme,
   colors: {
@@ -64,8 +64,3 @@ const CustomDarkTheme = {
     fontSize: 17,
   },
 };
-
-module.exports = {
-  CustomDefaultTheme,
-  CustomDarkTheme
-}
