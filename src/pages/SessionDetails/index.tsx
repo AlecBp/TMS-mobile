@@ -45,11 +45,11 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 
-import {useTheme} from "react-native-paper";
+import { useTheme } from "react-native-paper";
 
 // @ts-ignore
 const SessionDetails = () => {
-  const {primaryBtn, font17} = useTheme();
+  const { primaryBtn, font17 } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const headerHeight = useHeaderHeight();

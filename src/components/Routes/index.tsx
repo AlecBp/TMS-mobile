@@ -58,8 +58,8 @@ const Routes: React.FC = () => {
     },
     font17: {
       color: "#000",
-      fontSize: 17
-    }
+      fontSize: 17,
+    },
   };
 
   const CustomDarkTheme = {
@@ -86,8 +86,8 @@ const Routes: React.FC = () => {
     },
     font17: {
       color: "#fff",
-      fontSize: 17
-    }
+      fontSize: 17,
+    },
   };
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
@@ -129,41 +129,41 @@ const Routes: React.FC = () => {
 
   return (
     <PaperProvider theme={theme}>
-        <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#0655ab",
-          },
-          headerTintColor: "#fff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-        }}
-      >
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: "Upcoming Sessions" }}
-        />
-        <Stack.Screen
-          name="PastSessions"
-          component={PastSessions}
-          options={{ title: "Past Sessions" }}
-        />
-        <Stack.Screen
-          name="TutorPage"
-          component={TutorPage}
-          options={{ title: "Tutor Page" }}
-        />
-        <Stack.Screen
-          name="SessionDetails"
-          component={SessionDetails}
-          options={{ title: "Session Details" }}
-        />
-      </Stack.Navigator>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#0655ab",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ title: "Upcoming Sessions" }}
+          />
+          <Stack.Screen
+            name="PastSessions"
+            component={PastSessions}
+            options={{ title: "Past Sessions" }}
+          />
+          <Stack.Screen
+            name="TutorPage"
+            component={TutorPage}
+            options={{ title: "Tutor Page" }}
+          />
+          <Stack.Screen
+            name="SessionDetails"
+            component={SessionDetails}
+            options={{ title: "Session Details" }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
-      </PaperProvider>
+    </PaperProvider>
   );
 };
 

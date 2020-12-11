@@ -21,7 +21,9 @@ const Footer: React.FC<{}> = () => {
   return (
     <View style={styles.bottom}>
       {/* font1 style cannot be used since its background, the black and white is inverted */}
-      <Text style={{color: `${materialTheme.dark ? '#000' : '#fff'}`}}>Tutoring Management System © 2020 - V 0.1.0</Text>
+      <Text style={{ color: `${materialTheme.dark ? "#000" : "#fff"}` }}>
+        Tutoring Management System © 2020 - V 0.1.0
+      </Text>
     </View>
   );
 };

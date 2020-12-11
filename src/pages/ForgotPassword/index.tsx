@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
 });
 
 const ForgotPassword = () => {
-  
   const [email, setEmail] = React.useState("");
 
   const { dispatch } = React.useContext(UserContext);
@@ -33,11 +32,11 @@ const ForgotPassword = () => {
     return;
   };
 
-  const {primaryBtn, font1} = useTheme();
+  const { primaryBtn, font1 } = useTheme();
 
   return (
     <>
-      <Text style={font1} >
+      <Text style={font1}>
         A new temporary password will be sent to your email address
       </Text>
       <TextInput
