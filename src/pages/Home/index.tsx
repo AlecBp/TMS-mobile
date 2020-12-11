@@ -23,12 +23,17 @@ import PageTitle from "../../components/PageTitle";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
+import { useTheme } from "react-native-paper";
+
 const Home = () => {
   const navigation = useNavigation();
   const { state, dispatch } = useContext(UserContext);
   const [logout, { client }] = useLogoutMutation();
 
+  const {primaryBtn, secondaryBtn} = useTheme();
+
   const { loading, error, data } = useSessionsQuery();
+
 
   const logoutProcedure = async () => {
     setAccessToken("");
@@ -58,10 +63,11 @@ const Home = () => {
         <Button
           mode="outlined"
           onPress={() => navigation.navigate("PastSessions")}
+          style={[secondaryBtn, {height: 35, width: 190}]}
         >
           See Past Sessions
         </Button>
-        <Button mode="contained" onPress={logoutProcedure}>
+        <Button mode="contained" onPress={logoutProcedure} style={[primaryBtn, {height: 35, width: 190}]}>
           Logout
         </Button>
       </View>

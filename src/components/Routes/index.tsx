@@ -56,6 +56,10 @@ const Routes: React.FC = () => {
     font1: {
       color: "#000",
     },
+    font17: {
+      color: "#000",
+      fontSize: 17
+    }
   };
 
   const CustomDarkTheme = {
@@ -80,6 +84,10 @@ const Routes: React.FC = () => {
     font1: {
       color: "#fff",
     },
+    font17: {
+      color: "#fff",
+      fontSize: 17
+    }
   };
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
@@ -120,7 +128,8 @@ const Routes: React.FC = () => {
   }
 
   return (
-    <NavigationContainer theme={NavigationDarkTheme}>
+    <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
       <Stack.Navigator
         screenOptions={{
           headerStyle: {
@@ -153,7 +162,8 @@ const Routes: React.FC = () => {
           options={{ title: "Session Details" }}
         />
       </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
+      </PaperProvider>
   );
 };
 

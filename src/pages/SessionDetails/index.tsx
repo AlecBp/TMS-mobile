@@ -45,13 +45,15 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 
+import {useTheme} from "react-native-paper";
+
 // @ts-ignore
 const SessionDetails = () => {
+  const {primaryBtn, font17} = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
   const headerHeight = useHeaderHeight();
 
-  const fontSize = 17;
   const { sessionId }: number = route.params;
 
   const { loading, error, data } = useSessionQuery({
@@ -83,19 +85,17 @@ const SessionDetails = () => {
     return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
   }
 
-  console.log(data);
-
   return (
     <View>
       <Card>
         <Card.Content>
           <View style={styles.spaceAround}>
-            <Title style={{ fontSize }}>{data?.session?.date}</Title>
-            <Title style={{ fontSize }}>{data?.session?.time}</Title>
+            <Title style={font17}>{data?.session?.date}</Title>
+            <Title style={font17}>{data?.session?.time}</Title>
           </View>
 
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Title style={{ fontSize }}>Subjects: </Title>
+            <Title style={font17}>Subjects: </Title>
             {data?.session?.subjects?.map((subject: any, i) => (
               <View key={i}>
                 <Text style={styles.badge}>
@@ -112,8 +112,8 @@ const SessionDetails = () => {
               alignItems: "center",
             }}
           >
-            <Title style={{ fontSize }}>Location: </Title>
-            <Text style={{ fontSize }}>{data?.session?.location}</Text>
+            <Title style={font17}>Location: </Title>
+            <Text style={font17}>{data?.session?.location}</Text>
           </View>
 
           <View
@@ -123,11 +123,11 @@ const SessionDetails = () => {
               alignItems: "center",
             }}
           >
-            <Title style={{ fontSize }}>Tutor: </Title>
-            <Text style={{ fontSize }}>{state?.user?.firstName}</Text>
+            <Title style={font17}>Tutor: </Title>
+            <Text style={font17}>{state?.user?.firstName}</Text>
           </View>
 
-          <Title style={{ fontSize }}>
+          <Title style={font17}>
             There are {data?.session?.attendance?.length} students in the
             session
           </Title>
@@ -165,7 +165,7 @@ const SessionDetails = () => {
           onChangeText={(note) => setNote(note)}
         />
         <View style={{ marginVertical: 10 }}>
-          <Button mode="contained" onPress={handleSubmit}>
+          <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
             Update
           </Button>
         </View>
