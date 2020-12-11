@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { ScrollView, View, FlatList } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -25,6 +25,8 @@ import PageContainer from "../../components/HOC/PageContainer";
 
 import { useTheme } from "react-native-paper";
 
+// import md5 from "react-native-md5";
+
 const Home = () => {
   const navigation = useNavigation();
   const { state, dispatch } = useContext(UserContext);
@@ -44,29 +46,12 @@ const Home = () => {
         }}
       >
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          <Avatar.Text
+          {/* <Avatar.Image
             size={60}
-            label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}
-          />
+            source={ { uri: (`https://www.gravatar.com/avatar/${useMemo(() => md5.str_md5(state?.user?.email), [state?.user])}`)}}
+          /> */}
         </TouchableOpacity>
       </View>
-
-      {/* <View style={styles.spaceBetween}>
-        <Button
-          mode="outlined"
-          onPress={() => navigation.navigate("PastSessions")}
-          style={[secondaryBtn, { height: 35, width: 190 }]}
-        >
-          See Past Sessions
-        </Button>
-        <Button
-          mode="contained"
-          onPress={logoutProcedure}
-          style={[primaryBtn, { height: 35, width: 190 }]}
-        >
-          Logout
-        </Button>
-      </View> */}
 
       {loading && (
         <LoadingSpinner text="Loading" size="large" color="#0000ff" />
