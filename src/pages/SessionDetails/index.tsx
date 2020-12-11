@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   ScrollView,
@@ -67,7 +67,7 @@ const SessionDetails = () => {
   const [editNotes] = useEditNotesMutation();
   const [editAttendance] = useEditAttendanceMutation();
   const [note, setNote] = useState("");
-  const [sessionData, setSessionData] = useState();
+  const [attendance, setAttendance] = useState([]);
 
   const markAttendance = (studentId: string, isPresent: boolean) => {
     handleCheckAttendance(studentId, isPresent);
