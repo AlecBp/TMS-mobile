@@ -40,14 +40,21 @@ const Routes: React.FC = () => {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
     },
-    btn: {
+    primaryBtn: {
       backgroundColor: "black",
       justifyContent: "center",
       height: 50,
       marginVertical: 5,
     },
+    secondaryBtn: {
+      backgroundColor: "white",
+      justifyContent: "center",
+      height: 50,
+      marginVertical: 5,
+      color: "black",
+    },
     font1: {
-      color: "#fff",
+      color: "#000",
     },
   };
 
@@ -58,15 +65,20 @@ const Routes: React.FC = () => {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
     },
-    btn: {
-      backgroundColor: "white",
+    primaryBtn: {
+      backgroundColor: "#fff",
       justifyContent: "center",
       height: 50,
       marginVertical: 5,
       color: "black",
     },
+    secondaryBtn: {
+      height: 50,
+      marginVertical: 5,
+      justifyContent: "center",
+    },
     font1: {
-      color: "#000",
+      color: "#fff",
     },
   };
 

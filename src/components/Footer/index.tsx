@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
 const Footer: React.FC<{}> = () => {
-  const { font1 }: object = useTheme();
   const materialTheme = useTheme();
 
   const styles = StyleSheet.create({
@@ -21,7 +20,9 @@ const Footer: React.FC<{}> = () => {
 
   return (
     <View style={styles.bottom}>
-      <Text style={font1}>Tutoring Management System © 2020 - V 0.1.0</Text>
+      {/* font1 style cannot be used since its background, the black and white is inverted */}
+      {console.log("MATERIAL THEME", materialTheme)}
+      <Text style={{color: `${materialTheme.dark ? '#000' : '#fff'}`}}>Tutoring Management System © 2020 - V 0.1.0</Text>
     </View>
   );
 };

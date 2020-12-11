@@ -7,6 +7,8 @@ import PageContainer from "../../components/HOC/PageContainer";
 import { UserContext, SET_ACCESS_TOKEN } from "./../../context/UserContext";
 import PageTitle from "../../components/PageTitle";
 
+import { useTheme } from "@react-navigation/native";
+
 const styles = StyleSheet.create({
   title: {
     marginTop: 60,
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
 });
 
 const ForgotPassword = () => {
+  
   const [email, setEmail] = React.useState("");
 
   const { dispatch } = React.useContext(UserContext);
@@ -30,9 +33,11 @@ const ForgotPassword = () => {
     return;
   };
 
+  const {primaryBtn, font1} = useTheme();
+
   return (
     <>
-      <Text style={{ fontSize: 16, marginTop: 60 }}>
+      <Text style={font1} >
         A new temporary password will be sent to your email address
       </Text>
       <TextInput
@@ -50,16 +55,10 @@ const ForgotPassword = () => {
           console.log("Pressed");
           handleForgotPassword();
         }}
-        style={[
-          styles.formGroup,
-          { backgroundColor: "black", justifyContent: "center" },
-        ]}
+        style={primaryBtn}
       >
         Recover my password
       </Button>
-
-      {/* until the footer is positioned at the bottom*/}
-      <View style={{ height: 700 }} />
     </>
   );
 };

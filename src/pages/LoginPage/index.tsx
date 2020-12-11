@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 // @ts-ignore
 const LoginPage = () => {
   const navigation = useNavigation();
-  const { btn }: object = useTheme();
+  const { primaryBtn, secondaryBtn }: object = useTheme();
 
   const [email, setEmail] = useState("");
 
@@ -75,7 +75,6 @@ const LoginPage = () => {
         autoCompleteType={"email"}
         value={email}
         onChangeText={(text) => setEmail(text)}
-        style={styles.formGroup}
       />
 
       <TextInput
@@ -85,17 +84,16 @@ const LoginPage = () => {
         autoCompleteType={"password"}
         value={password}
         onChangeText={(text) => setPassword(text)}
-        style={styles.formGroup}
       />
 
-      <Button mode="contained" onPress={handleLogin} style={btn}>
+      <Button mode="contained" onPress={handleLogin} style={primaryBtn}>
         Log In
       </Button>
 
       <Button
         mode="outlined"
         onPress={() => navigation.navigate("ForgotPassword")}
-        style={[styles.formGroup, { justifyContent: "center" }]}
+        style={secondaryBtn}
       >
         Forgot Password ?
       </Button>
