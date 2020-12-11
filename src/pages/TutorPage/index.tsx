@@ -139,7 +139,7 @@ const TutorPage = () => {
           </TouchableOpacity>
         </View>
         <Title style={{ marginLeft: 15, fontSize: 22 }}>
-          {state.user.firstName} {state.user.lastName}
+          {state?.user?.firstName} {state?.user?.lastName}
         </Title>
       </View>
 

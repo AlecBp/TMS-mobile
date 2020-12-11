@@ -26,7 +26,7 @@ const PastSessions = () => {
       )}
 
       {!loading &&
-        data!.sessions!.map((s) => {
+        data?.sessions?.map((s) => {
           const { id, date, time, subjects, location }: any = s;
           return (
             <TouchableOpacity
