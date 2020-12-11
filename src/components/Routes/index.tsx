@@ -22,22 +22,30 @@ import ForgotPassword from "../../pages/ForgotPassword";
 import { Provider as PaperProvider, Text } from "react-native-paper";
 import { CustomDefaultTheme, CustomDarkTheme } from "../Theme";
 
-const MyTabBarIcon = ({focused, name}:any) => {
+const MyTabBarIcon = ({ focused, name }: any) => {
   const { isDarkTheme } = useContext(ThemeContext);
 
-  return <Ionicons
-    name={name}
-    size={24}
-    color={`${focused ? "#6200EF" : isDarkTheme ? "white" : "black"}`}
-  />;
+  return (
+    <Ionicons
+      name={name}
+      size={24}
+      color={`${focused ? "#6200EF" : isDarkTheme ? "white" : "black"}`}
+    />
+  );
 };
 
-const MyTabBarLabel = ({focused, label}:any) => {
+const MyTabBarLabel = ({ focused, label }: any) => {
   const { isDarkTheme } = useContext(ThemeContext);
 
-  return <Text style={{ color: `${focused ? "#6200EF" :  isDarkTheme ? "white" : "black"}` }}>
-  {label}
-</Text>;
+  return (
+    <Text
+      style={{
+        color: `${focused ? "#6200EF" : isDarkTheme ? "white" : "black"}`,
+      }}
+    >
+      {label}
+    </Text>
+  );
 };
 
 const Routes: React.FC = () => {
@@ -92,7 +100,7 @@ const Routes: React.FC = () => {
         component={Home}
         options={{
           tabBarIcon: (props) => <MyTabBarIcon {...props} name="ios-home" />,
-          tabBarLabel: (props) => <MyTabBarLabel {...props} label="Home" /> ,
+          tabBarLabel: (props) => <MyTabBarLabel {...props} label="Home" />,
         }}
       />
       <Tab.Screen
@@ -100,7 +108,9 @@ const Routes: React.FC = () => {
         component={PastSessions}
         options={{
           tabBarIcon: (props) => <MyTabBarIcon {...props} name="md-document" />,
-          tabBarLabel: (props) => <MyTabBarLabel {...props} label="Past Sessions" />,
+          tabBarLabel: (props) => (
+            <MyTabBarLabel {...props} label="Past Sessions" />
+          ),
         }}
       />
       <Tab.Screen

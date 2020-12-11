@@ -10,14 +10,13 @@ import { getAccessToken } from "../../../auth/accessToken";
 
 export default (Contents: any) => {
   return (args: any) => {
-    
     return (
       // this flex: 1 would make a footer at the bottom throughout the application
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
           <Contents {...args} navigation={args.navigation} />
         </ScrollView>
-        {getAccessToken() == null && <Footer />}
+        {getAccessToken() == "" && <Footer />}
       </View>
     );
   };

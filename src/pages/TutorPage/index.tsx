@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import {
   Colors,
   IconButton,
@@ -6,7 +6,8 @@ import {
   Avatar,
   Paragraph,
   Switch,
-  useTheme
+  useTheme,
+  Button,
 } from "react-native-paper";
 import React, { useContext, useState } from "react";
 import { styles } from "./style";
@@ -28,6 +29,15 @@ import { ThemeContext } from "./../../context/ThemeContext";
 // @ts-ignore
 import { useUserQuery } from "../../graphql/generated/graphql";
 
+import { setAccessToken } from "../../auth/accessToken";
+
+import { Ionicons } from '@expo/vector-icons'; 
+
+import {
+  useLogoutMutation,
+  useSessionsQuery,
+} from "../../graphql/generated/graphql";
+
 // @ts-ignore
 const TutorPage = () => {
   const navigation = useNavigation;
@@ -39,8 +49,19 @@ const TutorPage = () => {
     variables: {
       id: state?.user?.id,
     },
-    skip: !state.user
+    skip: !state.user,
   });
+
+  const [logout, { client }] = useLogoutMutation();
+
+  const { secondaryBtn }:any = useTheme();
+
+  const logoutProcedure = async () => {
+    setAccessToken("");
+    await logout();
+    await client.clearStore();
+    dispatch({ type: CLEAR });
+  };
 
   if (loading) {
     return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
@@ -49,9 +70,25 @@ const TutorPage = () => {
   // alert(JSON.stringify(data));
   return (
     <>
-        <View>
-          <Switch value={materialTheme.dark} onValueChange={toggleDarkTheme} />
-        </View>
+      <View style={{flex:1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 30 }}>
+      <View>
+        
+      <Button
+        mode="outlined"
+        onPress={logoutProcedure}
+        style={[secondaryBtn, { height: 35, width: 190 }]}
+      >
+        Logout
+      </Button>
+      </View>
+
+      <View style={{flex:1, flexDirection: "row-reverse", alignItems: "center" }}>
+        <Switch value={materialTheme.dark} onValueChange={toggleDarkTheme} />
+        {<Ionicons name={`${isDarkTheme ? "md-moon" : "ios-sunny"}`} size={24} style={{marginHorizontal: 10}} color={`${isDarkTheme ? "white" : "black"}`} />}
+      </View>
+
+      </View>
+
       <View style={styles.iconImage}>
         <Avatar.Text
           size={100}

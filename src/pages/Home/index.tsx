@@ -13,7 +13,7 @@ import { TouchableOpacity } from "react-native";
 
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
-import { setAccessToken } from "../../auth/accessToken";
+
 import {
   useLogoutMutation,
   useSessionsQuery,
@@ -28,18 +28,11 @@ import { useTheme } from "react-native-paper";
 const Home = () => {
   const navigation = useNavigation();
   const { state, dispatch } = useContext(UserContext);
-  const [logout, { client }] = useLogoutMutation();
+
 
   const { primaryBtn, secondaryBtn } = useTheme();
 
   const { loading, error, data } = useSessionsQuery();
-
-  const logoutProcedure = async () => {
-    setAccessToken("");
-    await logout();
-    await client.clearStore();
-    dispatch({ type: CLEAR });
-  };
 
   return (
     <>
@@ -58,7 +51,7 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.spaceBetween}>
+      {/* <View style={styles.spaceBetween}>
         <Button
           mode="outlined"
           onPress={() => navigation.navigate("PastSessions")}
@@ -73,7 +66,7 @@ const Home = () => {
         >
           Logout
         </Button>
-      </View>
+      </View> */}
 
       {loading && (
         <LoadingSpinner text="Loading" size="large" color="#0000ff" />
