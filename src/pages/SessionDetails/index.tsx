@@ -77,74 +77,75 @@ const SessionDetails = () => {
   }
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "position" : "padding"} enabled> 
-    <View>
-      <Card>
-        <Card.Content>
-          <View style={styles.spaceAround}>
-            <Title style={font17}>{data?.session?.date}</Title>
-            <Title style={font17}>{data?.session?.time}</Title>
-          </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "position" : "padding"}
+      enabled
+    >
+      <View>
+        <Card>
+          <Card.Content>
+            <View style={styles.spaceAround}>
+              <Title style={font17}>{data?.session?.date}</Title>
+              <Title style={font17}>{data?.session?.time}</Title>
+            </View>
 
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Title style={font17}>Subjects: </Title>
-            {data?.session?.subjects?.map((subject: any, i) => (
-              <View key={i}>
-                <Text style={styles.badge}>
-                  {subject.name} {subject.level}
-                </Text>
-              </View>
-            ))}
-          </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Title style={font17}>Subjects: </Title>
+              {data?.session?.subjects?.map((subject: any, i) => (
+                <View key={i}>
+                  <Text style={styles.badge}>
+                    {subject.name} {subject.level}
+                  </Text>
+                </View>
+              ))}
+            </View>
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Title style={font17}>Location: </Title>
-            <Text style={font17}>{data?.session?.location}</Text>
-          </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Title style={font17}>Location: </Title>
+              <Text style={font17}>{data?.session?.location}</Text>
+            </View>
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <Title style={font17}>Tutor: </Title>
-            <Text style={font17}>{state?.user?.firstName}</Text>
-          </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Title style={font17}>Tutor: </Title>
+              <Text style={font17}>{state?.user?.firstName}</Text>
+            </View>
 
-          <Title style={font17}>
-            There are {data?.session?.attendance?.length} students in the
-            session
-          </Title>
-        </Card.Content>
-      </Card>
+            <Title style={font17}>
+              There are {data?.session?.attendance?.length} students in the
+              session
+            </Title>
+          </Card.Content>
+        </Card>
 
-      <Title style={styles.title}>Tutor</Title>
-      <TutorCard />
+        <Title style={styles.title}>Tutor</Title>
+        <TutorCard />
 
-      <Title style={styles.title}>Students</Title>
-      {data?.session?.attendance?.map((obj) => {
-        return (
-          <View key={obj!.student!.id} style={{ marginVertical: 10 }}>
-            <StudentCard
-              markAttendance={markAttendance}
-              student={obj?.student}
-              isPresent={obj?.isPresent}
-            />
-          </View>
-        );
-      })}
+        <Title style={styles.title}>Students</Title>
+        {data?.session?.attendance?.map((obj) => {
+          return (
+            <View key={obj!.student!.id} style={{ marginVertical: 10 }}>
+              <StudentCard
+                markAttendance={markAttendance}
+                student={obj?.student}
+                isPresent={obj?.isPresent}
+              />
+            </View>
+          );
+        })}
 
         <Title style={styles.title}>Notes</Title>
-
-        
 
         <TextInput
           mode="outlined"
@@ -153,14 +154,12 @@ const SessionDetails = () => {
           numberOfLines={5}
           onChangeText={(note) => setNote(note)}
         />
-          <View style={{ marginVertical: 10 }}>
-            <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
-              Update
-            </Button>
-          </View>
-
-        
-    </View>
+        <View style={{ marginVertical: 10 }}>
+          <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
+            Update
+          </Button>
+        </View>
+      </View>
     </KeyboardAvoidingView>
   );
 };
