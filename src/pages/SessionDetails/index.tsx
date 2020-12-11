@@ -22,15 +22,6 @@ import { styles } from "./style";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useHeaderHeight } from "@react-navigation/stack";
 
-// dummy data
-const subjects = ["Science Lv.1", "Math Lv.1"];
-const students = [
-  "Andrew Rudder",
-  "Alec Pagliarussi",
-  "Rafael Afonso",
-  "Suho Kang",
-];
-
 import TutorCard from "../../components/TutorCard";
 import StudentCard from "../../components/StudentCard";
 import Footer from "../../components/Footer";
@@ -86,6 +77,7 @@ const SessionDetails = () => {
   }
 
   return (
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "position" : "padding"} enabled> 
     <View>
       <Card>
         <Card.Content>
@@ -150,13 +142,10 @@ const SessionDetails = () => {
         );
       })}
 
-      <KeyboardAvoidingView
-        behavior="padding"
-        keyboardVerticalOffset={400}
-        style={{ flex: 1 }}
-        enabled
-      >
         <Title style={styles.title}>Notes</Title>
+
+        
+
         <TextInput
           mode="outlined"
           multiline={true}
@@ -164,18 +153,16 @@ const SessionDetails = () => {
           numberOfLines={5}
           onChangeText={(note) => setNote(note)}
         />
-        <View style={{ marginVertical: 10 }}>
-          <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
-            Update
-          </Button>
-        </View>
-      </KeyboardAvoidingView>
+          <View style={{ marginVertical: 10 }}>
+            <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
+              Update
+            </Button>
+          </View>
+
+        
     </View>
+    </KeyboardAvoidingView>
   );
 };
 
 export default PageContainer(SessionDetails);
-
-{
-  /* <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : null} ></KeyboardAvoidingView> */
-}
