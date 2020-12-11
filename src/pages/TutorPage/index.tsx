@@ -1,7 +1,5 @@
-import { View, Text } from "react-native";
+import { Linking, View } from "react-native";
 import {
-  Colors,
-  IconButton,
   Title,
   Avatar,
   Paragraph,
@@ -9,19 +7,14 @@ import {
   useTheme,
   Button,
 } from "react-native-paper";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { styles } from "./style";
-import { ScrollView } from "react-native";
 import SubjectCard from "../../components/SubjectCard";
-import Footer from "../../components/Footer";
-import PageTitle from "../../components/PageTitle";
 import PageContainer from "../../components/HOC/PageContainer";
 import LoadingSpinner from "../../components/LoadingSpinner";
 
 // @ts-ignore
 import { subjects } from "./subjects";
-import { useNavigation } from "@react-navigation/native";
-
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 // @ts-ignore
@@ -31,16 +24,13 @@ import { useUserQuery } from "../../graphql/generated/graphql";
 
 import { setAccessToken } from "../../auth/accessToken";
 
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from "@expo/vector-icons";
 
-import {
-  useLogoutMutation,
-  useSessionsQuery,
-} from "../../graphql/generated/graphql";
+import { useLogoutMutation } from "../../graphql/generated/graphql";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 // @ts-ignore
 const TutorPage = () => {
-  const navigation = useNavigation;
   const { state, dispatch } = useContext(UserContext);
   const { isDarkTheme, toggleDarkTheme } = useContext(ThemeContext);
   const materialTheme = useTheme();
@@ -54,7 +44,7 @@ const TutorPage = () => {
 
   const [logout, { client }] = useLogoutMutation();
 
-  const { secondaryBtn }:any = useTheme();
+  const { secondaryBtn }: any = useTheme();
 
   const logoutProcedure = async () => {
     setAccessToken("");
@@ -67,33 +57,90 @@ const TutorPage = () => {
     return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
   }
 
-  // alert(JSON.stringify(data));
   return (
     <>
-      <View style={{flex:1, flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 30 }}>
-      <View>
-        
-      <Button
-        mode="outlined"
-        onPress={logoutProcedure}
-        style={[secondaryBtn, { height: 35, width: 190 }]}
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 30,
+        }}
       >
-        Logout
-      </Button>
+        <View>
+          <Button
+            mode="outlined"
+            onPress={logoutProcedure}
+            style={[secondaryBtn, { height: 35, width: 190 }]}
+          >
+            Logout
+          </Button>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row-reverse",
+            alignItems: "center",
+          }}
+        >
+          <Switch value={materialTheme.dark} onValueChange={toggleDarkTheme} />
+          {
+            <Ionicons
+              name={`${isDarkTheme ? "md-moon" : "ios-sunny"}`}
+              size={24}
+              style={{ marginHorizontal: 10 }}
+              color={`${isDarkTheme ? "white" : "black"}`}
+            />
+          }
+        </View>
       </View>
 
-      <View style={{flex:1, flexDirection: "row-reverse", alignItems: "center" }}>
-        <Switch value={materialTheme.dark} onValueChange={toggleDarkTheme} />
-        {<Ionicons name={`${isDarkTheme ? "md-moon" : "ios-sunny"}`} size={24} style={{marginHorizontal: 10}} color={`${isDarkTheme ? "white" : "black"}`} />}
-      </View>
+      <View
+        style={{
+          flex: 1,
+          marginBottom: 25,
+          marginHorizontal: 20,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Avatar.Image size={100} source={{ uri: state?.user?.gravatar }} />
 
-      </View>
-
-      <View style={styles.iconImage}>
-        <Avatar.Text
-          size={100}
-          label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}
-        />
+        <View
+          style={{
+            position: "absolute",
+            zIndex: 1,
+            bottom: -10,
+            left: 65,
+            backgroundColor: isDarkTheme ? "white" : "black",
+            opacity: 0.75,
+            borderRadius: 50,
+            padding: 0,
+            height: 40,
+            width: 40,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL(
+                "https://en.gravatar.com/support/activating-your-account/"
+              )
+            }
+          >
+            <Ionicons
+              name="ios-camera"
+              size={30}
+              color={!isDarkTheme ? "white" : "black"}
+            />
+          </TouchableOpacity>
+        </View>
+        <Title style={{ marginLeft: 15, fontSize: 22 }}>
+          {state.user.firstName} {state.user.lastName}
+        </Title>
       </View>
 
       <Paragraph style={styles.bodyParagraph}>{data?.user?.bio}</Paragraph>

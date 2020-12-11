@@ -1,38 +1,24 @@
-import React, { useContext, useMemo } from "react";
-import { ScrollView, View, FlatList } from "react-native";
+import React, { useContext } from "react";
+import { View } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
-import { Title, Avatar, Button } from "react-native-paper";
-import { styles } from "./style";
+import { Avatar } from "react-native-paper";
 
-// @ts-ignore
-import { sessions } from "./sessions";
 import SessionCard from "../../components/SessionCard";
 import { TouchableOpacity } from "react-native";
 
 // @ts-ignore
-import { UserContext, CLEAR } from "./../../context/UserContext";
+import { UserContext } from "./../../context/UserContext";
 
-import {
-  useLogoutMutation,
-  useSessionsQuery,
-} from "../../graphql/generated/graphql";
-import Footer from "../../components/Footer";
-import PageTitle from "../../components/PageTitle";
+import { useSessionsQuery } from "../../graphql/generated/graphql";
+
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
-import { useTheme } from "react-native-paper";
-
-// import md5 from "react-native-md5";
-
 const Home = () => {
   const navigation = useNavigation();
-  const { state, dispatch } = useContext(UserContext);
-
-
-  const { primaryBtn, secondaryBtn } = useTheme();
+  const { state } = useContext(UserContext);
 
   const { loading, error, data } = useSessionsQuery();
 
@@ -46,10 +32,12 @@ const Home = () => {
         }}
       >
         <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
-          {/* <Avatar.Image
+          <Avatar.Image
             size={60}
-            source={ { uri: (`https://www.gravatar.com/avatar/${useMemo(() => md5.str_md5(state?.user?.email), [state?.user])}`)}}
-          /> */}
+            source={{
+              uri: state?.user?.gravatar,
+            }}
+          />
         </TouchableOpacity>
       </View>
 

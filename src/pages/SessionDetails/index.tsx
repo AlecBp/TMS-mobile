@@ -1,40 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
-import {
-  ScrollView,
-  View,
-  Text,
-  Platform,
-  KeyboardAvoidingView,
-} from "react-native";
-import {
-  Avatar,
-  Badge,
-  Card,
-  Colors,
-  IconButton,
-  Title,
-  TextInput,
-  Button,
-} from "react-native-paper";
+import { View, Text, KeyboardAvoidingView } from "react-native";
+import { Card, Title, TextInput, Button } from "react-native-paper";
 import { styles } from "./style";
 
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { useHeaderHeight } from "@react-navigation/stack";
-
-// dummy data
-const subjects = ["Science Lv.1", "Math Lv.1"];
-const students = [
-  "Andrew Rudder",
-  "Alec Pagliarussi",
-  "Rafael Afonso",
-  "Suho Kang",
-];
+import { useRoute } from "@react-navigation/native";
 
 import TutorCard from "../../components/TutorCard";
 import StudentCard from "../../components/StudentCard";
-import Footer from "../../components/Footer";
-import PageTitle from "../../components/PageTitle";
+
 import PageContainer from "../../components/HOC/PageContainer";
 import {
   useSessionQuery,
@@ -49,12 +23,10 @@ import { useTheme } from "react-native-paper";
 
 // @ts-ignore
 const SessionDetails = () => {
-  const { primaryBtn, font17 } = useTheme();
-  const navigation = useNavigation();
+  const { primaryBtn, font17 }: any = useTheme();
   const route = useRoute();
-  const headerHeight = useHeaderHeight();
 
-  const { sessionId }: number = route.params;
+  const { sessionId }: any = route.params;
 
   const { loading, error, data } = useSessionQuery({
     variables: {
@@ -62,12 +34,11 @@ const SessionDetails = () => {
     },
   });
 
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   const [editNotes] = useEditNotesMutation();
   const [editAttendance] = useEditAttendanceMutation();
   const [note, setNote] = useState("");
-  const [attendance, setAttendance] = useState([]);
 
   const markAttendance = (studentId: string, isPresent: boolean) => {
     handleCheckAttendance(studentId, isPresent);

@@ -1,5 +1,6 @@
 import jwtDecode from "jwt-decode";
 import React, { createContext, useReducer } from "react";
+import md5 from "md5";
 
 const initialState = {
   accessToken: null,
@@ -11,7 +12,8 @@ const SET_ACCESS_TOKEN = "SET_ACCESS_TOKEN";
 
 const userFromToken = (token) => {
   const { firstName, lastName, email, userId, role } = jwtDecode(token);
-  return { firstName, lastName, email, id: userId, role };
+  const gravatar = `https://www.gravatar.com/avatar/${md5(email)}`;
+  return { firstName, lastName, email, id: userId, role, gravatar };
 };
 
 const reducer = (state, action) => {
