@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { useTheme } from "react-native-paper";
 import Footer from "../../Footer";
 import { styles } from "./style";
