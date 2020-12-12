@@ -1,11 +1,11 @@
 import "react-native-gesture-handler";
 import React, { useContext, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import { View, Appbar } from "react-native";
+import { View } from "react-native";
 
 // Pages
 import Home from "../../pages/Home";
@@ -21,7 +21,12 @@ import { ThemeContext } from "./../../context/ThemeContext";
 import ForgotPassword from "../../pages/ForgotPassword";
 
 // Theme
-import { Provider as PaperProvider, Text, useTheme } from "react-native-paper";
+import {
+  Appbar,
+  Provider as PaperProvider,
+  Text,
+  useTheme,
+} from "react-native-paper";
 
 import { CustomDefaultTheme, CustomDarkTheme } from "../Theme";
 
@@ -58,26 +63,43 @@ const Routes: React.FC = () => {
   console.log(state);
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
-  const {font17}:any = useTheme();
+  const { font17 }: any = useTheme();
   const Stack = createStackNavigator();
   // if (!state.accessToken) return <LoginPage />;
 
-  // const MyHeader = () => {
-  //   return <Appbar.Header>
-  //     <Appbar.Content title="Title" subtitle="Subtitle" />
-  //   </Appbar.Header>
-  // };
+  const MyHeader = ({ scene, previous }: any) => {
+    const navigation = useNavigation();
+    console.log(scene);
 
-  const MyHeader = () => {
     return (
-      <View>
-        <View style={{height: 20, backgroundColor: 'white'}} />
-        <View style={{height: 50, alignItems: 'center', justifyContent: 'center', backgroundColor: `${isDarkTheme ? 'white' : 'black'}`}}>
-          <Text style={[font17, {color: `${isDarkTheme ? 'black' : 'white'}`}]}>Log in</Text>
-        </View>
-      </View>
-    )
-  }
+      <Appbar.Header style={{backgroundColor: isDarkTheme? "#444" : "white"}}>
+        {previous && <Appbar.BackAction onPress={() => navigation.goBack()} />}
+        <Appbar.Content title={scene.route.name} />
+      </Appbar.Header>
+    );
+  };
+
+  // const MyHeader = ({ scene }: any) => {
+  //   return (
+  //     <View>
+  //       <View style={{ height: 20, backgroundColor: "white" }}></View>
+  //       <View
+  //         style={{
+  //           height: 50,
+  //           alignItems: "center",
+  //           justifyContent: "center",
+  //           backgroundColor: `${isDarkTheme ? "white" : "black"}`,
+  //         }}
+  //       >
+  //         <Text
+  //           style={[font17, { color: `${isDarkTheme ? "black" : "white"}` }]}
+  //         >
+  //           {"scene"}
+  //         </Text>
+  //       </View>
+  //     </View>
+  //   );
+  // };
 
   // Before Login
   if (!state.accessToken) {
@@ -86,19 +108,11 @@ const Routes: React.FC = () => {
         <NavigationContainer theme={theme}>
           <Stack.Navigator
             screenOptions={{
-              header: () => (
-                <MyHeader />
-              ),
+              header: (props) => <MyHeader {...props} />,
             }}
           >
-            <Stack.Screen
-              name="LoginPage"
-              component={LoginPage}
-            />
-            <Stack.Screen
-              name="ForgotPassword"
-              component={ForgotPassword}
-            />
+            <Stack.Screen name="LoginPage" component={LoginPage} />
+            <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
           </Stack.Navigator>
         </NavigationContainer>
       </PaperProvider>
@@ -142,7 +156,11 @@ const Routes: React.FC = () => {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme}>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            header: (props) => <MyHeader {...props} />,
+          }}
+        >
           <Stack.Screen
             name="Home"
             component={HomeTab}
