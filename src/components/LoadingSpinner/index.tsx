@@ -14,5 +14,4 @@ const LoadingSpinner: React.FC<{ text: string; size: any; color: any }> = ({
   );
 };
 
-// @ts-ignore
 export default LoadingSpinner;
