@@ -14,11 +14,11 @@ import jwtDecode from "jwt-decode";
 import { getAccessToken, setAccessToken } from "../../auth/accessToken";
 
 // @ts-ignore
-import {
-  UserContext,
-  SET_ACCESS_TOKEN,
-  CLEAR,
-} from "../../context/UserContext";
+// import {
+//   UserContext,
+//   SET_ACCESS_TOKEN,
+//   CLEAR,
+// } from "../../context/UserContext";
 import getEnvVars from "../../../env";
 
 // Inside of this file, we make use of a getter and setter to manipulate and read a token that is stored in memory as variable,
@@ -26,112 +26,110 @@ import getEnvVars from "../../../env";
 // the state the value that we read right after might not be the one we just set because react "queus that update"
 // By using a regular variable we are able to write and read the variable in sequence
 
-const Apollo = (props: any) => {
-  const { state, dispatch } = useContext(UserContext);
+const { graphqlUrl, refreshTokenUrl }: any = getEnvVars();
 
-  const { graphqlUrl, refreshTokenUrl }: any = getEnvVars();
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "ignore",
+  },
+  query: {
+    fetchPolicy: "no-cache",
+    errorPolicy: "all",
+  },
+};
 
-  const defaultOptions = {
-    watchQuery: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "ignore",
-    },
-    query: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
-    },
-  };
+const tokenRefreshLink = new TokenRefreshLink({
+  accessTokenField: "accessToken",
+  isTokenValidOrUndefined: () => {
+    // const token = state.accessToken;
+    const token = getAccessToken();
 
-  const tokenRefreshLink = new TokenRefreshLink({
-    accessTokenField: "accessToken",
-    isTokenValidOrUndefined: () => {
-      const token = state.accessToken;
-      // const token = getAccessToken();
+    if (!token) return true;
 
-      if (!token) return true;
-
-      try {
-        // @ts-ignore
-        const { exp } = jwtDecode(token);
-        if (Date.now() >= exp * 1000) {
-          return false;
-        } else {
-          return true;
-        }
-      } catch (err) {
+    try {
+      // @ts-ignore
+      const { exp } = jwtDecode(token);
+      if (Date.now() >= exp * 1000) {
         return false;
+      } else {
+        return true;
       }
-    },
-    fetchAccessToken: () => {
-      return fetch(refreshTokenUrl, {
-        method: "POST",
-        credentials: "include",
-      });
-    },
-    handleFetch: (accessToken) => {
-      setAccessToken(accessToken);
-      dispatch({
-        type: SET_ACCESS_TOKEN,
-        payload: { accessToken: accessToken },
-      });
-    },
-    handleError: (err) => {
-      console.warn("Refresh token is invalid, try to sign in again.");
-      dispatch({ type: CLEAR });
-      setAccessToken("");
-    },
-  });
+    } catch (err) {
+      return false;
+    }
+  },
+  fetchAccessToken: () => {
+    return fetch(refreshTokenUrl, {
+      method: "POST",
+      credentials: "include",
+    });
+  },
+  handleFetch: (accessToken) => {
+    setAccessToken(accessToken);
+    // dispatch({
+    //   type: SET_ACCESS_TOKEN,
+    //   payload: { accessToken: accessToken },
+    // });
+  },
+  handleError: (err) => {
+    console.warn("Refresh token is invalid, try to sign in again.");
+    // dispatch({ type: CLEAR });
+    setAccessToken("");
+  },
+});
 
-  const requestLink = new ApolloLink(
-    (operation, forward) =>
-      new Observable((observer) => {
-        let handle: any;
-        Promise.resolve(operation)
-          .then((operation) => {
-            // const accessToken = state.accessToken;
-            const accessToken = getAccessToken();
-            if (accessToken) {
-              operation.setContext({
-                headers: {
-                  authorization: `bearer ${accessToken}`,
-                },
-              });
-            }
-          })
-          .then(() => {
-            handle = forward(operation).subscribe({
-              next: observer.next.bind(observer),
-              error: observer.error.bind(observer),
-              complete: observer.complete.bind(observer),
+const requestLink = new ApolloLink(
+  (operation, forward) =>
+    new Observable((observer) => {
+      let handle: any;
+      Promise.resolve(operation)
+        .then((operation) => {
+          // const accessToken = state.accessToken;
+          const accessToken = getAccessToken();
+          if (accessToken) {
+            operation.setContext({
+              headers: {
+                authorization: `bearer ${accessToken}`,
+              },
             });
-          })
-          .catch(observer.error.bind(observer));
+          }
+        })
+        .then(() => {
+          handle = forward(operation).subscribe({
+            next: observer.next.bind(observer),
+            error: observer.error.bind(observer),
+            complete: observer.complete.bind(observer),
+          });
+        })
+        .catch(observer.error.bind(observer));
 
-        return () => {
-          if (handle) handle.unsubscribe();
-        };
-      })
-  );
+      return () => {
+        if (handle) handle.unsubscribe();
+      };
+    })
+);
 
-  const client = new ApolloClient({
-    link: ApolloLink.from([
-      tokenRefreshLink,
-      onError(({ graphQLErrors, networkError }) => {
-        console.log(graphQLErrors);
-        console.log(networkError);
-      }),
-      requestLink,
-      new HttpLink({
-        uri: graphqlUrl,
-        credentials: "include",
-      }),
-    ]),
-    // @ts-ignore
-    defaultOptions,
-    cache: new InMemoryCache({}),
-  });
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    tokenRefreshLink,
+    onError(({ graphQLErrors, networkError }) => {
+      console.log(graphQLErrors);
+      console.log(networkError);
+    }),
+    requestLink,
+    new HttpLink({
+      uri: graphqlUrl,
+      credentials: "include",
+    }),
+  ]),
+  // @ts-ignore
+  // defaultOptions,
+  cache: new InMemoryCache({}),
+});
 
+const Apollo = (props: any) => {
   return <ApolloProvider client={client}>{props.children}</ApolloProvider>;
 };
 
-export default Apollo;
+export { Apollo, client };

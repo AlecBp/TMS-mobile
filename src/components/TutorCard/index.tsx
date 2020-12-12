@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import React, { useContext } from "react";
 import { styles } from "./style";
 
+// @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 
 import { useNavigation } from "@react-navigation/native";
@@ -16,10 +17,7 @@ const TutorCard = (props: any) => {
     <TouchableOpacity onPress={() => navigation.navigate("TutorPage")}>
       <Card>
         <Card.Content style={styles.spaceBetween}>
-          <Avatar.Text
-            size={50}
-            label={`${state?.user?.firstName[0] + state?.user?.lastName[0]}`}
-          />
+          <Avatar.Image size={50} source={{ uri: state?.user?.gravatar }} />
           <Title>{"John Doe"}</Title>
           <Title>(Tutor)</Title>
         </Card.Content>

@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
-import { View, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
-import { useTheme } from "react-native-paper";
+import React from "react";
+import { View, ScrollView } from "react-native";
+
 import Footer from "../../Footer";
-import { styles } from "./style";
 
 // @ts-ignore
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -13,8 +12,10 @@ export default (Contents: any) => {
     return (
       // this flex: 1 would make a footer at the bottom throughout the application
       <View style={{ flex: 1 }}>
-        <ScrollView style={styles.container}>
-          <Contents {...args} navigation={args.navigation} />
+        <ScrollView>
+          <View style={{ padding: 10 }}>
+            <Contents {...args} />
+          </View>
         </ScrollView>
         {getAccessToken() == "" && <Footer />}
       </View>

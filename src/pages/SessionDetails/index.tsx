@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { View, Text, KeyboardAvoidingView, Platform } from "react-native";
 import { Card, Title, TextInput, Button } from "react-native-paper";
@@ -14,12 +14,15 @@ import {
   useSessionQuery,
   useEditNotesMutation,
   useEditAttendanceMutation,
+  SessionQuery,
+  SessionDocument,
 } from "../../graphql/generated/graphql";
 import LoadingSpinner from "../../components/LoadingSpinner";
 // @ts-ignore
 import { UserContext, CLEAR } from "./../../context/UserContext";
 
 import { useTheme } from "react-native-paper";
+import SimpleToast from "react-native-simple-toast";
 
 // @ts-ignore
 const SessionDetails = () => {
@@ -45,12 +48,88 @@ const SessionDetails = () => {
   };
 
   const handleSubmit = () => {
-    editNotes({ variables: { sessionId, notes: note } });
+    editNotes({
+      variables: { sessionId, notes: note },
+      update: (store, { data }) => {
+        const existingSessionData = store.readQuery<SessionQuery>({
+          query: SessionDocument,
+          variables: { id: sessionId },
+        })?.session;
+
+        console.log(existingSessionData);
+
+        store.writeQuery<SessionQuery>({
+          query: SessionDocument,
+          variables: {
+            id: data!.editNotes!.id,
+          },
+          data: {
+            // IDK WHY THIS IS GIVING AN ERROR
+            session: { ...existingSessionData, notes: data!.editNotes!.notes },
+          },
+        });
+      },
+    })
+      .then((res) => {
+        SimpleToast.show("Notes updated successfully");
+      })
+      .catch((err) => {
+        console.log(err);
+        SimpleToast.show("Error: Notes couldn't be updated");
+      });
   };
 
   const handleCheckAttendance = (studentId: any, attendance: any) => {
-    editAttendance({ variables: { sessionId, studentId, status: attendance } });
+    const student = data?.session?.attendance?.find(
+      (att) => att!.student!.id === studentId
+    )?.student;
+
+    editAttendance({
+      variables: { sessionId, studentId, status: attendance },
+      update: (store, { data }) => {
+        const sessionData = store.readQuery<SessionQuery>({
+          query: SessionDocument,
+          variables: { id: sessionId },
+        });
+        store.writeQuery<SessionQuery>({
+          query: SessionDocument,
+          variables: { id: sessionId },
+          data: {
+            session: {
+              ...sessionData,
+              attendance: sessionData?.session?.attendance?.map((att) => {
+                if (att?.student?.id === studentId) {
+                  return { ...att, isPresent: attendance };
+                }
+                return att;
+              }),
+            },
+          },
+        });
+      },
+    })
+      .then((res) => {
+        SimpleToast.show(
+          `Attendance status updated for '${student!.firstName} ${
+            student!.lastName
+          }'`
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        SimpleToast.show(
+          `Error: Attendance status couldn't be updated for '${
+            student!.firstName
+          } ${student!.lastName}'`
+        );
+      });
   };
+
+  useEffect(() => {
+    if (data && data.session) {
+      setNote(data?.session?.notes);
+    }
+  }, [loading]);
 
   if (loading) {
     return <LoadingSpinner text="Loading" size="large" color="#0000ff" />;
@@ -133,6 +212,7 @@ const SessionDetails = () => {
           label="Notes about the session"
           numberOfLines={5}
           onChangeText={(note) => setNote(note)}
+          value={note}
         />
         <View style={{ marginVertical: 10 }}>
           <Button mode="contained" onPress={handleSubmit} style={primaryBtn}>
