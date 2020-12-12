@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "react-native-paper";
+
 const Footer: React.FC<{}> = () => {
-  const { font1 }: any = useTheme();
   const materialTheme = useTheme();
 
   const styles = StyleSheet.create({

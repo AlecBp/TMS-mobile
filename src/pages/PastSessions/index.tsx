@@ -14,6 +14,8 @@ import { useSessionsQuery } from "../../graphql/generated/graphql";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
 
+import ErrorMsg from "../../components/ErrorMsg";
+
 // @ts-ignore
 const PastSessions = () => {
   const navigation = useNavigation();
@@ -45,6 +47,10 @@ const PastSessions = () => {
             </TouchableOpacity>
           );
         })}
+
+        {!loading && data?.sessions?.length === 0 && 
+          <ErrorMsg msg="You have not had any session in the past" />
+        }
     </>
   );
 };

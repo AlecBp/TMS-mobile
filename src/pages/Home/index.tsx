@@ -15,6 +15,7 @@ import { useSessionsQuery } from "../../graphql/generated/graphql";
 
 import LoadingSpinner from "../../components/LoadingSpinner";
 import PageContainer from "../../components/HOC/PageContainer";
+import ErrorMsg from "../../components/ErrorMsg";
 
 const Home = () => {
   const navigation = useNavigation();
@@ -64,6 +65,9 @@ const Home = () => {
             </TouchableOpacity>
           );
         })}
+        {!loading && data?.sessions?.length === 0 && 
+          <ErrorMsg msg="Currently, there is no session registered with your account" />
+        }
     </>
   );
 };
