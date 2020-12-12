@@ -69,12 +69,19 @@ const Routes: React.FC = () => {
 
   const MyHeader = ({ scene, previous }: any) => {
     const navigation = useNavigation();
-    console.log(scene);
-
+    console.log(scene.route.name);
+    const naming = {
+      Home: "Tutoring Management System",
+      "LoginPage": "Sign in",
+      "ForgotPassword": "Forgot password",
+      "SessionDetails": "Session Details",
+    };
     return (
-      <Appbar.Header style={{backgroundColor: isDarkTheme? "#444" : "white"}}>
+      <Appbar.Header
+        style={{ backgroundColor: isDarkTheme ? "#444" : "white" }}
+      >
         {previous && <Appbar.BackAction onPress={() => navigation.goBack()} />}
-        <Appbar.Content title={scene.route.name} />
+        <Appbar.Content title={naming[scene.route.name] || "Home"} />
       </Appbar.Header>
     );
   };
